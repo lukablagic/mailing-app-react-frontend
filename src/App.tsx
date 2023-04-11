@@ -2,8 +2,8 @@ import * as React from "react";
 import { useState } from "react";
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 // import Home from "./components/Test";
-import Login from "./components/Auth/Login";
-import Register from "./components/Auth/Register";
+import Login from "./components/auth/Login";
+import Register from "./components/auth/Register";
 import {LoginData} from "./models/LoginData";
 import Home from "./components/home/Home";
 export const useLoginData = () => {
