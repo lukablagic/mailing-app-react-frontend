@@ -6,21 +6,12 @@ import MailAPI from '../../api/MailAPI';
 const Inbox = (props) => {
   const [emails, setEmails] = useState([{ id: 0, subject: 'Loading...' }]);
 
-  useEffect(() => {
-    if (props !== null) {
-      console.log(props)
-      setEmails(props.emails);;
-    }
-  }, [props.emails]);
 
   return (
     <Outline>
       <h1>Inbox</h1>
-      
       <ListGroup>
-        {emails.map((email) => (
-          <ListGroup.Item key={email.id}>{email.subject}</ListGroup.Item>
-        ))}
+          <ListGroup.Item ></ListGroup.Item>
       </ListGroup>
     </Outline>
   );

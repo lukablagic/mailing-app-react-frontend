@@ -1,25 +1,33 @@
 import React, { useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import {MailAPI} from "../../api/MailAPI";
+import {Routes, Route, useNavigate} from 'react-router-dom';
+const Login = (onLogin) => {
 
-const Login = () => {
   const [loginData, setLoginData] = useState({ email: "", password: "" });
 
-  const handleSubmit = (event) => {
+  const navigateToHome = () => {
+    const navigate = useNavigate();
+    navigate(`/`);
+  };
+
+  const handleLogin = (event) => {
     event.preventDefault();
     MailAPI.login(loginData.email, loginData.password)
       .then((response) => {
+        console.log(response);
         return response;  
       })
       .catch((error) => {
         // handle login error
       });
+      navigateToHome();
   };
  
   return (
     <Container className="login-wrapper">
       <h2>Login</h2>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleLogin}>
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
@@ -44,7 +52,7 @@ const Login = () => {
           />
         </Form.Group>
 
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit"  >
           Submit
         </Button>
       </Form>

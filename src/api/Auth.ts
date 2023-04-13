@@ -3,7 +3,8 @@ import { User } from '../models/User';
 import {RegisterData} from '../models/RegisterData';
 
 class Auth {
-  private isAuth: Promise<boolean>;
+
+  private isAuth: boolean;
   private user: User | null = null;
   constructor() {
     axios.defaults.baseURL = process.env.BASE_URL;
@@ -20,7 +21,10 @@ class Auth {
   public async logout(): Promise<void> {
     await axios.post('/logout');
   }
-  
+  static isAuthenticated(): boolean {
+    this.isAuth = true;
+    return this.isAuth;
+  }
 
 
 }

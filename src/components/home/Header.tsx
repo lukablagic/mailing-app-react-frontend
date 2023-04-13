@@ -22,6 +22,7 @@ const Header = () => {
                 aria-label="Search"
               />
               <Button variant="outline-success">Search</Button>
+              <Button className="button-danger" ></Button>
             </Form>
           </Container>
         </Container>

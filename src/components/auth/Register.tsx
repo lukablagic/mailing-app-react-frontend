@@ -1,16 +1,22 @@
 import React, { useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
-
-const Register = () => {
+import { Routes, Route, useNavigate } from "react-router-dom";
+import Auth from "../../api/Auth";
+const Register = (onLogin) => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-  
+    const navigate = useNavigate();
     const handleSubmit = (e) => {
       e.preventDefault();
       // add code for handling registration form submission
+      navigateToHome();
     };
-  
+    const navigateToHome = () => {
+      
+      navigate(`/`);
+    };
+
     return (
       <Container>
         <h2>Register</h2>
