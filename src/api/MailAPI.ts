@@ -1,36 +1,26 @@
-import axios from "axios";
-import { User } from "../models/User";
-import process from 'process';
-import { Mail } from "../models/Mail";
 
-export class MailAPI {
+const API_BASE_URL = 'http://localhost';
 
-    private baseUrl = "http://localhost";
-    private user: User; 
-    private emails: Mail;
-
-    constructor() {
-    }
-
-  static  fetchEmails = async (email: string, password: string) => {
-        const data = { email: 'emailexample', password: 'password' }; // ovo menjam za hook usestate
-
-        axios.post('http://localhost/emails', data)
-            .then(response => {
-           
-            })
-            .catch(error => {
-                console.error(error);
-            });    
-    }
-
-   static login(email: string, password: string) {
-       return this.fetchEmails(email, password);
-        
-    }
-
-    getEmails(): Mail {
-        return this.emails;
-    }
+export async function getEmails() {
+  const response = await fetch(`${API_BASE_URL}/emails`);
+  const emails = await response.json();
+  return emails;
 }
-export default MailAPI;
+
+export async function getEmail(id) {
+  const response = await fetch(`${API_BASE_URL}/emails/${id}`);
+  const email = await response.json();
+  return email;
+}
+
+export async function sendEmail(data) {
+  const response = await fetch(`${API_BASE_URL}/emails`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+  const email = await response.json();
+  return email;
+}

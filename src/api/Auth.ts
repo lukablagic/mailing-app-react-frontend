@@ -1,32 +1,45 @@
-import axios from 'axios';
-import { User } from '../models/User';
-import {RegisterData} from '../models/RegisterData';
-
-class Auth {
-
-  private isAuth: boolean;
-  private user: User | null = null;
-  constructor() {
-    axios.defaults.baseURL = process.env.BASE_URL;
-  }
-
-  public async register(data: RegisterData): Promise<User> {
-    const response = await axios.post('/register', data);
-    return response.data;
-  }
-  public async login(data: RegisterData): Promise<User> {
-    const response = await axios.post('/login', data);
-    return response.data;
-  }
-  public async logout(): Promise<void> {
-    await axios.post('/logout');
-  }
-  static isAuthenticated(): boolean {
-    this.isAuth = true;
-    return this.isAuth;
-  }
+import React from "react";
+import {Routes, Route, useNavigate} from 'react-router-dom';
+import {AuthResponse} from '../models/AuthResponse';
+import {User} from '../models/User';
 
 
+const API_BASE_URL = 'https://localhost';
+
+export async function registerUser(user: User): Promise<AuthResponse> {
+  const response = await fetch(`${API_BASE_URL}/register`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ action: 'register', ...user }),
+  });
+  const data = await response.json();
+  return data;
 }
 
-export default Auth;
+export async function loginUser(email: string, password: string): Promise<AuthResponse> {
+  const response = await fetch(`${API_BASE_URL}/login`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ action: 'login', email, password }),
+  });
+  const data = await response.json();
+  return data;
+}
+
+export async function logoutUser(token: string): Promise<void> {
+  const response = await fetch(`${API_BASE_URL}/auth/logout`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ action: 'logout' }),
+  });
+  if (!response.ok) {
+    throw new Error('Failed to log out');
+  }
+}
+

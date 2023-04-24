@@ -1,10 +1,10 @@
 export class User {
-  id: number;
   name: string;
+  surname: string;
   email: string;
   password: string;
-  profile_picture: string;
-  faield_attempts: number;
-  locked: boolean;
-  locekd_until: Date;
+  profile_picture?: string;
+  faield_attempts?: number;
+  locked?: boolean;
+  locekd_until?: Date;
 }

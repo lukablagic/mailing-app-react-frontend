@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
-import {MailAPI} from "../../api/MailAPI";
 import {Routes, Route, useNavigate} from 'react-router-dom';
 const Login = (onLogin) => {
 
@@ -13,15 +12,15 @@ const Login = (onLogin) => {
 
   const handleLogin = (event) => {
     event.preventDefault();
-    MailAPI.login(loginData.email, loginData.password)
-      .then((response) => {
-        console.log(response);
-        return response;  
-      })
-      .catch((error) => {
-        // handle login error
-      });
-      navigateToHome();
+  //  login(loginData.email, loginData.password)
+  //     .then((response) => {
+  //       console.log(response);
+  //       return response;  
+  //     })
+  //     .catch((error) => {
+  //       // handle login error
+  //     });
+  //     navigateToHome();
   };
  
   return (
