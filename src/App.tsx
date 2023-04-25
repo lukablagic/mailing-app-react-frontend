@@ -5,6 +5,8 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Home from "./components/home/Home";
 import { LoginData } from "./models/LoginData";
+import {ToastContext, ToastProvider} from "./components/common/ToastContext";
+import ToastManager from "./components/common/Toast";
 //import AuthGuard from "./guard/AuthGuard";
 
 const App = () => {
@@ -29,7 +31,17 @@ const App = () => {
       //   console.error(error);
       // });
   };
-
+  const handleLogin = ( email, password ) => {
+    // Auth.register(name,surename, email, password)
+      // .then(() => {
+      //   // Registration successful
+      //   login(email, password); // Automatically login user after registration
+      // })
+      // .catch((error) => {
+      //   // Registration failed
+      //   console.error(error);
+      // });
+  };
   function AuthGuard({ children }) {
     const auth = useAuth();
     return auth ? children : <Navigate to="/register" />;
@@ -41,6 +53,7 @@ const App = () => {
   
   return (
     <div>
+      <ToastProvider>
       <BrowserRouter>
         <Routes>
           <Route
@@ -55,6 +68,7 @@ const App = () => {
           <Route path="login" element={<Login onLogin={login} />} />
         </Routes>
       </BrowserRouter>
+     </ToastProvider>
     </div>
   );
 };

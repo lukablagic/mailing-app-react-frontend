@@ -1,29 +1,35 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { registerUser } from "../../api/Auth";
+import { ToastContext } from "../common/ToastContext";
 
 const Register = ({ onRegister }) => {
   const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
+
+  const navigate = useNavigate();
+
+//  const { addToast } = useContext(ToastContext);
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
       const data = await registerUser({ name, surname, email, password });
-   //   saveAuthData(data);
       onRegister();
-      navigateToHome();
+   //   addToast('success', 'Registration successful!');
+      navigateToLogin();
     } catch (error) {
       console.error(error);
+    //  addToast('error', 'Registration failed!');
     }
   };
 
-  const navigate = useNavigate();
 
-  const navigateToHome = () => {
-    navigate(`/`);
+  const navigateToLogin = () => {
+    navigate(`/login`);
   };
 
   return (

@@ -1,26 +1,31 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import {Routes, Route, useNavigate} from 'react-router-dom';
-const Login = (onLogin) => {
+import { loginUser } from "../../api/Auth";
 
-  const [loginData, setLoginData] = useState({ email: "", password: "" });
+const Login = ({onLogin}) => {
+
+  const [email,setEmail] = useState('');
+  const [password,setPassword] = useState('');
+
+  const navigate = useNavigate();
 
   const navigateToHome = () => {
-    const navigate = useNavigate();
+    
     navigate(`/`);
   };
 
-  const handleLogin = (event) => {
+  const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-  //  login(loginData.email, loginData.password)
-  //     .then((response) => {
-  //       console.log(response);
-  //       return response;  
-  //     })
-  //     .catch((error) => {
-  //       // handle login error
-  //     });
-  //     navigateToHome();
+    try {
+      const data = await loginUser(email, password);
+      onLogin(true);
+   //   showToast('Login successful!');
+      navigateToHome();
+    } catch (error) {
+      console.error(error);
+    //  showToast('Login failed!');
+    }
   };
  
   return (
@@ -32,9 +37,9 @@ const Login = (onLogin) => {
           <Form.Control
             type="email"
             placeholder="Enter email"
-            value={loginData.email}
+            value={email}
             onChange={(event) =>
-              setLoginData({ ...loginData, email: event.target.value })
+              setEmail(event.target.value)
             }
           />
         </Form.Group>
@@ -44,9 +49,9 @@ const Login = (onLogin) => {
           <Form.Control
             type="password"
             placeholder="Password"
-            value={loginData.password}
+            value={password}
             onChange={(event) =>
-              setLoginData({ ...loginData, password: event.target.value })
+              setPassword(event.target.value)
             }
           />
         </Form.Group>
@@ -60,3 +65,4 @@ const Login = (onLogin) => {
 };
 
 export default Login;
+
