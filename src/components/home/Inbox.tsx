@@ -1,31 +1,29 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { ListGroup } from 'react-bootstrap';
-import Outline from './Outline';
-import { getEmails } from '../../api/Mail';
-import { AuthContext } from  '../../components/common/AuthContext';
+import React from "react";
+import { Button, Card, ListGroup } from "react-bootstrap";
 
-const Inbox = () => {
-  const [emails, setEmails] = useState([]);
-  const {token} = useContext(AuthContext);
-  useEffect(() => {
-    getEmails(token)
-      .then((data) => setEmails((prevEmails) => [...prevEmails, data])
-      )
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
-  
-
+const Inbox = ({ emails, handleEmailClick, selectedEmailId }) => {
   return (
-    <Outline>
-      <h1>Inbox</h1>
-      <ListGroup >
+    <div style={{ height: "95vh ", overflowY: "scroll" }}>
+      <ListGroup>
         {emails.map((email) => (
-          <ListGroup.Item key={email.uid}>{email.subject}</ListGroup.Item>
+          <ListGroup.Item
+            key={email.id}
+            onClick={() => handleEmailClick(email.id)}
+            style={{
+              backgroundColor: selectedEmailId === email.id ? "#f8f9fa" : "white",
+              cursor: "pointer",
+            }}
+          >
+            <Card border="secondary" style={{ padding: "10px" }}>
+              <Card.Body>
+                <Card.Title>{email.subject}</Card.Title>
+                <Card.Text>{new Date(email.sent_date).toLocaleString()}</Card.Text>
+              </Card.Body>
+            </Card>
+          </ListGroup.Item>
         ))}
       </ListGroup>
-    </Outline>
+    </div>
   );
 };
 

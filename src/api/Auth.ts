@@ -28,7 +28,6 @@ export async function loginUser( email:string,password:string ): Promise<string>
     body: JSON.stringify({ email, password }),
   });
   const data = await response.json();
-  
   return data.token;
 }
 

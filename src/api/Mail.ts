@@ -10,8 +10,7 @@ const API_BASE_URL = 'http://localhost';
 
 
 
-export async function getEmails(token: string): Promise<Mail> {
-  console.log(token)
+export async function getEmails(token: string): Promise<Mail[]> {
   const response = await fetch(`${API_BASE_URL}/emails`, {
     method: 'GET',
     headers: {
@@ -20,7 +19,6 @@ export async function getEmails(token: string): Promise<Mail> {
     }
   });
   const data = await response.json();
-  console.log(data.emails)
   return data.emails;
 }
 
