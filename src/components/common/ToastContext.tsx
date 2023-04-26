@@ -7,7 +7,7 @@ import { Toast } from 'react-bootstrap';
   hideToast: () => {},
 });
 
-function ToastProvider(props) {
+function ToastProvider ({ children }) {
     const [isOpen, setIsOpen] = useState(false);
     const [message, setMessage] = useState('');
   
@@ -22,12 +22,16 @@ function ToastProvider(props) {
   
     return (
       <ToastContext.Provider value={{ showToast, hideToast }}>
-        {props.children}
-        <Toast show={isOpen} onClose={hideToast} delay={3000} autohide>
+       
+        <div className='toast-container'>
+        <Toast className="d-inline-block m-1" bg='success' show={isOpen} onClose={hideToast} delay={3000} autohide>
+          <Toast.Header></Toast.Header>
           <Toast.Body>{message}</Toast.Body>
         </Toast>
+      </div>
+        {children}      
       </ToastContext.Provider>
-    );
+);
   }
   
 

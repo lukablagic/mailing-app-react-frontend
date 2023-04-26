@@ -10,3 +10,9 @@
     align-items: center;
     padding-top: 15rem;
 }
+.toast-container {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 9999;
+}

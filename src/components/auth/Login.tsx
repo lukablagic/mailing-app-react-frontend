@@ -2,9 +2,10 @@ import React, { useContext, useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import {Routes, Route, useNavigate} from 'react-router-dom';
 import { loginUser } from "../../api/Auth";
+import { ToastContext } from "../common/ToastContext";
 
 const Login = ({onLogin}) => {
-
+  const {showToast}  = useContext(ToastContext);
   const [email,setEmail] = useState('');
   const [password,setPassword] = useState('');
 
@@ -20,11 +21,11 @@ const Login = ({onLogin}) => {
     try {
       const data = await loginUser(email, password);
       onLogin(true);
-   //   showToast('Login successful!');
+      showToast('Login successful!');
       navigateToHome();
     } catch (error) {
       console.error(error);
-    //  showToast('Login failed!');
+     showToast('Login failed!');
     }
   };
  
