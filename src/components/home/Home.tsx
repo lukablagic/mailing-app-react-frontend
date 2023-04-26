@@ -26,7 +26,7 @@ const Home = (loginData) => {
             <Options />
           </Col>
           <Col xs={12} md={2} className="py-3 py-md-0">
-            <Inbox loginData={loginData}/> //props email and password
+            <Inbox /> //props email and password
           </Col>
           <Col xs={12} md={8} className="d-flex flex-column xp-3">
             <Details />

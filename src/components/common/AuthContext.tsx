@@ -2,27 +2,20 @@ import React, { createContext, useState } from 'react';
 import { Toast } from 'react-bootstrap';
 
 
- const AuthContext = createContext({
-    login: (email: string, password: string) => {},
-    logout: () => {},
+const AuthContext = createContext({
+  auth: {},
+  setAuth: (auth: {}) => {},
+  token:  "",
+  setToken: (token: any) => {},
 });
 
+
 function AuthProvider ({ children }) {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [auth, setAuth] = useState(false);
+  const [token, setToken] = useState('xxxxxxx');
     
-    const login = (email, password) => {
-      setIsLoggedIn(true);
-    };
-  
-    const logout = () => {
-      setIsLoggedIn(false);
-    };
-   
-  
- 
-  
     return (
-      <AuthContext.Provider value={{ login, logout }}>
+      <AuthContext.Provider value={{ auth, setAuth ,token, setToken}}>
         {children}      
       </AuthContext.Provider>
 );

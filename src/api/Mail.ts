@@ -2,7 +2,7 @@ import React from "react";
 import {Routes, Route, useNavigate} from 'react-router-dom';
 import {AuthResponse} from '../models/AuthResponse';
 import {User} from '../models/User';
-
+import {Mail} from '../models/Mail';
 
 const API_BASE_URL = 'http://localhost';
 
@@ -10,18 +10,18 @@ const API_BASE_URL = 'http://localhost';
 
 
 
-export async function getEmails(token: string): Promise<AuthResponse> {
-
+export async function getEmails(token: string): Promise<Mail> {
+  console.log(token)
   const response = await fetch(`${API_BASE_URL}/emails`, {
-    method: 'POST',
+    method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      Authentication: `Bearer ${token}`
+      Authorization: "Bearer "+ token,
     }
   });
   const data = await response.json();
-  console.log(data);
-  return data;
+  console.log(data.emails)
+  return data.emails;
 }
 
 export async function getEmail(id) {

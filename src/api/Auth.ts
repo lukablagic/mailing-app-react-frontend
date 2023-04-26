@@ -19,7 +19,7 @@ export async function registerUser(user: User): Promise<AuthResponse> {
   return data;
 }
 
-export async function loginUser( email:string,password:string ): Promise<AuthResponse> {
+export async function loginUser( email:string,password:string ): Promise<string> {
   const response = await fetch(`${API_BASE_URL}/auth/login`, {
     method: 'POST',
     headers: {
@@ -28,7 +28,8 @@ export async function loginUser( email:string,password:string ): Promise<AuthRes
     body: JSON.stringify({ email, password }),
   });
   const data = await response.json();
-  return data;
+  
+  return data.token;
 }
 
 export async function logoutUser(token: string): Promise<void> {

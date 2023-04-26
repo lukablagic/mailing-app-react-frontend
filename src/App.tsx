@@ -1,26 +1,20 @@
 import * as React from "react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Home from "./components/home/Home";
 import { LoginData } from "./models/LoginData";
 import {ToastContext, ToastProvider} from "./components/common/ToastContext";
+import { AuthContext } from "./components/common/AuthContext";
 //import AuthGuard from "./guard/AuthGuard";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const login = (email, password) => {
-    setIsLoggedIn(true);
-  };
-
-  const logout = () => {
-    setIsLoggedIn(false);
-  };
+  const {auth} = useContext(AuthContext);
+ 
 
   function AuthGuard({ children }) {
-    const auth = useAuth();
     return auth ? children : <Navigate to="/login" />;
   }
 
@@ -40,8 +34,8 @@ const App = () => {
               </AuthGuard>
             }
           />
-          <Route path="register" element={<Register onRegister={login} />} />
-          <Route path="login" element={<Login onLogin={login} />} />
+          <Route path="register" element={<Register  />} />
+          <Route path="login" element={<Login  />} />
         </Routes>
       </BrowserRouter>
     </div>
