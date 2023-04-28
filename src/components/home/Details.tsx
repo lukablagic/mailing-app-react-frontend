@@ -1,10 +1,23 @@
 import Outline from "./Outline";
-import { Container} from "react-bootstrap";
+import { Container } from "react-bootstrap";
+import parse from 'html-react-parser';
+import { useEffect, useState } from "react";
 
-const Details = ({emails, selectedEmailId}) => {
+const Details = ({ emails, selectedEmailId }) => {
   // Find the selected email by its ID
-  const selectedEmail = selectedEmailId ? emails.find(email => email.id === selectedEmailId) : null;
-
+  const selectedEmail = selectedEmailId
+    ? emails.find((email) => email.id === selectedEmailId)
+    : null;
+  const stringToHtml = (selectedEmail) => {
+    const [html, setHtml] = useState<string>("");
+    useEffect(() => {
+      setHtml(replaceWithBr(selectedEmail));
+    }, [html]);
+  return <p>{parse(html)}</p>;
+  };
+  function replaceWithBr(replaceString) {
+    return replaceString.replace(/\n/g, "<br />")
+  }
   // Render the email details or a message to select an email
   return (
     <Outline>
@@ -15,11 +28,8 @@ const Details = ({emails, selectedEmailId}) => {
             <h4>{selectedEmail.subject}</h4>
             <p>From: {selectedEmail.from}</p>
             <p>Date: {new Date(selectedEmail.sent_date).toLocaleString()}</p>
-            <p>{selectedEmail.body}</p>
+            <p dangerouslySetInnerHTML={{__html: replaceWithBr(selectedEmail.body)}} />
             <p>Replied to: {selectedEmail.replied_to}</p>
-            <p>Read: {selectedEmail.is_read ? "Yes" : "No"}</p>
-            <p>Draft: {selectedEmail.is_draft ? "Yes" : "No"}</p>
-            <p>Sent: {selectedEmail.is_sent ? "Yes" : "No"}</p>
             <p>Has attachment: {selectedEmail.has_attachment ? "Yes" : "No"}</p>
           </>
         ) : (
@@ -29,6 +39,4 @@ const Details = ({emails, selectedEmailId}) => {
     </Outline>
   );
 };
-
-
 export default Details;

@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
-import { Button, Container } from "react-bootstrap";
+import { Button, Container, Modal } from "react-bootstrap";
+import {Something } from "./SlateEditor/Editor";
 import {
   HiOutlineMail,
   HiOutlineTrash,
@@ -9,8 +10,14 @@ import {
   HiOutlineMailOpen,
   HiArrowNarrowRight,
 } from "react-icons/hi";
+import Editor from "./NewMailEditor";
 
 const ToolbarComponent = () => {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  
   return (
     <Tabs
       defaultActiveKey="home"
@@ -19,10 +26,24 @@ const ToolbarComponent = () => {
     >
       <Tab eventKey="home" title="Home">
         <Container className="Container">
-          <Button variant="primary">
+          <Button  onClick={handleShow} variant="primary">
             <HiOutlineMail className="mr-2" />
             New Email
           </Button>
+          <Modal show={show} onHide={handleClose}  size="lg">
+        <Modal.Header closeButton>
+          <Modal.Title>Send New Mail</Modal.Title>
+        </Modal.Header>
+        <Modal.Body><Editor/></Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
           <Button className="mx-1" variant="secondary">
             <HiOutlineTrash />
             Trash
@@ -53,6 +74,7 @@ const ToolbarComponent = () => {
           </Button>
         </Container>{" "}
       </Tab>
+ 
     </Tabs>
   );
 };

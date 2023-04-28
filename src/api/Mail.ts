@@ -19,6 +19,7 @@ export async function getEmails(token: string): Promise<Mail[]> {
     }
   });
   const data = await response.json();
+  console.log(data)
   return data.emails;
 }
 

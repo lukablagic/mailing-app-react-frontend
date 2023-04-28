@@ -3,7 +3,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import Details from "./Details";
 import Footer from "./Footer";
 import Header from "./Header";
-import ToolbarComponent from "./ToolbarComponent";
+import ToolbarComponent from "./Toolbar/ToolbarComponent";
 import Options from "./Options";
 import Inbox from "./Inbox";
 import { getEmails } from "../../api/Mail";
