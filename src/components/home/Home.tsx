@@ -12,10 +12,21 @@ import { AuthContext } from "../../components/common/AuthContext";
 const Home = () => {
   const { token } = useContext(AuthContext);
   const [emails, setEmails] = useState([]);
+  const [emailsDetails, setEmailsDetails] = useState([]);
   const [selectedEmailId, setSelectedEmailId] = useState(null);
 
   useEffect(() => {
     getEmails(token).then((res) => setEmails(res));
+    const emailsInbox = [];
+    const emailsDetails = [];
+    emails.map((email) => {
+      if (email.in_reply_to === "") {
+        emailsInbox.push(email);
+      }else{
+        emailsDetails.push(email);
+      }
+      setEmailsDetails(emailsDetails);
+    });
   }, [token]);
 
   const handleEmailClick = (id) => {
@@ -37,7 +48,7 @@ const Home = () => {
             <Inbox emails={emails} handleEmailClick={handleEmailClick} selectedEmailId={selectedEmailId} />
           </Col>
           <Col xs={12} md={8} className="d-flex flex-column xp-3">
-            <Details emails={emails} selectedEmailId={selectedEmailId} />
+            <Details emails={emails} emailsDetails={emailsDetails} selectedEmailId={selectedEmailId} />
           </Col>
         </Row>
         <Footer />

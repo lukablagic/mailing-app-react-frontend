@@ -23,6 +23,7 @@ export async function getEmails(token: string): Promise<Mail[]> {
   return data.emails;
 }
 
+
 export async function getEmail(id) {
   const response = await fetch(`${API_BASE_URL}/emails/${id}`);
   const email = await response.json();

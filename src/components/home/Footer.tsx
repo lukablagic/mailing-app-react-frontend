@@ -21,7 +21,7 @@ const Footer = () => {
             <Nav.Link href="#" className="px-2 text-body-secondary">About</Nav.Link>
           </NavItem>
         </Nav>
-        <p className="text-center text-body-secondary">&copy; 2023 Company, Inc</p>
+        <p className="text-center text-body-secondary">&copy; 2023 Mailing App, Inc</p>
       </footer>
     </Container>
   );

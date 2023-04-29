@@ -2,13 +2,16 @@ import React from "react";
 import { Button, Card, ListGroup } from "react-bootstrap";
 
 const Inbox = ({ emails, handleEmailClick, selectedEmailId }) => {
+  // Filter the emails to only show those with an empty in_reply_to field
+  const filteredEmails = emails.filter((email) => email.in_reply_to === "");
+
   return (
     <div style={{ height: "95vh ", overflowY: "scroll" }}>
       <ListGroup>
-        {emails.map((email) => (
+        {filteredEmails.map((email) => (
           <ListGroup.Item
             key={email.id}
-            onClick={() => handleEmailClick(email.id)}
+            onClick={() => handleEmailClick(email.uid)}
             style={{
               backgroundColor: selectedEmailId === email.id ? "#f8f9fa" : "white",
               cursor: "pointer",
