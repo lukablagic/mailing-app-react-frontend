@@ -11,17 +11,21 @@ import { AuthContext } from "./components/common/AuthContext";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const {auth} = useContext(AuthContext);
- 
+  const {auth,setAuth,setToken} = useContext(AuthContext);
+  const storedToken = localStorage.getItem('token');
+
 
   function AuthGuard({ children }) {
+    console.log(storedToken)
+    if (storedToken) {
+      setToken(storedToken);
+      setAuth(true);
+      return auth ? children : <Navigate to="/" />;
+    }
     return auth ? children : <Navigate to="/login" />;
   }
 
-  function useAuth() {
-    return isLoggedIn;
-  }
-  
+
   return (
     <div>
       <BrowserRouter>
@@ -45,3 +49,5 @@ const App = () => {
 
 
 export default App;
+
+
