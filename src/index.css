@@ -16,3 +16,11 @@
   right: 1rem;
   z-index: 9999;
 }
+.read-email {
+  background-color: #f1f1f1;
+}
+
+.unread-email {
+  background-color: rgb(255, 255, 255);
+  font-weight: bold;
+}

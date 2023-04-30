@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import { Button, Container, Modal } from "react-bootstrap";
-import {Something } from "./SlateEditor/Editor";
 import {
   HiOutlineMail,
   HiOutlineTrash,
@@ -11,13 +10,36 @@ import {
   HiArrowNarrowRight,
 } from "react-icons/hi";
 import Editor from "./NewMailEditor";
+import { updateEmailStatus } from "../../../api/Mail";
+import { AuthContext } from "../../common/AuthContext";
 
-const ToolbarComponent = () => {
+const ToolbarComponent = ({emails,selectedEmailUid, handleStatusUpdate}) => {
+  const {token} = useContext(AuthContext);
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  
+
+  const selectedEmail = selectedEmailUid
+  ? emails.find((email) => email.uid === selectedEmailUid)
+  : null;
+
+const changeStatus = async () => {
+  event.preventDefault();
+  try {
+    let status;
+    if(selectedEmail.is_read == 0){
+      status = false;
+
+    }else if (selectedEmail.is_read == 1){
+      status = true;
+    }
+    updateEmailStatus(selectedEmail.id,!status,token);
+    handleStatusUpdate();
+  } catch (error) {
+    console.error(error);
+  }
+};
+
   return (
     <Tabs
       defaultActiveKey="home"
@@ -53,14 +75,10 @@ const ToolbarComponent = () => {
             Reply
           </Button>
           <Button className="mx-1" variant="secondary">
-            <HiOutlineReply />
-            Reply All
-          </Button>
-          <Button className="mx-1" variant="secondary">
             <HiArrowNarrowRight />
             Forward
           </Button>
-          <Button className="mx-1" variant="secondary">
+          <Button className="mx-1" variant="secondary" onClick={ changeStatus } >
             <HiOutlineMailOpen />
             Unread / Read
           </Button>

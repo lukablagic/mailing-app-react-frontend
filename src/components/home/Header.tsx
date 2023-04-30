@@ -16,8 +16,8 @@ const Header = () => {
   const [showProfilePicture, setShowProfilePicture] = useState(false);
   const {showToast}  = useContext(ToastContext);
   const { token ,setAuth,setToken } = useContext(AuthContext);
-
-
+ 
+ 
   const handleLogout = async (event: React.MouseEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {

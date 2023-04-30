@@ -22,7 +22,7 @@ const Home = () => {
     emails.map((email) => {
       if (email.in_reply_to === "") {
         emailsInbox.push(email);
-      }else{
+      } else {
         emailsDetails.push(email);
       }
       setEmailsDetails(emailsDetails);
@@ -32,23 +32,33 @@ const Home = () => {
   const handleEmailClick = (id) => {
     setSelectedEmailId(id);
   };
+  const handleStatusUpdate = () => {
+    getEmails(token).then((res) => setEmails(res));
+  };
 
   return (
     <div>
-      <Container className="bg-light overflow-hidden " style={{ width: "100%" }}>
+      <Container
+        className="bg-light overflow-hidden "
+        style={{ width: "100%" }}
+      >
         <Header />
         <Container className="d-flex flex-column vh-10 py-3 border rounded">
-          <ToolbarComponent />
+          <ToolbarComponent emails={emails} handleStatusUpdate={handleStatusUpdate} selectedEmailUid={selectedEmailId} />
         </Container>
         <Row className="flex-grow-1 vh-100">
           <Col xs={12} md={2} className="py-3 py-md-0">
             <Options />
           </Col>
           <Col xs={12} md={2} className="py-4 py-md-0">
-            <Inbox emails={emails} handleEmailClick={handleEmailClick} selectedEmailId={selectedEmailId} />
+            <Inbox
+              emails={emails}
+              handleEmailClick={handleEmailClick}
+              selectedEmailId={selectedEmailId}
+            />
           </Col>
           <Col xs={12} md={8} className="d-flex flex-column xp-3">
-            <Details emails={emails} emailsDetails={emailsDetails} selectedEmailId={selectedEmailId} />
+            <Details emails={emails} selectedEmailId={selectedEmailId} />
           </Col>
         </Row>
         <Footer />

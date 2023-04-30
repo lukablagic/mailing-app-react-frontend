@@ -3,7 +3,7 @@ import { Container, Button } from "react-bootstrap";
 import parse from 'html-react-parser';
 import { useEffect, useState } from "react";
 
-const Details = ({ emails, emailsDetails, selectedEmailId }) => {
+const Details = ({ emails, selectedEmailId }) => {
   // Find the selected email by its ID
   const selectedEmail = selectedEmailId
     ? emails.find((email) => email.uid === selectedEmailId)
@@ -13,10 +13,8 @@ const Details = ({ emails, emailsDetails, selectedEmailId }) => {
     return replaceString.replace(/\n/g, "<br />")
   }
 
-  // Filter emails from emailsDetails that match the in_reply_to property of the selected email
   const filteredEmailsDetails = selectedEmail ? emails.filter((email) => email.in_reply_to === selectedEmail.uid) : [];
-
-  // Render the email details or a message to select an email
+  
   return (
     <Outline>
       <h1>Details</h1>

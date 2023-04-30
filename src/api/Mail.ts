@@ -41,3 +41,13 @@ export async function sendEmail(data) {
   const email = await response.json();
   return email;
 }
+export async function updateEmailStatus(id: number, status: boolean,token: string) {
+  const response = await fetch(`${API_BASE_URL}/emails/${id}/status`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: "Bearer "+ token,
+    },
+    body: JSON.stringify( { status: status  })
+  });
+}
