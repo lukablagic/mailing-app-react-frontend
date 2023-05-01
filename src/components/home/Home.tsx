@@ -40,10 +40,9 @@ const Home = () => {
     <div>
       <Container
         className="bg-light overflow-hidden "
-        style={{ width: "100%" }}
       >
         <Header />
-        <Container className="d-flex flex-column vh-10 py-3 border rounded">
+        <Container className="d-flex flex-column vh-12 py-3 border rounded">
           <ToolbarComponent emails={emails} handleStatusUpdate={handleStatusUpdate} selectedEmailUid={selectedEmailId} />
         </Container>
         <Row className="flex-grow-1 vh-100">

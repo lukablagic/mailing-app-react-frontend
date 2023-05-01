@@ -30,7 +30,15 @@ export async function getEmail(id) {
   return email;
 }
 
-export async function sendEmail(data) {
+export async function sendEmail(subject,to:  string[] , cc, bcc,body, inReplyTo  ) {
+  const data = {
+    to,
+    cc,
+    bcc,
+    inReplyTo,
+    subject,
+    body,
+  };
   const response = await fetch(`${API_BASE_URL}/emails`, {
     method: 'POST',
     headers: {
@@ -41,6 +49,7 @@ export async function sendEmail(data) {
   const email = await response.json();
   return email;
 }
+
 export async function updateEmailStatus(id: number, status: boolean,token: string) {
   const response = await fetch(`${API_BASE_URL}/emails/${id}/status`, {
     method: 'PUT',
