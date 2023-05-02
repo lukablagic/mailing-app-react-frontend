@@ -5,6 +5,9 @@ import "react-quill/dist/quill.snow.css";
 import { Button, Col, Container, Form, Modal } from "react-bootstrap";
 import { HiOutlineMail } from "react-icons/hi";
 import { sendEmail } from "../../../api/Mail";
+import { useContext } from "react";
+import { AuthContext } from "../../common/AuthContext";
+
 const Editor = ({ placeholder }) => {
   const [editorHtml, setEditorHtml] = useState("");
   const [subject, setSubject] = useState("New Email");
@@ -15,10 +18,11 @@ const Editor = ({ placeholder }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const {token} = useContext(AuthContext);
   
 
   const handleSendEmail = () => {
-  //  sendEmail(to, subject, editorHtml);
+    sendEmail(token,subject,to,cc,bcc, editorHtml,null);
     handleClose();
   };
  
@@ -30,11 +34,11 @@ const Editor = ({ placeholder }) => {
   const handleToChange = (e) => {
     setTo(e.target.value);
   };
-  const handleCcChange = (cc) => {
-    setCC(cc);
+  const handleCcChange = (e) => {
+    setCC(e.target.value);
   };
-  const handleBccChange = (bcc) => {
-    setBCC(bcc);
+  const handleBccChange = (e) => {
+    setBCC(e.target.value);
   };
   const handleChange = (html) => {
     setEditorHtml(html);
