@@ -1,10 +1,10 @@
 import React from "react";
 import { Button, Card, ListGroup } from "react-bootstrap";
 
-const Inbox = ({ emails, handleEmailClick, selectedEmailId }) => {
+const Inbox = ({ emails, handleEmailClick, selectedEmailUid }) => {
   // Filter the emails to only show those with an empty in_reply_to field
   const filteredEmails = emails.filter((email) => email.in_reply_to === null);
-
+  
   return (
     <div style={{ height: "95vh ", overflowY: "scroll" }}>
       <ListGroup>

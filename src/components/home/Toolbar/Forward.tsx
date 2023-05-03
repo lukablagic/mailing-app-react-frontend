@@ -3,12 +3,12 @@ import PropTypes from "prop-types";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { Button, Col, Container, Form, Modal } from "react-bootstrap";
-import { HiOutlineMail } from "react-icons/hi";
+import { HiArrowNarrowRight, HiOutlineMail, HiOutlineReply } from "react-icons/hi";
 import { sendEmail } from "../../../api/Mail";
 import { useContext } from "react";
 import { AuthContext } from "../../common/AuthContext";
 
-const Editor = ({ placeholder }) => {
+const Forward = ({ placeholder ,emails, selectedEmailUid}) => {
   const [editorHtml, setEditorHtml] = useState("");
   const [subject, setSubject] = useState("");
   const [to, setTo] = useState([]);
@@ -21,7 +21,7 @@ const Editor = ({ placeholder }) => {
   const { token } = useContext(AuthContext);
 
   const handleSendEmail = () => {
-    sendEmail(token, subject, to, cc, bcc, editorHtml, "");
+    sendEmail(token, subject, to, cc, bcc, editorHtml, null);
     handleClose();
   };
 
@@ -47,10 +47,10 @@ const Editor = ({ placeholder }) => {
 
   return (
     <div>
-      <Button onClick={handleShow} variant="primary">
-        <HiOutlineMail className="mr-2" />
-        New Email
-      </Button>
+      <Button className="mx-1" onClick={handleShow}  variant="secondary">
+      <HiArrowNarrowRight />
+        Forward
+           </Button>
       <Modal show={show} onHide={handleClose} size="lg">
         <Modal.Header closeButton>
           <Modal.Title>{subject}</Modal.Title>
@@ -181,8 +181,8 @@ const formats = [
   "image",
   "video",
 ];
-Editor.propTypes = {
+Forward.propTypes = {
   placeholder: PropTypes.string,
 };
 
-export default Editor;
+export default Forward;

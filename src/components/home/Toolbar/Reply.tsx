@@ -3,12 +3,12 @@ import PropTypes from "prop-types";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { Button, Col, Container, Form, Modal } from "react-bootstrap";
-import { HiOutlineMail } from "react-icons/hi";
+import { HiOutlineReply } from "react-icons/hi";
 import { sendEmail } from "../../../api/Mail";
 import { useContext } from "react";
 import { AuthContext } from "../../common/AuthContext";
 
-const Editor = ({ placeholder }) => {
+const Reply = ({ placeholder, emails, selectedEmailUid, selectedEmail }) => {
   const [editorHtml, setEditorHtml] = useState("");
   const [subject, setSubject] = useState("");
   const [to, setTo] = useState([]);
@@ -16,12 +16,60 @@ const Editor = ({ placeholder }) => {
   const [bcc, setBCC] = useState([]);
   const [sending, setSending] = useState(false);
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
   const { token } = useContext(AuthContext);
 
-  const handleSendEmail = () => {
-    sendEmail(token, subject, to, cc, bcc, editorHtml, "");
+  const getReplies = (emailUid, emails) => {
+    const email = emails.find((email) => email.uid === emailUid);
+    if (!email) return [];
+    const replies = emails.filter((email) => email.in_reply_to === emailUid);
+    const subReplies = replies.flatMap((reply) =>
+      getReplies(reply.uid, emails)
+    );
+    return [email, ...subReplies];
+  };
+
+  const replies = selectedEmail ? getReplies(selectedEmailUid, emails) : [];
+  const reply = replies ? replies[replies.length - 1]: selectedEmail;
+
+  const handleClose = () => {
+    setShow(false);
+    removeReply();
+  };
+  const handleShow = () => {
+    setShow(true);
+    addReply();
+  };
+  const addReply = () => {
+    console.log(reply)
+    setSubject("Re: " + selectedEmail.subject);
+    setTo(selectedEmail.to_recipients);
+    if (!reply.cc) {
+      reply.cc = "";
+    }
+    if (!reply.bcc) {
+      reply.bcc = "";
+    }
+    setCC(reply.cc);
+    setBCC(reply.bcc);
+    let replyBody =
+      "<br><b>On " +
+      reply.sent_date +
+      ", " +
+      reply.from +
+      " wrote:</b><br>" +
+      reply.body;
+    setEditorHtml(replyBody);
+  };
+const removeReply = () => {
+setSubject("");
+setTo([]);
+setCC([]);
+setBCC([]);
+setEditorHtml("");
+};
+
+  const handleReplyEmail = () => {
+    sendEmail(token, subject, to, cc, bcc, editorHtml, reply.uid);
     handleClose();
   };
 
@@ -47,22 +95,23 @@ const Editor = ({ placeholder }) => {
 
   return (
     <div>
-      <Button onClick={handleShow} variant="primary">
-        <HiOutlineMail className="mr-2" />
-        New Email
+      <Button className="mx-1" onClick={handleShow} variant="secondary">
+        <HiOutlineReply />
+        Reply
       </Button>
       <Modal show={show} onHide={handleClose} size="lg">
         <Modal.Header closeButton>
           <Modal.Title>{subject}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={handleSendEmail}>
+          <Form onSubmit={handleReplyEmail}>
             <Form.Group controlId="subject">
               <Form.Label className="mb-0" style={{ fontSize: "1.2rem" }}>
                 Subject:
               </Form.Label>
               <Col md={8} className="w-100">
                 <Form.Control
+                  disabled={true}
                   type="text"
                   value={subject}
                   onChange={handleSubjectChange}
@@ -82,7 +131,6 @@ const Editor = ({ placeholder }) => {
                   onChange={handleToChange}
                   style={{ width: "100%" }}
                   className="rounded"
-                  placeholder="Enter comma separated email addresses"
                 />
               </Col>
             </Form.Group>
@@ -135,7 +183,7 @@ const Editor = ({ placeholder }) => {
           </Button>
           <Button
             variant="primary"
-            onClick={handleSendEmail}
+            onClick={handleReplyEmail}
             type="submit"
             disabled={sending}
           >
@@ -181,8 +229,8 @@ const formats = [
   "image",
   "video",
 ];
-Editor.propTypes = {
+Reply.propTypes = {
   placeholder: PropTypes.string,
 };
 
-export default Editor;
+export default Reply;

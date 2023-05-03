@@ -12,6 +12,8 @@ import {
 import Editor from "./Editor";
 import { updateEmailStatus } from "../../../api/Mail";
 import { AuthContext } from "../../common/AuthContext";
+import Forward from "./Forward";
+import Reply from "./Reply";
 
 const ToolbarComponent = ({ emails, selectedEmailUid, handleStatusUpdate }) => {
   const { token } = useContext(AuthContext);
@@ -45,20 +47,13 @@ const ToolbarComponent = ({ emails, selectedEmailUid, handleStatusUpdate }) => {
     >
       <Tab eventKey="home" title="Home">
         <Container className="Container">
-   
           <Editor  />
           <Button className="mx-1" variant="secondary">
             <HiOutlineTrash />
             Trash
           </Button>
-          <Button className="mx-1" variant="secondary">
-            <HiOutlineReply />
-            Reply
-          </Button>
-          <Button className="mx-1" variant="secondary">
-            <HiArrowNarrowRight />
-            Forward
-          </Button>
+          <Reply emails={emails} selectedEmailUid={selectedEmailUid} selectedEmail={selectedEmail} />
+          <Forward emails={emails} selectedEmailUid={selectedEmailUid} />
           <Button className="mx-1" variant="secondary" onClick={changeStatus}>
             <HiOutlineMailOpen />
             Unread / Read

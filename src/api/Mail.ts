@@ -26,9 +26,9 @@ export async function getEmails(token: string): Promise<Mail[]> {
 
 
 
-export async function sendEmail(token: string, subject: string, to: string, cc: string, bcc: string, body: string, inReplyTo: string) {
+export async function sendEmail(token: string, subject: string, to: string[], cc: string[], bcc: string[], body: string, inReplyTo: string) {
 
- 
+ console.log(token, subject, to, cc, bcc, body, inReplyTo)
   const response = await fetch(`${API_BASE_URL}/emails`, {
     method: 'POST',
     headers: {
@@ -53,3 +53,4 @@ export async function updateEmailStatus(id: number, status: boolean,token: strin
     body: JSON.stringify( { status: status  })
   });
 }
+
