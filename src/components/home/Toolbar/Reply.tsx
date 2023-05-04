@@ -40,7 +40,7 @@ const Reply = ({ placeholder, emails, selectedEmailUid, selectedEmail }) => {
     addReply();
   };
   const addReply = () => {
-    console.log(reply)
+
     setSubject("Re: " + selectedEmail.subject);
     setTo(selectedEmail.to_recipients);
     if (!reply.cc) {
@@ -69,7 +69,7 @@ setEditorHtml("");
 };
 
   const handleReplyEmail = () => {
-    sendEmail(token, subject, to, cc, bcc, editorHtml, reply.uid);
+    sendEmail(token, subject, to, cc, bcc, editorHtml, selectedEmailUid);
     handleClose();
   };
 

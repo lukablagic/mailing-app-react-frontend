@@ -2,14 +2,14 @@ import axios from "axios";
 import { User } from "../models/User";
 import process from 'process';
 
-export class UserAPI {
+
 
     
-    private baseUrl = "http://localhost";
+    const baseUrl = "http://localhost";
     
-    fetchUser(): Promise<User[]> {
+   export async function getUser(boolean): Promise<User[]> {
     return axios.get(`${this.baseUrl}/users`);
     }
    
 
-}
+

@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import { Toast } from 'react-bootstrap';
 
 
@@ -11,11 +11,11 @@ const AuthContext = createContext({
 
 
 function AuthProvider ({ children }) {
+ 
   const [auth, setAuth] = useState(false);
-  const [token, setToken] = useState('xxxxxxx');
-    
-    return (
-      <AuthContext.Provider value={{ auth, setAuth ,token, setToken}}>
+  const [token, setToken] = useState('');
+  return (
+    <AuthContext.Provider value={{ auth, setAuth ,token, setToken}}>
         {children}      
       </AuthContext.Provider>
 );

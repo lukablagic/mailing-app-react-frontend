@@ -17,7 +17,10 @@ const Details = ({ emails, selectedEmailUid }) => {
       const replies = emails.filter((email) => email.in_reply_to === emailUid);
       const subReplies = replies.flatMap((reply) => getReplies(reply.uid, emails));
     
-      return [email, ...subReplies];
+      // filter the replies with the "Re: + selectedemail.subject" header and sort them alphabetically by sender
+      const sortedReplies = replies.filter((reply) => reply.subject.startsWith(`Re: ${email.subject}`)).sort((a, b) => a.from.localeCompare(b.from_recipients));
+    
+      return [email, ...sortedReplies, ...subReplies];
     };
     
 

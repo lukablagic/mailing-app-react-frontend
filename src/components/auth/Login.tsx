@@ -22,7 +22,6 @@ const Login = () => {
     event.preventDefault();
     try {
       const token = await loginUser(email, password);
-     
       setAuth(true);
       setToken(token);
       showToast('Login successful!');
