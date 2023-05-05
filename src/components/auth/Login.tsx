@@ -4,10 +4,11 @@ import {Routes, Route, useNavigate} from 'react-router-dom';
 import { loginUser } from "../../api/Auth";
 import { ToastContext } from "../common/ToastContext";
 import { AuthContext } from "../common/AuthContext";
+import { getUserData } from "../../api/User";
 
 const Login = () => {
   const {showToast}  = useContext(ToastContext);
-  const { setAuth,setToken } = useContext(AuthContext);
+  const { setAuth,setToken , setUser } = useContext(AuthContext);
   const [email,setEmail] = useState('');
   const [password,setPassword] = useState('');
 
@@ -24,6 +25,7 @@ const Login = () => {
       const token = await loginUser(email, password);
       setAuth(true);
       setToken(token);
+      setUser(getUserData(token));
       showToast('Login successful!');
       navigateToHome();
     } catch (error) {

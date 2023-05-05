@@ -41,6 +41,21 @@ export async function sendEmail(token: string, subject: string, to: string[], cc
   const email = await response.json();
   return email;
 }
+export async function replyEmail(token: string, email: any) {
+  console.log(token, email);
+  const response = await fetch(`${API_BASE_URL}/emails`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(email),
+  });
+  
+  const responseJson = await response.json();
+  return responseJson;
+}
+
 
 
 export async function updateEmailStatus(id: number, status: boolean,token: string) {

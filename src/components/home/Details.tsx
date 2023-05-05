@@ -4,27 +4,20 @@ import Outline from "./Outline";
 import Accordion from "react-bootstrap/Accordion";
 
 const Details = ({ emails, selectedEmailUid }) => {
-  const [showReplies, setShowReplies] = useState(false); // State to track whether replies should be displayed
+  
+    
+  // Filter the emails to only show those with an empty in_reply_to field and unique subjects
+  const filteredEmails = emails.filter((email) => {
+    if (email.subject.startsWith('Re: ${selectedEmail.subject}')) {
+      return false;
+    }
+    
+    return true;
+  });
+    
+    const selectedEmail = emails.find((email) => email.uid === selectedEmailUid);
 
-  const selectedEmail = selectedEmailUid
-    ? emails.find((email) => email.uid === selectedEmailUid)
-    : null;
-    
-    const getReplies = (emailUid, emails) => {
-      const email = emails.find((email) => email.uid === emailUid);
-      if (!email) return [];
-    
-      const replies = emails.filter((email) => email.in_reply_to === emailUid);
-      const subReplies = replies.flatMap((reply) => getReplies(reply.uid, emails));
-    
-      // filter the replies with the "Re: + selectedemail.subject" header and sort them alphabetically by sender
-      const sortedReplies = replies.filter((reply) => reply.subject.startsWith(`Re: ${email.subject}`)).sort((a, b) => a.from.localeCompare(b.from_recipients));
-    
-      return [email, ...sortedReplies, ...subReplies];
-    };
-    
-
-    const replies = selectedEmail ? getReplies(selectedEmailUid, emails) : [];
+    const replies = selectedEmail ? filteredEmails : [];
 
     
   //create array of replies that are all lined one after the other

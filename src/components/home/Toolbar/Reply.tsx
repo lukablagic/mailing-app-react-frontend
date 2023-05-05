@@ -4,7 +4,7 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { Button, Col, Container, Form, Modal } from "react-bootstrap";
 import { HiOutlineReply } from "react-icons/hi";
-import { sendEmail } from "../../../api/Mail";
+import { replyEmail } from "../../../api/Mail";
 import { useContext } from "react";
 import { AuthContext } from "../../common/AuthContext";
 
@@ -16,7 +16,7 @@ const Reply = ({ placeholder, emails, selectedEmailUid, selectedEmail }) => {
   const [bcc, setBCC] = useState([]);
   const [sending, setSending] = useState(false);
   const [show, setShow] = useState(false);
-  const { token } = useContext(AuthContext);
+  const { token ,user} = useContext(AuthContext);
 
   const getReplies = (emailUid, emails) => {
     const email = emails.find((email) => email.uid === emailUid);
@@ -68,10 +68,22 @@ setBCC([]);
 setEditorHtml("");
 };
 
-  const handleReplyEmail = () => {
-    sendEmail(token, subject, to, cc, bcc, editorHtml, selectedEmailUid);
-    handleClose();
+const handleReplyEmail = () => {
+  // Construct the reply email
+  const reply = {
+    subject: subject,
+    to: to,
+    cc: cc,
+    bcc: bcc,
+    body: editorHtml,
+    in_reply_to: selectedEmailUid,
+    references: selectedEmail.references ? selectedEmail.references.concat([selectedEmailUid]) : [selectedEmailUid],
   };
+  // Send the reply email
+  replyEmail(token, reply);
+  handleClose();
+};
+
 
   const handleSubjectChange = (e) => {
     setSubject(e.target.value);
