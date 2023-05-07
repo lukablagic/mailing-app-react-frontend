@@ -1,7 +1,16 @@
 import { useEffect, useState } from "react";
-import { Container } from "react-bootstrap";
+import {
+  Button,
+  Col,
+  Container,
+  Dropdown,
+  DropdownButton,
+  Row,
+} from "react-bootstrap";
 import Outline from "./Outline";
 import Accordion from "react-bootstrap/Accordion";
+import { HiOutlineTrash } from "react-icons/hi";
+import { truncate } from "fs";
 
 const Details = ({ emails, selectedEmailUid }) => {
   const [selectedEmail, setSelectedEmail] = useState(null);
@@ -35,8 +44,16 @@ const Details = ({ emails, selectedEmailUid }) => {
     setReplies(replies);
   }, [emails, selectedEmailUid]);
 
+  const getBodyPreview = (body) => {
+    const maxLength = 60; // Maximum number of characters for the preview
+    if (body.length <= maxLength) {
+      return body;
+    } else {
+      return body.substring(0, maxLength) + "...";
+    }
+  };
   //create array of replies that are all lined one after the other
-  const removeQuotes = (email) => {
+  const removeQuotes = (email):string => {
     // Remove the quotes div from the email body
     const start = email.indexOf('<div class="ltr">');
     const end = email.indexOf("</div>");
@@ -53,7 +70,6 @@ const Details = ({ emails, selectedEmailUid }) => {
     const quote = email.substring(start, end);
     return quote;
   };
-  
   return (
     <Outline>
       <h1>Details</h1>
@@ -70,15 +86,26 @@ const Details = ({ emails, selectedEmailUid }) => {
                       <Accordion>
                         <Accordion.Item eventKey={email.id}>
                           <Accordion.Header>
-                            {" "}
-                            <p>{email.from}</p>{" "}
-                            <p
-                              className="me-1"
-                              dangerouslySetInnerHTML={{
-                                __html: removeQuotes(email.body),
-                              }}
-                            />
+                            <Container>
+                            <Row>
+                              <Col   sm={11}>  
+                                <p>From: {email.from}</p>
+                                <p
+                                  className="me-1"
+                                  dangerouslySetInnerHTML={{
+                                    __html:  getBodyPreview( removeQuotes(email.body))
+                                  }}
+                                />
+                              </Col>
+                              <Col sm={1}>
+                                <Button  variant="light" size="sm">
+                                  <HiOutlineTrash />
+                                </Button>
+                              </Col>
+                              </Row>
+                            </Container>
                           </Accordion.Header>
+
                           <Accordion.Body>
                             <h5>{email.subject}</h5>
                             <p>From: {email.from}</p>

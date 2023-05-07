@@ -48,10 +48,6 @@ const ToolbarComponent = ({ emails, selectedEmailUid, handleStatusUpdate }) => {
       <Tab eventKey="home" title="Home">
         <Container className="Container">
           <Editor  />
-          <Button className="mx-1" variant="secondary">
-            <HiOutlineTrash />
-            Trash
-          </Button>
           <Reply emails={emails} selectedEmailUid={selectedEmailUid} selectedEmail={selectedEmail} />
           <Forward emails={emails} selectedEmailUid={selectedEmailUid}  selectedEmail={selectedEmail}/>
           <Button className="mx-1" variant="secondary" onClick={changeStatus}>

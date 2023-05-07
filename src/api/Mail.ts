@@ -69,3 +69,14 @@ export async function updateEmailStatus(id: number, status: boolean,token: strin
   });
 }
 
+export async function deleteEmail(id: number,token: string) {
+  const response = await fetch(`${API_BASE_URL}/emails/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: "Bearer "+ token,
+    }
+  });
+}
+
+
