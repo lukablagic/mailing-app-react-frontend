@@ -7,6 +7,8 @@ import { HiOutlineReply } from "react-icons/hi";
 import { replyEmail } from "../../../api/Mail";
 import { useContext } from "react";
 import { AuthContext } from "../../common/AuthContext";
+import { get } from "http";
+import { getUserData } from "../../../api/User";
 
 const Reply = ({ placeholder, emails, selectedEmailUid, selectedEmail }) => {
   const [editorHtml, setEditorHtml] = useState("");
@@ -17,6 +19,7 @@ const Reply = ({ placeholder, emails, selectedEmailUid, selectedEmail }) => {
   const [sending, setSending] = useState(false);
   const [show, setShow] = useState(false);
   const { token ,user} = useContext(AuthContext);
+  const [recipient, setRecipient] = useState(null);
 
   const getReplies = (emailUid, emails) => {
     const email = emails.find((email) => email.uid === emailUid);
@@ -27,9 +30,16 @@ const Reply = ({ placeholder, emails, selectedEmailUid, selectedEmail }) => {
     );
     return [email, ...subReplies];
   };
-
+  const findRecipients = () => {
+  if(selectedEmail.to == user.email){
+    setRecipient(selectedEmail.from)
+  }
+else{
+  setRecipient(selectedEmail.to)
+}
+  };
   const replies = selectedEmail ? getReplies(selectedEmailUid, emails) : [];
-  const reply = replies ? replies[replies.length - 1]: selectedEmail;
+  const replyLatest = replies ? replies[replies.length - 1]: selectedEmail;
 
   const handleClose = () => {
     setShow(false);
@@ -37,27 +47,27 @@ const Reply = ({ placeholder, emails, selectedEmailUid, selectedEmail }) => {
   };
   const handleShow = () => {
     setShow(true);
-    addReply();
+    prepareReply();
   };
-  const addReply = () => {
-
+ 
+  const prepareReply = () => {
     setSubject("Re: " + selectedEmail.subject);
     setTo(selectedEmail.to_recipients);
-    if (!reply.cc) {
-      reply.cc = "";
+    if (!replyLatest.cc) {
+      replyLatest.cc = "";
     }
-    if (!reply.bcc) {
-      reply.bcc = "";
+    if (!replyLatest.bcc) {
+      replyLatest.bcc = "";
     }
-    setCC(reply.cc);
-    setBCC(reply.bcc);
+    setCC(replyLatest.cc);
+    setBCC(replyLatest.bcc);
     let replyBody =
       "<br><b>On " +
-      reply.sent_date +
+      replyLatest.sent_date +
       ", " +
-      reply.from +
+      replyLatest.from +
       " wrote:</b><br>" +
-      reply.body;
+      replyLatest.body;
     setEditorHtml(replyBody);
   };
 const removeReply = () => {
@@ -76,8 +86,8 @@ const handleReplyEmail = () => {
     cc: cc,
     bcc: bcc,
     body: editorHtml,
-    in_reply_to: selectedEmailUid,
-    references: selectedEmail.references ? selectedEmail.references.concat([selectedEmailUid]) : [selectedEmailUid],
+    in_reply_to: replyLatest.uid,
+    references: replyLatest.references,
   };
   // Send the reply email
   replyEmail(token, reply);

@@ -7,7 +7,7 @@ const AuthContext = createContext({
   setAuth: (auth: {}) => {},
   token:  "",
   setToken: (token: any) => {},
-  user:  [],
+  user:  null,
   setUser: (user: any) => {},
 });
 

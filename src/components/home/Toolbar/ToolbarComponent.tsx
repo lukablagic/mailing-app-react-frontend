@@ -53,7 +53,7 @@ const ToolbarComponent = ({ emails, selectedEmailUid, handleStatusUpdate }) => {
             Trash
           </Button>
           <Reply emails={emails} selectedEmailUid={selectedEmailUid} selectedEmail={selectedEmail} />
-          <Forward emails={emails} selectedEmailUid={selectedEmailUid} />
+          <Forward emails={emails} selectedEmailUid={selectedEmailUid}  selectedEmail={selectedEmail}/>
           <Button className="mx-1" variant="secondary" onClick={changeStatus}>
             <HiOutlineMailOpen />
             Unread / Read
