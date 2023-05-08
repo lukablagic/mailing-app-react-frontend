@@ -55,7 +55,7 @@ const Register = () => {
               onChange={(e) => setSurname(e.target.value)}
             />
           </Form.Group>
-  
+
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control

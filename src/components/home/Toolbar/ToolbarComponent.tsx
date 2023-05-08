@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import { Button, Container, Modal } from "react-bootstrap";
@@ -15,7 +15,7 @@ import { AuthContext } from "../../common/AuthContext";
 import Forward from "./Forward";
 import Reply from "./Reply";
 
-const ToolbarComponent = ({ emails, selectedEmailUid, handleStatusUpdate }) => {
+const ToolbarComponent = ({ emails, selectedEmailUid, handleStatusUpdate ,toggleImageDisplay ,showAttachemnts }) => {
   const { token } = useContext(AuthContext);
 
 
@@ -40,32 +40,33 @@ const ToolbarComponent = ({ emails, selectedEmailUid, handleStatusUpdate }) => {
   };
 
   return (
-    <Tabs
-      defaultActiveKey="home"
-      id="uncontrolled-tab-example"
-      className="mb-3 "
-    >
+    <Tabs defaultActiveKey="home" id="uncontrolled-tab-example" className="mb-3">
       <Tab eventKey="home" title="Home">
         <Container className="Container">
-          <Editor  />
+          <Editor />
           <Reply emails={emails} selectedEmailUid={selectedEmailUid} selectedEmail={selectedEmail} />
-          <Forward emails={emails} selectedEmailUid={selectedEmailUid}  selectedEmail={selectedEmail}/>
+          <Forward emails={emails} selectedEmailUid={selectedEmailUid} selectedEmail={selectedEmail} />
           <Button className="mx-1" variant="secondary" onClick={changeStatus}>
             <HiOutlineMailOpen />
             Unread / Read
           </Button>
         </Container>
       </Tab>
-      <Tab eventKey="send-receive" title="Send / Receive">
+      <Tab eventKey="send-receive" title="Display">
         <Container className="Container">
-          <Button className="mx-1" variant="primary">
+          <Button
+            className={`mx-1 ${showAttachemnts ? 'btn-primary' : 'btn-danger'}`}
+            variant={showAttachemnts ? 'primary' : 'danger'}
+            onClick={toggleImageDisplay}
+          >
             <HiArrowNarrowRight />
-            Send All
+            {showAttachemnts ? 'Hide Images' : 'Display Images'}
           </Button>
-        </Container>{" "}
+        </Container>
       </Tab>
     </Tabs>
   );
+  
 };
 
 export default ToolbarComponent;

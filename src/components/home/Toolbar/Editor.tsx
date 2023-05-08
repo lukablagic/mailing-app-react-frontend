@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
 import { Button, Col, Container, Form, Modal } from "react-bootstrap";
 import { HiOutlineMail } from "react-icons/hi";
 import { sendEmail } from "../../../api/Mail";

@@ -79,4 +79,15 @@ export async function deleteEmail(id: number,token: string) {
   });
 }
 
-
+export async function getAttachments(token:string,emailId: number){
+  const response = await fetch(`${API_BASE_URL}/emails/${emailId}/attachments`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: "Bearer "+ token,
+    }
+  });
+  const data = await response.json();
+  return data.attachments;
+  
+}

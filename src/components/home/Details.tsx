@@ -1,20 +1,18 @@
-import { useEffect, useState } from "react";
-import {
-  Button,
-  Col,
-  Container,
-  Dropdown,
-  DropdownButton,
-  Row,
-} from "react-bootstrap";
+import { useContext, useEffect, useState } from "react";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import Outline from "./Outline";
 import Accordion from "react-bootstrap/Accordion";
 import { HiOutlineTrash } from "react-icons/hi";
-import { truncate } from "fs";
+import { getAttachments } from "../../api/Mail";
+import { AuthContext } from "../common/AuthContext";
 
-const Details = ({ emails, selectedEmailUid }) => {
+import FileViewer from "react-file-viewer";
+
+const Details = ({ emails, selectedEmailUid, showAttachments }) => {
   const [selectedEmail, setSelectedEmail] = useState(null);
   const [replies, setReplies] = useState([]);
+  const { token } = useContext(AuthContext);
+  const [attachments, setAttachments] = useState(null);
 
   useEffect(() => {
     const selectedEmail = emails.find(
@@ -35,13 +33,12 @@ const Details = ({ emails, selectedEmailUid }) => {
 
       return false;
     });
-    const replies = selectedEmail ? filteredEmails : [];
-    replies.sort((a, b) => {
+    const sortedReplies = filteredEmails.sort((a, b) => {
       const dateA = new Date(a.sent_date);
       const dateB = new Date(b.sent_date);
       return dateA.getTime() - dateB.getTime();
     });
-    setReplies(replies);
+    setReplies(sortedReplies);
   }, [emails, selectedEmailUid]);
 
   const getBodyPreview = (body) => {
@@ -53,7 +50,7 @@ const Details = ({ emails, selectedEmailUid }) => {
     }
   };
   //create array of replies that are all lined one after the other
-  const removeQuotes = (email):string => {
+  const removeQuotes = (email): string => {
     // Remove the quotes div from the email body
     const start = email.indexOf('<div class="ltr">');
     const end = email.indexOf("</div>");
@@ -70,6 +67,13 @@ const Details = ({ emails, selectedEmailUid }) => {
     const quote = email.substring(start, end);
     return quote;
   };
+  const displayAttachments = async () => {
+    const data = await getAttachments(token, selectedEmail.id);
+    // Update attachments state with the fetched data
+    setAttachments(data);
+    console.log(data)
+  };
+
   return (
     <Outline>
       <h1>Details</h1>
@@ -77,7 +81,6 @@ const Details = ({ emails, selectedEmailUid }) => {
         {selectedEmail ? (
           <>
             <h4>{selectedEmail.subject}</h4>
-
             <Outline>
               {replies.length > 0 && (
                 <>
@@ -87,25 +90,30 @@ const Details = ({ emails, selectedEmailUid }) => {
                         <Accordion.Item eventKey={email.id}>
                           <Accordion.Header>
                             <Container>
-                            <Row>
-                              <Col   sm={11}>  
-                                <p>From: {email.from}</p>
-                                <p
-                                  className="me-1"
-                                  dangerouslySetInnerHTML={{
-                                    __html:  getBodyPreview( removeQuotes(email.body))
-                                  }}
-                                />
-                              </Col>
-                              <Col sm={1}>
-                                <Button  variant="light" size="sm">
-                                  <HiOutlineTrash />
-                                </Button>
-                              </Col>
+                              <Row>
+                                <Col sm={11}>
+                                  <p>From: {email.from}</p>
+                                  <p
+                                    className="me-1"
+                                    dangerouslySetInnerHTML={{
+                                      __html: getBodyPreview(
+                                        removeQuotes(email.body)
+                                      ),
+                                    }}
+                                  />
+                                </Col>
+                                <Col sm={1}>
+                                  <Button
+                                    className="mt-3"
+                                    variant="light"
+                                    size="sm"
+                                  >
+                                    <HiOutlineTrash />
+                                  </Button>
+                                </Col>
                               </Row>
                             </Container>
                           </Accordion.Header>
-
                           <Accordion.Body>
                             <h5>{email.subject}</h5>
                             <p>From: {email.from}</p>
@@ -118,6 +126,16 @@ const Details = ({ emails, selectedEmailUid }) => {
                             <p
                               dangerouslySetInnerHTML={{ __html: email.body }}
                             />
+                            <Button variant="primary">Show Attachments</Button>
+                            {attachments && (
+                              <>
+                                <FileViewer
+                                  fileType={attachments[0].data}
+                                  filePath={attachments[0].filepath}
+                                />
+                                {/* Render additional attachments here if needed */}
+                              </>
+                            )}
                           </Accordion.Body>
                         </Accordion.Item>
                       </Accordion>
