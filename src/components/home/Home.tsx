@@ -15,17 +15,21 @@ const Home = () => {
   const [selectedEmailUid, setSelectedEmailUid] = useState(null);
   const [emailType, setEmailType] = useState("inbox");
   const [showAttachments, setShowAttachments] = useState(true);
-
+  const [selectedEmail, setSelectedEmail] = useState(null);
   const seenSubjects = new Set();
   const seenSubjectsSent = new Set();
 
   useEffect(() => {
+
     getEmails(token).then((res) => setEmails(res));
+
   }, [token]);
 
   const handleEmailClick = (id) => {
-    console.log(user)
+
     setSelectedEmailUid(id);
+    setSelectedEmail(emails.find((email) => email.uid === id));
+    console.log("selectedEmailUid",selectedEmailUid)
   };
 
   const handleStatusUpdate = () => {
@@ -66,10 +70,10 @@ const Home = () => {
   };
 
   return (
-      <div>
-        <Container className="bg-light overflow-hidden ">
+
+        <div className="bg-light  Home">
           <Header />
-          <Container className="">
+          <div >
             <ToolbarComponent
                 emails={emails}
                 handleStatusUpdate={handleStatusUpdate}
@@ -77,8 +81,8 @@ const Home = () => {
                 toggleImageDisplay={toggleImageDisplay}
                 showAttachments={showAttachments}
             />
-          </Container>
-          <Row className="flex-grow-1 vh-100">
+          </div>
+          <Row className="flex-grow-1 ">
             <Col xs={12} md={2} className="py-3 py-md-0">
               <Options handleItemSelected={handleEmailType} />
             </Col>
@@ -86,17 +90,15 @@ const Home = () => {
               <Inbox
                   filteredEmailsInbox={filteredEmailsInbox}
                   handleEmailClick={handleEmailClick}
-                  selectedEmailUid={selectedEmailUid}
                   handleReload={handleStatusUpdate}
               />
             </Col>
             <Col xs={12} md={8} className="d-flex flex-column xp-3">
-              <Details emails={emails} selectedEmailUid={selectedEmailUid} showAttachments={showAttachments} />
+              <Details emails={emails} selectedEmail={selectedEmail} showAttachments={showAttachments} />
             </Col>
           </Row>
-          <Footer />
-        </Container>
-      </div>
+        </div>
+
   );
 };
 

@@ -1,9 +1,5 @@
-.Container {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    width: 100%;
-    padding: 10px;
+.outline {
+    max-height: 100vh;
   }
   .Container .left {
     display: flex;
@@ -32,4 +28,36 @@
 .unread-email {
   background-color: rgb(255, 255, 255);
   font-weight: bold;
+}
+.home-screen {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.inbox-list {
+  max-height: 650px; /* Set the maximum height for the list */
+  overflow-y: auto; /* Enable vertical scroll if the list exceeds the maximum height */
+}
+body {
+  min-height: 100vh;
+  display: flex;
+  background-color: #efefef;
+}
+#root {
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+}
+.App{
+  flex-grow: 1;
+}
+.Home{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 100vh;
+  max-height: 100%;
+}
+.html, body {
+  max-height: 100vh;
 }

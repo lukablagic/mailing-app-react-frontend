@@ -40,7 +40,7 @@ const App = () => {
   }
 
   return (
-    <div>
+
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<AuthGuard><Home /></AuthGuard>} />
@@ -48,7 +48,7 @@ const App = () => {
           <Route path="login" element={<UnAuthGuard><Login /></UnAuthGuard>} />
         </Routes>
       </BrowserRouter>
-    </div>
+
   );
 };
 

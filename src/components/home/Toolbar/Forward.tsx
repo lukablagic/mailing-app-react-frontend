@@ -5,6 +5,7 @@ import { Button, Col, Container, Form, Modal } from "react-bootstrap";
 import { HiOutlineReply } from "react-icons/hi";
 import { replyEmail } from "../../../api/Mail";
 import { AuthContext } from "../../common/AuthContext";
+import {ToastContext} from "../../common/ToastContext";
 
 const Forward = ({ placeholder, selectedEmail, selectedEmailUid, emails }) => {
   const [editorHtml, setEditorHtml] = useState("");
@@ -15,6 +16,12 @@ const Forward = ({ placeholder, selectedEmail, selectedEmailUid, emails }) => {
   const [sending, setSending] = useState(false);
   const [show, setShow] = useState(false);
   const { token, user } = useContext(AuthContext);
+  const { showToast } = useContext(ToastContext);
+
+
+  // Validator functions
+
+
 
   const handleClose = () => {
     setShow(false);
@@ -22,8 +29,13 @@ const Forward = ({ placeholder, selectedEmail, selectedEmailUid, emails }) => {
   };
 
   const handleShow = () => {
-    setShow(true);
-    prepareForward();
+    if (selectedEmail){
+      setShow(true);
+      prepareForward();
+    }else{
+      showToast("warning","Please select an email to forward!");
+    }
+
   };
   const getReplies = (emailUid, emails) => {
     const email = emails.find((email) => email.uid === emailUid);
@@ -59,6 +71,7 @@ const Forward = ({ placeholder, selectedEmail, selectedEmailUid, emails }) => {
   };
 
   const handleForwardEmail = () => {
+
     const forward = {
       subject: subject,
       to: to,

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 import { Button, Col, Container, Form, Modal } from "react-bootstrap";
 import { HiOutlineMail } from "react-icons/hi";
 import { sendEmail } from "../../../api/Mail";
@@ -45,104 +46,104 @@ const Editor = ({ placeholder }) => {
   };
 
   return (
-    <div>
-      <Button onClick={handleShow} variant="primary">
-        <HiOutlineMail className="mr-2" />
-        New Email
-      </Button>
-      <Modal show={show} onHide={handleClose} size="lg">
-        <Modal.Header closeButton>
-          <Modal.Title>{subject}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form onSubmit={handleSendEmail}>
-            <Form.Group controlId="subject">
-              <Form.Label className="mb-0" style={{ fontSize: "1.2rem" }}>
-                Subject:
-              </Form.Label>
-              <Col md={8} className="w-100">
-                <Form.Control
-                  type="text"
-                  value={subject}
-                  onChange={handleSubjectChange}
-                  className="rounded w-100"
-                  placeholder="Enter subject"
+      <div>
+        <Button onClick={handleShow} variant="primary">
+          <HiOutlineMail className="mr-2" />
+          New Email
+        </Button>
+        <Modal show={show} onHide={handleClose} size="lg">
+          <Modal.Header closeButton>
+            <Modal.Title>{subject}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form onSubmit={handleSendEmail}>
+              <Form.Group controlId="subject">
+                <Form.Label className="mb-0" style={{ fontSize: "1.2rem" }}>
+                  Subject:
+                </Form.Label>
+                <Col md={8} className="w-100">
+                  <Form.Control
+                      type="text"
+                      value={subject}
+                      onChange={handleSubjectChange}
+                      className="rounded w-100"
+                      placeholder="Enter subject"
+                  />
+                </Col>
+              </Form.Group>
+              <Form.Group controlId="to">
+                <Form.Label className="mb-0" style={{ fontSize: "1.2rem" }}>
+                  To:
+                </Form.Label>
+                <Col md={8} className="w-100">
+                  <Form.Control
+                      type="text"
+                      value={to}
+                      onChange={handleToChange}
+                      style={{ width: "100%" }}
+                      className="rounded"
+                      placeholder="Enter comma separated email addresses"
+                  />
+                </Col>
+              </Form.Group>
+              <Form.Group controlId="cc">
+                <Form.Label className="mb-0" style={{ fontSize: "1.2rem" }}>
+                  CC:
+                </Form.Label>
+                <Col md={8} className="w-100">
+                  <Form.Control
+                      type="text"
+                      value={cc}
+                      onChange={handleCcChange}
+                      style={{ width: "100%" }}
+                      className="rounded"
+                      placeholder="Enter comma separated email addresses"
+                  />
+                </Col>
+              </Form.Group>
+              <Form.Group controlId="bcc">
+                <Form.Label className="mb-0" style={{ fontSize: "1.2rem" }}>
+                  BCC:
+                </Form.Label>
+                <Col md={8} className="w-100">
+                  <Form.Control
+                      type="text"
+                      value={bcc}
+                      onChange={handleBccChange}
+                      style={{ width: "100%" }}
+                      className="rounded"
+                      placeholder="Enter comma separated email addresses"
+                  />
+                </Col>
+              </Form.Group>
+              <Container style={{ paddingTop: "20px" }}>
+                <ReactQuill
+                    onChange={handleChange}
+                    value={editorHtml}
+                    modules={modules}
+                    formats={formats}
+                    bounds=".app"
+                    placeholder={placeholder}
+                    style={{ height: "100%", width: "100%" }}
                 />
-              </Col>
-            </Form.Group>
-            <Form.Group controlId="to">
-              <Form.Label className="mb-0" style={{ fontSize: "1.2rem" }}>
-                To:
-              </Form.Label>
-              <Col md={8} className="w-100">
-                <Form.Control
-                  type="text"
-                  value={to}
-                  onChange={handleToChange}
-                  style={{ width: "100%" }}
-                  className="rounded"
-                  placeholder="Enter comma separated email addresses"
-                />
-              </Col>
-            </Form.Group>
-            <Form.Group controlId="cc">
-              <Form.Label className="mb-0" style={{ fontSize: "1.2rem" }}>
-                CC:
-              </Form.Label>
-              <Col md={8} className="w-100">
-                <Form.Control
-                  type="text"
-                  value={cc}
-                  onChange={handleCcChange}
-                  style={{ width: "100%" }}
-                  className="rounded"
-                  placeholder="Enter comma separated email addresses"
-                />
-              </Col>
-            </Form.Group>
-            <Form.Group controlId="bcc">
-              <Form.Label className="mb-0" style={{ fontSize: "1.2rem" }}>
-                BCC:
-              </Form.Label>
-              <Col md={8} className="w-100">
-                <Form.Control
-                  type="text"
-                  value={bcc}
-                  onChange={handleBccChange}
-                  style={{ width: "100%" }}
-                  className="rounded"
-                  placeholder="Enter comma separated email addresses"
-                />
-              </Col>
-            </Form.Group>
-            <Container style={{ paddingTop: "20px" }}>
-              <ReactQuill
-                onChange={handleChange}
-                value={editorHtml}
-                modules={modules}
-                formats={formats}
-                bounds=".app"
-                placeholder={placeholder}
-                style={{ height: "100%", width: "100%" }}
-              />
-            </Container>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button
-            variant="primary"
-            onClick={handleSendEmail}
-            type="submit"
-            disabled={sending}
-          >
-            {sending ? "Sending..." : "Send Mail"}
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </div>
+              </Container>
+            </Form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+            <Button
+                variant="primary"
+                onClick={handleSendEmail}
+                type="submit"
+                disabled={sending}
+            >
+              {sending ? "Sending..." : "Send Mail"}
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
   );
 };
 const modules = {

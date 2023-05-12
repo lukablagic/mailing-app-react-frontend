@@ -3,15 +3,10 @@ import { getAttachmentData, getAttachments } from "../../api/Mail";
 import { AuthContext } from "../common/AuthContext";
 import { Button } from "react-bootstrap";
 
-const Attachments = ({ emails, selectedEmailUid }) => {
+const Attachments = ({ emails, selectedEmail }) => {
     const { token } = useContext(AuthContext);
     const [attachments, setAttachments] = useState(null);
-    const [selectedEmail, setSelectedEmail] = useState(null);
 
-    useEffect(() => {
-        const selectedEmail = emails.find((email) => email.uid === selectedEmailUid);
-        setSelectedEmail(selectedEmail);
-    }, [emails, selectedEmailUid]);
 
     const openAttachment = async (attachmentFileName) => {
         const attachment = await getAttachmentData(token, attachmentFileName);

@@ -1,20 +1,15 @@
 import { useContext, useEffect, useState } from "react";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import Outline from "./Outline";
 import Accordion from "react-bootstrap/Accordion";
 import { HiOutlineTrash } from "react-icons/hi";
 import { AuthContext } from "../common/AuthContext";
 import Attachments from "./Attachments";
-const Details = ({ emails, selectedEmailUid, showAttachments }) => {
-  const [selectedEmail, setSelectedEmail] = useState(null);
+const Details = ({ emails, selectedEmail, showAttachments }) => {
+
   const [replies, setReplies] = useState([]);
 
   useEffect(() => {
-    const selectedEmail = emails.find(
-      (email) => email.uid === selectedEmailUid
-    );
-    setSelectedEmail(selectedEmail);
-
     const filteredEmails = emails.filter((email) => {
       if (selectedEmail == null) {
         return false;
@@ -34,7 +29,7 @@ const Details = ({ emails, selectedEmailUid, showAttachments }) => {
       return dateA.getTime() - dateB.getTime();
     });
     setReplies(sortedReplies);
-  }, [emails, selectedEmailUid]);
+  }, [emails, selectedEmail]);
 
   const getBodyPreview = (body) => {
     const maxLength = 60; // Maximum number of characters for the preview
@@ -67,19 +62,22 @@ const Details = ({ emails, selectedEmailUid, showAttachments }) => {
   return (
     <Outline>
       <h1>Details</h1>
-      <Container className="justify-content-center py-1 py-md-0">
+      <div className="justify-content-center  py-md-0 inbox-list">
         {selectedEmail ? (
           <>
             <h4>{selectedEmail.subject}</h4>
             <Outline>
+              <Accordion>
+                <Card>
               {replies.length > 0 && (
                 <>
+
                   {replies.map((email) => (
                     <div key={email.id}>
-                      <Accordion>
+
                         <Accordion.Item eventKey={email.id}>
                           <Accordion.Header>
-                            <Container>
+                            <div>
                               <Row>
                                 <Col sm={11}>
                                   <p>From: {email.from}</p>
@@ -92,17 +90,8 @@ const Details = ({ emails, selectedEmailUid, showAttachments }) => {
                                     }}
                                   />
                                 </Col>
-                                <Col sm={1}>
-                                  <Button
-                                    className="mt-3"
-                                    variant="light"
-                                    size="sm"
-                                  >
-                                    <HiOutlineTrash />
-                                  </Button>
-                                </Col>
                               </Row>
-                            </Container>
+                            </div>
                           </Accordion.Header>
                           <Accordion.Body>
                             <h5>{email.subject}</h5>
@@ -117,20 +106,22 @@ const Details = ({ emails, selectedEmailUid, showAttachments }) => {
                               dangerouslySetInnerHTML={{ __html: email.body }}
                             />
                               {email.has_attachment ? (
-                            <Attachments emails={emails} selectedEmailUid={selectedEmailUid}/>
+                            <Attachments emails={emails}  selectedEmail={selectedEmail}/>
                               ):( <h4>No Attachments available!</h4>)}</Accordion.Body>
                         </Accordion.Item>
-                      </Accordion>
+
                     </div>
                   ))}
                 </>
               )}
+                  </Card>
+              </Accordion>
             </Outline>
           </>
         ) : (
           <h4>Please select an email to read!</h4>
         )}
-      </Container>
+      </div>
     </Outline>
   );
 };

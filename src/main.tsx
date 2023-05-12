@@ -6,18 +6,13 @@ import App from './App'
 import './index.css'
 import {ToastProvider} from './components/common/ToastContext';
 import {AuthProvider} from './components/common/AuthContext';
-import {DevSupport} from "@react-buddy/ide-toolbox";
-import {ComponentPreviews, useInitial} from "./dev";
+import {Container} from "react-bootstrap";
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <React.StrictMode>
         <ToastProvider>
             <AuthProvider>
-                <DevSupport ComponentPreviews={ComponentPreviews}
-                            useInitialHook={useInitial}
-                >
-                    <App/>
-                </DevSupport>
+                    <App />
             </AuthProvider>
         </ToastProvider>
     </React.StrictMode>,

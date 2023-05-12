@@ -10,7 +10,7 @@ const Options = ({ handleItemSelected }) => {
 
   return (
     <Outline>
-      <Container>
+      <div>
         <h4>Options</h4>
         <ListGroup>
           <ListGroup.Item action onClick={() => handleItemClick('inbox')}>
@@ -20,7 +20,7 @@ const Options = ({ handleItemSelected }) => {
             <TbMailFast /> Sent
           </ListGroup.Item>
         </ListGroup>
-      </Container>
+      </div>
     </Outline>
   );
 };

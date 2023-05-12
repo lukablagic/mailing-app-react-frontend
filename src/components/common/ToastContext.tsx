@@ -3,17 +3,18 @@ import { Toast } from 'react-bootstrap';
 
 
  const ToastContext = createContext({
-  showToast: (message: string) => {},
+  showToast: (type:string, message: string) => {},
   hideToast: () => {},
 });
 
 function ToastProvider ({ children }) {
     const [isOpen, setIsOpen] = useState(false);
     const [message, setMessage] = useState('');
-  
-    const showToast = (message) => {
-      setIsOpen(true);
+  const [type, setType] = useState('success');
+    const showToast = (type, message) => {
+        setType(type);
       setMessage(message);
+        setIsOpen(true);
     };
   
     const hideToast = () => {
@@ -24,7 +25,7 @@ function ToastProvider ({ children }) {
       <ToastContext.Provider value={{ showToast, hideToast }}>
        
         <div className='toast-container'>
-        <Toast className="d-inline-block m-1" bg='success' show={isOpen} onClose={hideToast} delay={3000} autohide>
+        <Toast className="d-inline-block m-1" bg={type} show={isOpen} onClose={hideToast} delay={3000} autohide>
           <Toast.Header></Toast.Header>
           <Toast.Body>{message}</Toast.Body>
         </Toast>

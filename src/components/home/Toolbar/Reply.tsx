@@ -6,8 +6,7 @@ import { HiOutlineReply } from "react-icons/hi";
 import { replyEmail } from "../../../api/Mail";
 import { useContext } from "react";
 import { AuthContext } from "../../common/AuthContext";
-import { get } from "http";
-import { getUserData } from "../../../api/User";
+import {ToastContext} from "../../common/ToastContext";
 
 const Reply = ({ placeholder, emails, selectedEmailUid, selectedEmail }) => {
   const [editorHtml, setEditorHtml] = useState("");
@@ -19,7 +18,7 @@ const Reply = ({ placeholder, emails, selectedEmailUid, selectedEmail }) => {
   const [show, setShow] = useState(false);
   const { token ,user} = useContext(AuthContext);
   const [recipient, setRecipient] = useState(null);
-
+  const {showToast} = useContext(ToastContext);
   const getReplies = (emailUid, emails) => {
     const email = emails.find((email) => email.uid === emailUid);
     if (!email) return [];
@@ -45,8 +44,13 @@ else{
     removeReply();
   };
   const handleShow = () => {
-    setShow(true);
-    prepareReply();
+    if (selectedEmail){
+      setShow(true);
+      prepareReply();
+    }else{
+      showToast("warning","Please select an email to forward!");
+    }
+
   };
  
   const prepareReply = () => {
