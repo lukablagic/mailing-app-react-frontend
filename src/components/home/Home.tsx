@@ -14,20 +14,24 @@ const Home = () => {
   const [emails, setEmails] = useState([]);
   const [selectedEmailUid, setSelectedEmailUid] = useState(null);
   const [emailType, setEmailType] = useState("inbox");
+  const [showAttachments, setShowAttachments] = useState(true);
+
   const seenSubjects = new Set();
-const [showAttachemnts, setShowAttachemnts] = useState(true);
+  const seenSubjectsSent = new Set();
+
   useEffect(() => {
     getEmails(token).then((res) => setEmails(res));
   }, [token]);
 
   const handleEmailClick = (id) => {
+    console.log(user)
     setSelectedEmailUid(id);
   };
 
   const handleStatusUpdate = () => {
     getEmails(token).then((res) => setEmails(res));
   };
-  // Filter the emails to only show those with an empty in_reply_to field and unique subjects
+
   const filteredEmailsInbox = emails.filter((email) => {
     if (emailType === "inbox") {
       if (email.in_reply_to !== null) {
@@ -43,54 +47,56 @@ const [showAttachemnts, setShowAttachemnts] = useState(true);
       if (email.in_reply_to !== null) {
         return false;
       }
-      if (email.to_recipients.includes(user.email)) {
+      if (email.from == user.email) {
         return false;
       }
     }
-    seenSubjects.add(email.subject);
     return true;
   });
 
   const handleEmailType = (type) => {
+    setSelectedEmailUid(null); // Reset selected email UID
+    seenSubjects.clear(); // Clear seenSubjects set
+    seenSubjectsSent.clear(); // Clear seenSubjectsSent set
     setEmailType(type);
   };
+
   const toggleImageDisplay = () => {
-    setShowAttachemnts(!showAttachemnts);
+    setShowAttachments(!showAttachments);
   };
 
-
   return (
-    <div>
-      <Container className="bg-light overflow-hidden ">
-        <Header />
-        <Container className="">
-          <ToolbarComponent
-            emails={emails}
-            handleStatusUpdate={handleStatusUpdate}
-            selectedEmailUid={selectedEmailUid}
-            toggleImageDisplay={toggleImageDisplay}
-            showAttachemnts={showAttachemnts}
-          />
-        </Container>
-        <Row className="flex-grow-1 vh-100">
-          <Col xs={12} md={2} className="py-3 py-md-0">
-            <Options handleItemSelected={handleEmailType} />
-          </Col>
-          <Col xs={12} md={2} className="py-4 py-md-0">
-            <Inbox
-              filteredEmailsInbox={filteredEmailsInbox}
-              handleEmailClick={handleEmailClick}
-              selectedEmailUid={selectedEmailUid}
-              handleReload={handleStatusUpdate}
+      <div>
+        <Container className="bg-light overflow-hidden ">
+          <Header />
+          <Container className="">
+            <ToolbarComponent
+                emails={emails}
+                handleStatusUpdate={handleStatusUpdate}
+                selectedEmailUid={selectedEmailUid}
+                toggleImageDisplay={toggleImageDisplay}
+                showAttachments={showAttachments}
             />
-          </Col>
-          <Col xs={12} md={8} className="d-flex flex-column xp-3">
-            <Details emails={emails} selectedEmailUid={selectedEmailUid} showAttachments={showAttachemnts} />
-          </Col>
-        </Row>
-        <Footer />
-      </Container>
-    </div>
+          </Container>
+          <Row className="flex-grow-1 vh-100">
+            <Col xs={12} md={2} className="py-3 py-md-0">
+              <Options handleItemSelected={handleEmailType} />
+            </Col>
+            <Col xs={12} md={2} className="py-4 py-md-0">
+              <Inbox
+                  filteredEmailsInbox={filteredEmailsInbox}
+                  handleEmailClick={handleEmailClick}
+                  selectedEmailUid={selectedEmailUid}
+                  handleReload={handleStatusUpdate}
+              />
+            </Col>
+            <Col xs={12} md={8} className="d-flex flex-column xp-3">
+              <Details emails={emails} selectedEmailUid={selectedEmailUid} showAttachments={showAttachments} />
+            </Col>
+          </Row>
+          <Footer />
+        </Container>
+      </div>
   );
 };
 

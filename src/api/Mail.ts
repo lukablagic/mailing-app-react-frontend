@@ -4,6 +4,7 @@ import {AuthResponse} from '../models/AuthResponse';
 import {User} from '../models/User';
 import {Mail} from '../models/Mail';
 import { stringify } from "querystring";
+import {createLogger} from "vite";
 
 const API_BASE_URL = 'http://localhost';
 
@@ -79,15 +80,36 @@ export async function deleteEmail(id: number,token: string) {
   });
 }
 
-export async function getAttachments(token:string,emailId: number){
+export async function getAttachments(token: string, emailId: number) {
   const response = await fetch(`${API_BASE_URL}/emails/${emailId}/attachments`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: "Bearer "+ token,
-    }
+      Authorization: 'Bearer ' + token,
+    },
   });
+
   const data = await response.json();
-  return data.attachments;
-  
+console.log(data)
+  if (response.ok) {
+    return data.attachments;
+  } else {
+    throw new Error(data.message);
+  }
+}
+
+export async function getAttachmentData(token: string, emailFileName: string) {
+  const response = await fetch(`${API_BASE_URL}/emails/${emailFileName}/data`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/pdf',
+      Authorization: 'Bearer ' + token,
+    },
+  });
+
+  if (response.ok) {
+    return  await response.blob();
+  } else {
+    throw new Error('Failed to fetch attachment data');
+  }
 }

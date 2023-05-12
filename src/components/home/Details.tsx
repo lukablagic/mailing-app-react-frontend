@@ -3,16 +3,11 @@ import { Button, Col, Container, Row } from "react-bootstrap";
 import Outline from "./Outline";
 import Accordion from "react-bootstrap/Accordion";
 import { HiOutlineTrash } from "react-icons/hi";
-import { getAttachments } from "../../api/Mail";
 import { AuthContext } from "../common/AuthContext";
-
-import FileViewer from "react-file-viewer";
-
+import Attachments from "./Attachments";
 const Details = ({ emails, selectedEmailUid, showAttachments }) => {
   const [selectedEmail, setSelectedEmail] = useState(null);
   const [replies, setReplies] = useState([]);
-  const { token } = useContext(AuthContext);
-  const [attachments, setAttachments] = useState(null);
 
   useEffect(() => {
     const selectedEmail = emails.find(
@@ -67,12 +62,7 @@ const Details = ({ emails, selectedEmailUid, showAttachments }) => {
     const quote = email.substring(start, end);
     return quote;
   };
-  const displayAttachments = async () => {
-    const data = await getAttachments(token, selectedEmail.id);
-    // Update attachments state with the fetched data
-    setAttachments(data);
-    console.log(data)
-  };
+
 
   return (
     <Outline>
@@ -126,17 +116,9 @@ const Details = ({ emails, selectedEmailUid, showAttachments }) => {
                             <p
                               dangerouslySetInnerHTML={{ __html: email.body }}
                             />
-                            <Button variant="primary">Show Attachments</Button>
-                            {attachments && (
-                              <>
-                                <FileViewer
-                                  fileType={attachments[0].data}
-                                  filePath={attachments[0].filepath}
-                                />
-                                {/* Render additional attachments here if needed */}
-                              </>
-                            )}
-                          </Accordion.Body>
+                              {email.has_attachment ? (
+                            <Attachments emails={emails} selectedEmailUid={selectedEmailUid}/>
+                              ):( <h4>No Attachments available!</h4>)}</Accordion.Body>
                         </Accordion.Item>
                       </Accordion>
                     </div>

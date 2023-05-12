@@ -15,7 +15,7 @@ import { AuthContext } from "../../common/AuthContext";
 import Forward from "./Forward";
 import Reply from "./Reply";
 
-const ToolbarComponent = ({ emails, selectedEmailUid, handleStatusUpdate ,toggleImageDisplay ,showAttachemnts }) => {
+const ToolbarComponent = ({ emails, selectedEmailUid, handleStatusUpdate ,toggleImageDisplay ,showAttachments }) => {
   const { token } = useContext(AuthContext);
 
 
@@ -55,12 +55,12 @@ const ToolbarComponent = ({ emails, selectedEmailUid, handleStatusUpdate ,toggle
       <Tab eventKey="send-receive" title="Display">
         <Container className="Container">
           <Button
-            className={`mx-1 ${showAttachemnts ? 'btn-primary' : 'btn-danger'}`}
-            variant={showAttachemnts ? 'primary' : 'danger'}
+            className={`mx-1 ${showAttachments ? 'btn-primary' : 'btn-danger'}`}
+            variant={showAttachments ? 'primary' : 'danger'}
             onClick={toggleImageDisplay}
           >
             <HiArrowNarrowRight />
-            {showAttachemnts ? 'Hide Images' : 'Display Images'}
+            {showAttachments ? 'Hide Images' : 'Display Images'}
           </Button>
         </Container>
       </Tab>
