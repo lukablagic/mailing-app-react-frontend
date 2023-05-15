@@ -11,11 +11,11 @@ import {
 } from "react-icons/hi";
 import Editor from "./Editor";
 import {updateEmailStatus} from "../../../api/Mail";
-import {AuthContext} from "../../common/AuthContext";
+import {AuthContext} from "../../../contexts/AuthContext";
 import Forward from "./Forward";
 import Reply from "./Reply";
 import Outline from "../Outline";
-import {ToastContext} from "../../common/ToastContext";
+import {ToastContext} from "../../../contexts/ToastContext";
 
 const ToolbarComponent = ({emails, selectedEmailUid, handleStatusUpdate, toggleImageDisplay, showAttachments}) => {
     const {token} = useContext(AuthContext);

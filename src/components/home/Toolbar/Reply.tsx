@@ -5,8 +5,8 @@ import {Button, Col, Container, Form, Modal} from "react-bootstrap";
 import {HiOutlineReply} from "react-icons/hi";
 import {replyEmail} from "../../../api/Mail";
 import {useContext} from "react";
-import {AuthContext} from "../../common/AuthContext";
-import {ToastContext} from "../../common/ToastContext";
+import {AuthContext} from "../../../contexts/AuthContext";
+import {ToastContext} from "../../../contexts/ToastContext";
 
 const Reply = ({placeholder, emails, selectedEmailUid, selectedEmail}) => {
     const [editorHtml, setEditorHtml] = useState("");

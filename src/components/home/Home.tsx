@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import Details from "./Details";
-import Footer from "./Footer";
+import Details from "./Details/Details";
 import Header from "./Header";
 import ToolbarComponent from "./Toolbar/ToolbarComponent";
 import Options from "./Options";
 import Inbox from "./Inbox";
 import { getEmails } from "../../api/Mail";
-import { AuthContext } from "../../components/common/AuthContext";
+import { AuthContext } from "../../contexts/AuthContext";
 
 const Home = () => {
   const { token,user } = useContext(AuthContext);

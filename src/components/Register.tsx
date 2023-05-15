@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import {Routes, Route, useNavigate, Link} from "react-router-dom";
-import { registerUser } from "../../api/Auth";
-import { ToastContext } from "../common/ToastContext";
-import { AuthContext } from "../common/AuthContext";
+import { registerUser } from "../api/Auth";
+import { ToastContext } from "../contexts/ToastContext";
+import { AuthContext } from "../contexts/AuthContext";
 
 const Register = () => {
     const [surname, setSurname] = useState('');

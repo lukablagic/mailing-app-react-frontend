@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import { getAttachmentData } from "../../api/Mail";
-import { AuthContext } from "../common/AuthContext";
+import { getAttachmentData } from "../../../api/Mail";
+import { AuthContext } from "../../../contexts/AuthContext";
 
 const ImageView = ({ attachment }) => {
     const [blobUrl, setBlobUrl] = useState(null);

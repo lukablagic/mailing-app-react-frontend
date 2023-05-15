@@ -4,8 +4,8 @@ import ReactQuill from "react-quill";
 import { Button, Col, Container, Form, Modal } from "react-bootstrap";
 import { HiOutlineReply } from "react-icons/hi";
 import { replyEmail } from "../../../api/Mail";
-import { AuthContext } from "../../common/AuthContext";
-import {ToastContext} from "../../common/ToastContext";
+import { AuthContext } from "../../../contexts/AuthContext";
+import {ToastContext} from "../../../contexts/ToastContext";
 
 const Forward = ({ placeholder, selectedEmail, selectedEmailUid, emails }) => {
   const [editorHtml, setEditorHtml] = useState("");

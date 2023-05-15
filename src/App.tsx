@@ -1,12 +1,12 @@
 import * as React from "react";
 import { useContext, useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import Login from "./components/auth/Login";
-import Register from "./components/auth/Register";
+import Login from "./components/Login";
+import Register from "./components/Register";
 import Home from "./components/home/Home";
 import { LoginData } from "./models/LoginData";
-import { ToastContext, ToastProvider } from "./components/common/ToastContext";
-import { AuthContext } from "./components/common/AuthContext";
+import { ToastContext, ToastProvider } from "./contexts/ToastContext";
+import { AuthContext } from "./contexts/AuthContext";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import { getAttachmentData, getAttachments } from "../../api/Mail";
-import { AuthContext } from "../common/AuthContext";
+import { getAttachmentData, getAttachments } from "../../../api/Mail";
+import { AuthContext } from "../../../contexts/AuthContext";
 import { Button } from "react-bootstrap";
 import ImageView from "./ImageView";
 

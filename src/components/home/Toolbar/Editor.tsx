@@ -6,7 +6,7 @@ import { Button, Col, Container, Form, Modal } from "react-bootstrap";
 import { HiOutlineMail } from "react-icons/hi";
 import { sendEmail } from "../../../api/Mail";
 import { useContext } from "react";
-import { AuthContext } from "../../common/AuthContext";
+import { AuthContext } from "../../../contexts/AuthContext";
 
 const Editor = ({ placeholder }) => {
   const [editorHtml, setEditorHtml] = useState("");

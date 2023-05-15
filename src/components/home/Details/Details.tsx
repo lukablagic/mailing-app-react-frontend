@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
-import Outline from "./Outline";
+import Outline from "../Outline";
 import Accordion from "react-bootstrap/Accordion";
 import { HiOutlineTrash } from "react-icons/hi";
-import { AuthContext } from "../common/AuthContext";
+import { AuthContext } from "../../../contexts/AuthContext";
 import Attachments from "./Attachments";
 const Details = ({ emails, selectedEmail, showAttachments }) => {
 

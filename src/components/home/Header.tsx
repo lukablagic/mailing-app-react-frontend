@@ -4,8 +4,8 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Navbar from "react-bootstrap/Navbar";
 import { logoutUser } from "../../api/Auth";
-import { ToastContext } from "../common/ToastContext";
-import { AuthContext } from "../common/AuthContext";
+import { ToastContext } from "../../contexts/ToastContext";
+import { AuthContext } from "../../contexts/AuthContext";
 
 const Header = () => {
   const [showProfilePicture, setShowProfilePicture] = useState(false);
