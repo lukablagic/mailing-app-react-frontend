@@ -32,7 +32,7 @@ The Mailing App Frontend is a web application that allows users to manage their 
 
 1. Clone the repository: **git clone <repository-url>**
 1. Install dependencies: **npm install**
-1. Start the development server: **npm start**
+1. Start the development server: **npm run dev**
 
 **Configuration**
 
