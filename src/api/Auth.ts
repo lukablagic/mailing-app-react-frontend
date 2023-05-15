@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { AuthResponse } from "../models/AuthResponse";
 import { User } from "../models/User";
+import {getUserData} from "./User";
 
 const API_BASE_URL = "https://localhost";
 
@@ -29,7 +30,6 @@ export async function loginUser(
     body: JSON.stringify({ email, password }),
   });
   const data = await response.json();
-  localStorage.setItem("token", data.token);
   return data.token;
 }
 
@@ -41,6 +41,7 @@ export async function logoutUser(token: string): Promise<void> {
     },
     body: JSON.stringify({ token }),
   });
+    localStorage.removeItem("user");
   localStorage.removeItem("token");
   if (!response.ok) {
     throw new Error("Failed to log out user");

@@ -63,12 +63,12 @@ const ToolbarComponent = ({emails, selectedEmailUid, handleStatusUpdate, toggleI
                 <Tab eventKey="send-receive" title="Display">
                     <div className="d-flex justify-content-start p-3">
                         <Button
-                            className={`mx-1 ${showAttachments ? 'btn-primary' : 'btn-danger'}`}
-                            variant={showAttachments ? 'primary' : 'danger'}
+                            className={`mx-1 ${showAttachments ?    'btn-danger' : 'btn-primary'}`}
+                            variant={showAttachments ? 'danger' :'primary' }
                             onClick={toggleImageDisplay}
                         >
                             <HiArrowNarrowRight/>
-                            {showAttachments ? 'Hide Images' : 'Display Images'}
+                            {showAttachments ? 'Attachments Disabled' : 'Attachments Enabled'}
                         </Button>
                     </div>
                 </Tab>

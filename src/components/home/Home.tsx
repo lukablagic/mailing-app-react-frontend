@@ -14,7 +14,7 @@ const Home = () => {
   const [emails, setEmails] = useState([]);
   const [selectedEmailUid, setSelectedEmailUid] = useState(null);
   const [emailType, setEmailType] = useState("inbox");
-  const [showAttachments, setShowAttachments] = useState(true);
+  const [showAttachments, setShowAttachments] = useState(false);
   const [selectedEmail, setSelectedEmail] = useState(null);
   const seenSubjects = new Set();
   const seenSubjectsSent = new Set();
@@ -29,7 +29,7 @@ const Home = () => {
 
     setSelectedEmailUid(id);
     setSelectedEmail(emails.find((email) => email.uid === id));
-    console.log("selectedEmailUid",selectedEmailUid)
+
   };
 
   const handleStatusUpdate = () => {
@@ -67,6 +67,7 @@ const Home = () => {
 
   const toggleImageDisplay = () => {
     setShowAttachments(!showAttachments);
+    console.log(showAttachments);
   };
 
   return (

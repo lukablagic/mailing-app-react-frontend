@@ -8,7 +8,7 @@ import Attachments from "./Attachments";
 const Details = ({ emails, selectedEmail, showAttachments }) => {
 
   const [replies, setReplies] = useState([]);
-
+  const [disableAttachments, setDisableAttachments] = useState(false);
   useEffect(() => {
     const filteredEmails = emails.filter((email) => {
       if (selectedEmail == null) {
@@ -29,7 +29,8 @@ const Details = ({ emails, selectedEmail, showAttachments }) => {
       return dateA.getTime() - dateB.getTime();
     });
     setReplies(sortedReplies);
-  }, [emails, selectedEmail]);
+    setDisableAttachments(showAttachments);
+  }, [emails, selectedEmail,showAttachments]);
 
   const getBodyPreview = (body) => {
     const maxLength = 60; // Maximum number of characters for the preview
@@ -39,6 +40,7 @@ const Details = ({ emails, selectedEmail, showAttachments }) => {
       return body.substring(0, maxLength) + "...";
     }
   };
+
   //create array of replies that are all lined one after the other
   const removeQuotes = (email): string => {
     // Remove the quotes div from the email body
@@ -50,15 +52,24 @@ const Details = ({ emails, selectedEmail, showAttachments }) => {
     const quote = email.substring(start, end);
     return quote;
   };
-
   const removeQuotes2 = (email) => {
     const start = 0;
     const end = email.indexOf("On");
     const quote = email.substring(start, end);
     return quote;
   };
-
-
+//remove images from email body
+//remove images from email body
+  const removeImg = (email) => {
+    const start = email.indexOf("<img");
+    const end = email.indexOf(">", start);
+    if (start !== -1 && end !== -1) {
+      // Remove the image tag from the email body
+      const withoutImg = email.slice(0, start) + email.slice(end + 1);
+      return withoutImg;
+    }
+    return email;
+  };
   return (
     <Outline>
       <h1>Details</h1>
@@ -103,10 +114,10 @@ const Details = ({ emails, selectedEmail, showAttachments }) => {
                               Date: {new Date(email.sent_date).toLocaleString()}
                             </p>
                             <p
-                              dangerouslySetInnerHTML={{ __html: email.body }}
+                              dangerouslySetInnerHTML={{ __html: removeImg(email.body) }}
                             />
                               {email.has_attachment ? (
-                            <Attachments emails={emails}  selectedEmail={selectedEmail}/>
+                            <Attachments emails={emails} showAttachments={showAttachments} selectedEmail={selectedEmail}/>
                               ):( <h4>No Attachments available!</h4>)}</Accordion.Body>
                         </Accordion.Item>
 

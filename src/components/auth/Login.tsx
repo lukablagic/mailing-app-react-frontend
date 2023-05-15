@@ -25,10 +25,14 @@ const Login = () => {
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
+
+
       const token = await loginUser(email, password);
       setAuth(true);
       setToken(token);
+      localStorage.setItem("token",token);
       setUser(getUserData(token));
+      const userData = await getUserData(token);
       showToast("success",'Login successful!');
       navigateToHome();
     } catch (error) {

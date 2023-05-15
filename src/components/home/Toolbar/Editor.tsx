@@ -20,8 +20,8 @@ const Editor = ({ placeholder }) => {
   const handleShow = () => setShow(true);
   const { token } = useContext(AuthContext);
 
-  const handleSendEmail = () => {
-    sendEmail(token, subject, to, cc, bcc, editorHtml, "");
+  const handleSendEmail = async () => {
+    await sendEmail(token, subject, to, cc, bcc, editorHtml, "");
     handleClose();
   };
 
