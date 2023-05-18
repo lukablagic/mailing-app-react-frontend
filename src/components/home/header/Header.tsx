@@ -3,9 +3,9 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Navbar from "react-bootstrap/Navbar";
-import { logoutUser } from "../../api/Auth";
-import { ToastContext } from "../../contexts/ToastContext";
-import { AuthContext } from "../../contexts/AuthContext";
+import { logoutUser } from "../../../api/Auth";
+import { ToastContext } from "../../../contexts/ToastContext";
+import { AuthContext } from "../../../contexts/AuthContext";
 
 const Header = () => {
   const [showProfilePicture, setShowProfilePicture] = useState(false);
@@ -25,7 +25,7 @@ const Header = () => {
      showToast("danger",'Logout failed!');
     }
   };
-
+  
   return (
     <div className='  flex-grow: 1;'>
       <Navbar bg="light" expand="lg">

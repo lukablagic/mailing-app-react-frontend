@@ -8,7 +8,7 @@ import { sendEmail } from "../../../api/Mail";
 import { useContext } from "react";
 import { AuthContext } from "../../../contexts/AuthContext";
 
-const Editor = ({ placeholder }) => {
+const NewMail = ({ placeholder }) => {
   const [editorHtml, setEditorHtml] = useState("");
   const [subject, setSubject] = useState("");
   const [to, setTo] = useState([]);
@@ -16,7 +16,6 @@ const Editor = ({ placeholder }) => {
   const [bcc, setBCC] = useState([]);
   const [sending, setSending] = useState(false);
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const { token } = useContext(AuthContext);
 
@@ -24,7 +23,17 @@ const Editor = ({ placeholder }) => {
     await sendEmail(token, subject, to, cc, bcc, editorHtml, "");
     handleClose();
   };
-
+  const handleClose = () => {
+    setShow(false);
+    removeNewEmail();
+  };
+  const removeNewEmail = () => {
+    setSubject("");
+    setTo([]);
+    setCC([]);
+    setBCC([]);
+    setEditorHtml("");
+  };
   const handleSubjectChange = (e) => {
     setSubject(e.target.value);
   };
@@ -47,6 +56,7 @@ const Editor = ({ placeholder }) => {
 
   return (
       <div>
+        
         <Button onClick={handleShow} variant="primary">
           <HiOutlineMail className="mr-2" />
           New Email
@@ -181,8 +191,8 @@ const formats = [
   "image",
   "video",
 ];
-Editor.propTypes = {
+NewMail.propTypes = {
   placeholder: PropTypes.string,
 };
 
-export default Editor;
+export default NewMail;

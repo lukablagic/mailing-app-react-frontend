@@ -33,6 +33,7 @@ const Login = () => {
       localStorage.setItem("token",token);
       setUser(getUserData(token));
       const userData = await getUserData(token);
+      localStorage.setItem("user",JSON.stringify(userData));
       showToast("success",'Login successful!');
       navigateToHome();
     } catch (error) {

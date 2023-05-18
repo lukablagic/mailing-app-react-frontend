@@ -10,7 +10,7 @@ const Options = ({ handleItemSelected }) => {
 
   return (
     <Outline>
-      <div>
+      <div >
         <h4>Options</h4>
         <ListGroup>
           <ListGroup.Item action onClick={() => handleItemClick('inbox')}>

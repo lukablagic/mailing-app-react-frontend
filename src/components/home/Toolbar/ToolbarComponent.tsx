@@ -9,21 +9,22 @@ import {
     HiOutlineMailOpen,
     HiArrowNarrowRight,
 } from "react-icons/hi";
-import Editor from "./Editor";
+import NewMail from "./NewMail";
 import {updateEmailStatus} from "../../../api/Mail";
 import {AuthContext} from "../../../contexts/AuthContext";
 import Forward from "./Forward";
 import Reply from "./Reply";
 import Outline from "../Outline";
 import {ToastContext} from "../../../contexts/ToastContext";
+import { Mail } from "../../../models/Mail";
 
-const ToolbarComponent = ({emails, selectedEmailUid, handleStatusUpdate, toggleImageDisplay, showAttachments}) => {
+const ToolbarComponent = ({emails, selectedEmail, handleStatusUpdate, toggleImageDisplay, showAttachments}) => {
     const {token} = useContext(AuthContext);
     const {showToast} = useContext(ToastContext);
-
-    const selectedEmail = selectedEmailUid
-        ? emails.find((email) => email.uid === selectedEmailUid)
-        : null;
+    
+    useEffect(() => {
+        
+    }, [selectedEmail]);
 
     const changeStatus = async () => {
         if (selectedEmail) {
@@ -48,12 +49,13 @@ const ToolbarComponent = ({emails, selectedEmailUid, handleStatusUpdate, toggleI
 
     return (
         <div>
+           
             <Tabs defaultActiveKey="home" id="uncontrolled-tab-example" className="mb-3">
                 <Tab eventKey="home" title="Home">
                     <div className="d-flex justify-content-start p-3">
-                        <Editor/>
-                        <Reply emails={emails} selectedEmailUid={selectedEmailUid} selectedEmail={selectedEmail}/>
-                        <Forward emails={emails} selectedEmailUid={selectedEmailUid} selectedEmail={selectedEmail}/>
+                        <NewMail/>
+                        <Reply emails={emails} selectedEmailUid={selectedEmail?.uid} selectedEmail={selectedEmail}/>
+                        <Forward emails={emails} selectedEmailUid={selectedEmail?.uid} selectedEmail={selectedEmail}/>
                         <Button className="mx-1" variant="secondary" onClick={changeStatus}>
                             <HiOutlineMailOpen/>
                             Unread / Read
@@ -73,6 +75,7 @@ const ToolbarComponent = ({emails, selectedEmailUid, handleStatusUpdate, toggleI
                     </div>
                 </Tab>
             </Tabs>
+          
         </div>
     );
 

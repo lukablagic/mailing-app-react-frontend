@@ -1,19 +1,9 @@
-.outline {
-    max-height: 100vh;
-  }
-  .Container .left {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50%;
-    height: 100vh;
-    background-color: #f5f5f5;
-  }
-  .login-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 15rem;
+.App, body{
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+.read-email {
+  background-color: #b8b7b7;
 }
 .toast-container {
   position: fixed;
@@ -21,55 +11,59 @@
   right: 1rem;
   z-index: 9999;
 }
-.read-email {
-  background-color: #b8b7b7;
+.login-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 15rem;
 }
-
 .unread-email {
   background-color: rgb(255, 255, 255);
   font-weight: bold;
 }
-.home-screen {
-  padding-left: 2rem;
-  padding-right: 2rem;
-}
-
-.inbox-list {
-  max-height: 650px; /* Set the maximum height for the list */
-  overflow-y: auto; /* Enable vertical scroll if the list exceeds the maximum height */
-}
-body {
-  min-height: 100vh;
-  display: flex;
-  background-color: #efefef;
-  overflow-x: hidden;
-}
-#root {
-  flex-grow: 1;
-  justify-content: center;
-  align-items: center;
-}
-.App{
-  flex-grow: 1;
-}
-.Home{
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  min-height: 100vh;
-  max-height: 100%;
-}
-.html, body {
-  max-height: 100vh;
-}
 .image-container {
-  width: 100px;
-  margin: 10px;
-  height: 100px;
+width: 100px;
+margin: 10px;
+height: 100px;
 }
 img {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+display: flex;
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+.home{
+max-height:100vh;
+}
+
+.inbox {
+
+  overflow-y: scroll;
+  max-height: 80ch;
+  min-height: 80ch;
+}
+.outline {
+  max-height:  85ch;
+  min-height:  85ch;
+  overflow-y: scroll;
+}
+/* Media query for smartphones */
+@media (max-width: 767px) {
+  .inbox,
+  .details,
+  .outline{
+    max-height: 30ch;
+    min-height: 30ch;
+  }
+  .outline{
+    max-height: 18ch;
+    min-height: 18ch;
+  }
+  .title{
+    font-size: 1rem;
+  }
+  .App, body{
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
 }

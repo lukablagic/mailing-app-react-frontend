@@ -1,15 +1,16 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Details from "./Details/Details";
-import Header from "./Header";
+import Header from "./header/Header";
 import ToolbarComponent from "./Toolbar/ToolbarComponent";
 import Options from "./Options";
 import Inbox from "./Inbox";
 import { getEmails } from "../../api/Mail";
 import { AuthContext } from "../../contexts/AuthContext";
+import { User } from "../../models/User";
 
 const Home = () => {
-  const { token,user } = useContext(AuthContext);
+  const { token } = useContext(AuthContext);
   const [emails, setEmails] = useState([]);
   const [selectedEmailUid, setSelectedEmailUid] = useState(null);
   const [emailType, setEmailType] = useState("inbox");
@@ -17,9 +18,15 @@ const Home = () => {
   const [selectedEmail, setSelectedEmail] = useState(null);
   const seenSubjects = new Set();
   const seenSubjectsSent = new Set();
+  const [user, setUser] = useState<User>(null);
+
+  const getUser = () => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    setUser(user);
+  };
 
   useEffect(() => {
-
+    getUser();
     getEmails(token).then((res) => setEmails(res));
 
   }, [token]);
@@ -46,15 +53,13 @@ const Home = () => {
       if (seenSubjects.has(email.subject)) {
         return false;
       }
+      return true ;
     } else if (emailType === "sent") {
-      if (email.in_reply_to !== null) {
-        return false;
-      }
-      if (email.from == user.email) {
-        return false;
+     if (email.from == user.email) {
+        return true;
       }
     }
-    return true;
+    return false ;
   });
 
   const handleEmailType = (type) => {
@@ -71,29 +76,29 @@ const Home = () => {
 
   return (
 
-        <div className="bg-light  Home">
+        <div className="bg-light ">
           <Header />
           <div >
             <ToolbarComponent
                 emails={emails}
                 handleStatusUpdate={handleStatusUpdate}
-                selectedEmailUid={selectedEmailUid}
+                selectedEmail={selectedEmail}
                 toggleImageDisplay={toggleImageDisplay}
                 showAttachments={showAttachments}
             />
           </div>
-          <Row className="flex-grow-1 ">
-            <Col xs={12} md={2} className="py-3 py-md-0">
+          <Row className=" ">
+            <Col xs={12} md={2} className="py-1 py-md-0 left">
               <Options handleItemSelected={handleEmailType} />
             </Col>
-            <Col xs={12} md={2} className="py-4 py-md-0">
+            <Col xs={12} md={2} className="py-2 py-md-0">
               <Inbox
                   filteredEmailsInbox={filteredEmailsInbox}
                   handleEmailClick={handleEmailClick}
-                  handleReload={handleStatusUpdate}
+                  handleReload={handleStatusUpdate} 
               />
             </Col>
-            <Col xs={12} md={8} className="d-flex flex-column xp-3">
+            <Col xs={12} md={8} >
               <Details emails={emails} selectedEmail={selectedEmail} showAttachments={showAttachments} />
             </Col>
           </Row>

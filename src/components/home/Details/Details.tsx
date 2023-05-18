@@ -58,8 +58,7 @@ const Details = ({ emails, selectedEmail, showAttachments }) => {
     const quote = email.substring(start, end);
     return quote;
   };
-//remove images from email body
-//remove images from email body
+
   const removeImg = (email) => {
     const start = email.indexOf("<img");
     const end = email.indexOf(">", start);
@@ -71,26 +70,28 @@ const Details = ({ emails, selectedEmail, showAttachments }) => {
     return email;
   };
   return (
+    <div >
     <Outline>
       <h1>Details</h1>
-      <div className="justify-content-center  py-md-0 inbox-list">
+      <div className="justify-content-start  py-md-0  ">
         {selectedEmail ? (
           <>
             <h4>{selectedEmail.subject}</h4>
-            <Outline>
+            
               <Accordion>
                 <Card>
               {replies.length > 0 && (
                 <>
-
+                  <div className="scroll">
                   {replies.map((email) => (
-                    <div key={email.id}>
+                    <div key={email.id} className="details-list">
 
                         <Accordion.Item eventKey={email.id}>
                           <Accordion.Header>
                             <div>
                               <Row>
-                                <Col sm={11}>
+                                <Col sm={11} >
+                                  <div className="d-flex ">
                                   <p>From: {email.from}</p>
                                   <p
                                     className="me-1"
@@ -100,6 +101,9 @@ const Details = ({ emails, selectedEmail, showAttachments }) => {
                                       ),
                                     }}
                                   />
+                                  </div>
+                                 
+                                  
                                 </Col>
                               </Row>
                             </div>
@@ -123,17 +127,18 @@ const Details = ({ emails, selectedEmail, showAttachments }) => {
 
                     </div>
                   ))}
+                  </div>
                 </>
               )}
                   </Card>
               </Accordion>
-            </Outline>
           </>
         ) : (
           <h4>Please select an email to read!</h4>
         )}
       </div>
     </Outline>
+    </div>
   );
 };
 

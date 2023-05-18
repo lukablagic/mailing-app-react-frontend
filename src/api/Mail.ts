@@ -25,7 +25,7 @@ export async function getEmails(token: string): Promise<Mail[]> {
 
 export async function sendEmail(token: string, subject: string, to: string[], cc: string[], bcc: string[], body: string, inReplyTo: string) {
 
-    console.log(token, subject, to, cc, bcc, body, inReplyTo)
+    console.log(token, subject, to, cc, bcc, inReplyTo)
     const response = await fetch(`${API_BASE_URL}/emails`, {
         method: 'POST',
         headers: {
@@ -40,7 +40,6 @@ export async function sendEmail(token: string, subject: string, to: string[], cc
 }
 
 export async function replyEmail(token: string, email: any) {
- //   console.log(token, email);
     const response = await fetch(`${API_BASE_URL}/emails`, {
         method: 'POST',
         headers: {

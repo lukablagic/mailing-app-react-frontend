@@ -5,23 +5,21 @@ import { Button, Col, Container, Form, Modal } from "react-bootstrap";
 import { HiOutlineReply } from "react-icons/hi";
 import { replyEmail } from "../../../api/Mail";
 import { AuthContext } from "../../../contexts/AuthContext";
-import {ToastContext} from "../../../contexts/ToastContext";
+import { ToastContext } from "../../../contexts/ToastContext";
+import { Mail } from "../../../models/Mail";
 
 const Forward = ({ placeholder, selectedEmail, selectedEmailUid, emails }) => {
   const [editorHtml, setEditorHtml] = useState("");
   const [subject, setSubject] = useState("");
-  const [to, setTo] = useState([]);
-  const [cc, setCC] = useState([]);
-  const [bcc, setBCC] = useState([]);
-  const [sending, setSending] = useState(false);
-  const [show, setShow] = useState(false);
+  const [to, setTo] = useState<string[]>([]);
+  const [cc, setCC] = useState<string[]>([]);
+  const [bcc, setBCC] = useState<string[]>([]);
+  const [sending, setSending] = useState<boolean>(false);
+  const [show, setShow] = useState<boolean>(false);
   const { token, user } = useContext(AuthContext);
   const { showToast } = useContext(ToastContext);
 
-
   // Validator functions
-
-
 
   const handleClose = () => {
     setShow(false);
@@ -29,13 +27,12 @@ const Forward = ({ placeholder, selectedEmail, selectedEmailUid, emails }) => {
   };
 
   const handleShow = () => {
-    if (selectedEmail){
+    if (selectedEmail) {
       setShow(true);
       prepareForward();
-    }else{
-      showToast("warning","Please select an email to forward!");
+    } else {
+      showToast("warning", "Please select an email to forward!");
     }
-
   };
   const getReplies = (emailUid, emails) => {
     const email = emails.find((email) => email.uid === emailUid);
@@ -71,8 +68,7 @@ const Forward = ({ placeholder, selectedEmail, selectedEmailUid, emails }) => {
   };
 
   const handleForwardEmail = () => {
-
-    const forward = {
+    const forward:Mail = {
       subject: subject,
       to: to,
       cc: cc,
@@ -111,104 +107,108 @@ const Forward = ({ placeholder, selectedEmail, selectedEmailUid, emails }) => {
 
   return (
     <div>
-      <Button className="mx-1" onClick={handleShow} variant="secondary">
-        <HiOutlineReply />
-        Forward
-      </Button>
-      <Modal show={show} onHide={handleClose} size="lg">
-        <Modal.Header closeButton>
-          <Modal.Title>{subject}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form onSubmit={handleForwardEmail}>
-            <Form.Group controlId="subject">
-              <Form.Group controlId="subject">
-                <Form.Label className="mb-0" style={{ fontSize: "1.2rem" }}>
-                  Subject:
-                </Form.Label>
-                <Col md={8} className="w-100">
-                  <Form.Control
-                    disabled={true}
-                    type="text"
-                    value={subject}
-                    onChange={handleSubjectChange}
-                    className="rounded w-100"
-                    placeholder="Enter subject"
-                  />
-                </Col>
-              </Form.Group>
-              <Form.Group controlId="to">
-                <Form.Label className="mb-0" style={{ fontSize: "1.2rem" }}>
-                  To:
-                </Form.Label>
-                <Col md={8} className="w-100">
-                  <Form.Control
-                    type="text"
-                    value={to}
-                    onChange={handleToChange}
-                    style={{ width: "100%" }}
-                    className="rounded"
-                  />
-                </Col>
-              </Form.Group>
-              <Form.Group controlId="cc">
-                <Form.Label className="mb-0" style={{ fontSize: "1.2rem" }}>
-                  CC:
-                </Form.Label>
-                <Col md={8} className="w-100">
-                  <Form.Control
-                    type="text"
-                    value={cc}
-                    onChange={handleCcChange}
-                    style={{ width: "100%" }}
-                    className="rounded"
-                    placeholder="Enter comma separated email addresses"
-                  />
-                </Col>
-              </Form.Group>
-              <Form.Group controlId="bcc">
-                <Form.Label className="mb-0" style={{ fontSize: "1.2rem" }}>
-                  BCC:
-                </Form.Label>
-                <Col md={8} className="w-100">
-                  <Form.Control
-                    type="text"
-                    value={bcc}
-                    onChange={handleBccChange}
-                    style={{ width: "100%" }}
-                    className="rounded"
-                    placeholder="Enter comma separated email addresses"
-                  />
-                </Col>
-              </Form.Group>
-              <Container style={{ paddingTop: "20px" }}>
-                <ReactQuill
-                  onChange={handleChange}
-                  value={editorHtml}
-                  modules={modules}
-                  formats={formats}
-                  bounds=".app"
-                  placeholder={placeholder}
-                  style={{ height: "100%", width: "100%" }}
-                />
-              </Container>
-            </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
+      {selectedEmail && (
+        <>
+          <Button className="mx-1" onClick={handleShow} variant="secondary">
+            <HiOutlineReply />
+            Forward
           </Button>
-          <Button
-            variant="primary"
-            onClick={handleForwardEmail}
-            type="submit"
-            disabled={sending}
-          >
-            {sending ? "Sending..." : "Send Mail"}
-          </Button>
-        </Modal.Footer>
-      </Modal>
+          <Modal show={show} onHide={handleClose} size="lg">
+            <Modal.Header closeButton>
+              <Modal.Title>{subject}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <Form onSubmit={handleForwardEmail}>
+                <Form.Group controlId="subject">
+                  <Form.Group controlId="subject">
+                    <Form.Label className="mb-0" style={{ fontSize: "1.2rem" }}>
+                      Subject:
+                    </Form.Label>
+                    <Col md={8} className="w-100">
+                      <Form.Control
+                        disabled={true}
+                        type="text"
+                        value={subject}
+                        onChange={handleSubjectChange}
+                        className="rounded w-100"
+                        placeholder="Enter subject"
+                      />
+                    </Col>
+                  </Form.Group>
+                  <Form.Group controlId="to">
+                    <Form.Label className="mb-0" style={{ fontSize: "1.2rem" }}>
+                      To:
+                    </Form.Label>
+                    <Col md={8} className="w-100">
+                      <Form.Control
+                        type="text"
+                        value={to}
+                        onChange={handleToChange}
+                        style={{ width: "100%" }}
+                        className="rounded"
+                      />
+                    </Col>
+                  </Form.Group>
+                  <Form.Group controlId="cc">
+                    <Form.Label className="mb-0" style={{ fontSize: "1.2rem" }}>
+                      CC:
+                    </Form.Label>
+                    <Col md={8} className="w-100">
+                      <Form.Control
+                        type="text"
+                        value={cc}
+                        onChange={handleCcChange}
+                        style={{ width: "100%" }}
+                        className="rounded"
+                        placeholder="Enter comma separated email addresses"
+                      />
+                    </Col>
+                  </Form.Group>
+                  <Form.Group controlId="bcc">
+                    <Form.Label className="mb-0" style={{ fontSize: "1.2rem" }}>
+                      BCC:
+                    </Form.Label>
+                    <Col md={8} className="w-100">
+                      <Form.Control
+                        type="text"
+                        value={bcc}
+                        onChange={handleBccChange}
+                        style={{ width: "100%" }}
+                        className="rounded"
+                        placeholder="Enter comma separated email addresses"
+                      />
+                    </Col>
+                  </Form.Group>
+                  <Container style={{ paddingTop: "20px" }}>
+                    <ReactQuill
+                      onChange={handleChange}
+                      value={editorHtml}
+                      modules={modules}
+                      formats={formats}
+                      bounds=".app"
+                      placeholder={placeholder}
+                      style={{ height: "100%", width: "100%" }}
+                    />
+                  </Container>
+                </Form.Group>
+              </Form>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+              <Button
+                variant="primary"
+                onClick={handleForwardEmail}
+                type="submit"
+                disabled={sending}
+              >
+                {sending ? "Sending..." : "Send Mail"}
+              </Button>
+            </Modal.Footer>
+          </Modal>
+        </>
+      )}
     </div>
   );
 };
