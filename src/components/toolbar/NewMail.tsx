@@ -4,9 +4,9 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { Button, Col, Container, Form, Modal } from "react-bootstrap";
 import { HiOutlineMail } from "react-icons/hi";
-import { sendEmail } from "../../../api/Mail";
 import { useContext } from "react";
-import { AuthContext } from "../../../contexts/AuthContext";
+import { AuthContext } from "../../utility/contexts/AuthContext";
+import { sendEmail } from "../../api/Mail";
 
 const NewMail = ({ placeholder }) => {
   const [editorHtml, setEditorHtml] = useState("");

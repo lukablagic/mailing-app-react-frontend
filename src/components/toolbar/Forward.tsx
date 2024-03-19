@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 import ReactQuill from "react-quill";
 import { Button, Col, Container, Form, Modal } from "react-bootstrap";
 import { HiOutlineReply } from "react-icons/hi";
-import { replyEmail } from "../../../api/Mail";
-import { AuthContext } from "../../../contexts/AuthContext";
-import { ToastContext } from "../../../contexts/ToastContext";
-import { Mail } from "../../../models/Mail";
+import { replyEmail } from "../../api/Mail";
+import { AuthContext } from "../../utility/contexts/AuthContext";
+import { ToastContext } from "../../utility/contexts/ToastContext";
+import { Mail } from "../../utility/models/Mail";
 
 const Forward = ({ placeholder, selectedEmail, selectedEmailUid, emails }) => {
   const [editorHtml, setEditorHtml] = useState("");

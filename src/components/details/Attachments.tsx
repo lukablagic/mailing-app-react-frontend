@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import { getAttachmentData, getAttachments } from "../../../api/Mail";
-import { AuthContext } from "../../../contexts/AuthContext";
 import { Button } from "react-bootstrap";
+import { getAttachments, getAttachmentData } from "../../api/Mail";
+import { AuthContext } from "../../utility/contexts/AuthContext";
 import ImageView from "./ImageView";
 
 const Attachments = ({ emails, selectedEmail, showAttachments }) => {
+    
     const { token } = useContext(AuthContext);
     const [attachments, setAttachments] = useState([]);
     const [attachmentImage, setAttachmentImage] = useState(null);

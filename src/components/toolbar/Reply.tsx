@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import ReactQuill from "react-quill";
 import { Button, Col, Container, Form, Modal } from "react-bootstrap";
 import { HiOutlineReply } from "react-icons/hi";
-import { replyEmail } from "../../../api/Mail";
-import { useContext } from "react";
-import { AuthContext } from "../../../contexts/AuthContext";
-import { ToastContext } from "../../../contexts/ToastContext";
-import { User } from "../../../models/User";
+import { replyEmail } from "../../api/Mail";
+import { AuthContext } from "../../utility/contexts/AuthContext";
+import { ToastContext } from "../../utility/contexts/ToastContext";
+import { User } from "../../utility/models/User";
 
 const Reply = ({ placeholder, emails, selectedEmailUid, selectedEmail }) => {
   const [editorHtml, setEditorHtml] = useState("");

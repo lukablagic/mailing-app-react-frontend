@@ -15,5 +15,4 @@
     in_reply_to?: string;
     references?: string[];
     references_id?: number;
-
   }

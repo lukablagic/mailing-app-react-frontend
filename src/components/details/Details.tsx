@@ -1,14 +1,13 @@
-import { useContext, useEffect, useState } from "react";
-import { Button, Card, Col, Container, Row } from "react-bootstrap";
-import Outline from "../Outline";
+import {  useEffect, useState } from "react";
+import { Card, Col,  Row } from "react-bootstrap";
 import Accordion from "react-bootstrap/Accordion";
-import { HiOutlineTrash } from "react-icons/hi";
-import { AuthContext } from "../../../contexts/AuthContext";
+import Outline from "../home/Outline";
 import Attachments from "./Attachments";
 const Details = ({ emails, selectedEmail, showAttachments }) => {
 
-  const [replies, setReplies] = useState([]);
+  const [replies, setReplies]                       = useState([]);
   const [disableAttachments, setDisableAttachments] = useState(false);
+ 
   useEffect(() => {
     const filteredEmails = emails.filter((email) => {
       if (selectedEmail == null) {

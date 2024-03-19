@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import { AuthResponse } from "../models/AuthResponse";
-import { User } from "../models/User";
+import { AuthResponse } from "../utility/models/AuthResponse";
+import { User } from "../utility/models/User";
 import {getUserData} from "./User";
 
 const API_BASE_URL = "https://localhost";

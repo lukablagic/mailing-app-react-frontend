@@ -3,14 +3,16 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Navbar from "react-bootstrap/Navbar";
-import { logoutUser } from "../../../api/Auth";
-import { ToastContext } from "../../../contexts/ToastContext";
-import { AuthContext } from "../../../contexts/AuthContext";
+import { logoutUser } from "../../api/Auth";
+import { AuthContext } from "../../utility/contexts/AuthContext";
+import { ToastContext } from "../../utility/contexts/ToastContext";
+
 
 const Header = () => {
+  
   const [showProfilePicture, setShowProfilePicture] = useState(false);
-  const {showToast}  = useContext(ToastContext);
-  const { token ,setAuth,setToken } = useContext(AuthContext);
+  const {showToast}                                 = useContext(ToastContext);
+  const { token ,setAuth,setToken }                 = useContext(AuthContext);
 
 
   const handleLogout = async () => {

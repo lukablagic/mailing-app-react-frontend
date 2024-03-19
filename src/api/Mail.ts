@@ -1,8 +1,8 @@
 import React from "react";
 import {Routes, Route, useNavigate} from 'react-router-dom';
-import {AuthResponse} from '../models/AuthResponse';
-import {User} from '../models/User';
-import {Mail} from '../models/Mail';
+import {AuthResponse} from '../utility/models/AuthResponse';
+import {User} from '../utility/models/User';
+import {Mail} from '../utility/models/Mail';
 import {stringify} from "querystring";
 import {createLogger} from "vite";
 

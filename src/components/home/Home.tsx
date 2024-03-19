@@ -1,25 +1,26 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import Details from "./Details/Details";
-import Header from "./header/Header";
-import ToolbarComponent from "./Toolbar/ToolbarComponent";
+import  { useState, useEffect, useContext } from "react";
+import {  Row, Col } from "react-bootstrap";
 import Options from "./Options";
 import Inbox from "./Inbox";
 import { getEmails } from "../../api/Mail";
-import { AuthContext } from "../../contexts/AuthContext";
-import { User } from "../../models/User";
+import { AuthContext } from "../../utility/contexts/AuthContext";
+import { User } from "../../utility/models/User";
+import Header from "../header/Header";
+import ToolbarComponent from "../toolbar/ToolbarComponent";
+import Details from "../details/Details";
 
 const Home = () => {
-  const { token } = useContext(AuthContext);
-  const [emails, setEmails] = useState([]);
+  
+  const { token }                               = useContext(AuthContext);
+  const [emails, setEmails]                     = useState([]);
   const [selectedEmailUid, setSelectedEmailUid] = useState(null);
-  const [emailType, setEmailType] = useState("inbox");
-  const [showAttachments, setShowAttachments] = useState(false);
-  const [selectedEmail, setSelectedEmail] = useState(null);
-  const seenSubjects = new Set();
-  const seenSubjectsSent = new Set();
-  const [user, setUser] = useState<User>(null);
-
+  const [emailType, setEmailType]               = useState("inbox");
+  const [showAttachments, setShowAttachments]   = useState(false);
+  const [selectedEmail, setSelectedEmail]       = useState(null);
+  const seenSubjects                            = new Set();
+  const seenSubjectsSent                        = new Set();
+  const [user, setUser]                         = useState<User>(null);
+  
   const getUser = () => {
     const user = JSON.parse(localStorage.getItem("user"));
     setUser(user);

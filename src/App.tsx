@@ -4,9 +4,9 @@ import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Home from "./components/home/Home";
-import { LoginData } from "./models/LoginData";
-import { ToastContext, ToastProvider } from "./contexts/ToastContext";
-import { AuthContext } from "./contexts/AuthContext";
+import { LoginData } from "./utility/models/LoginData";
+import { ToastContext, ToastProvider } from "./utility/contexts/ToastContext";
+import { AuthContext } from "./utility/contexts/AuthContext";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

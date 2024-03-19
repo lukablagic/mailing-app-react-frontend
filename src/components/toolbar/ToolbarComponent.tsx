@@ -1,22 +1,17 @@
-import React, {useContext, useEffect, useState} from "react";
+import  {useContext, useEffect, useState} from "react";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
-import {Button, Container, Modal} from "react-bootstrap";
+import {Button} from "react-bootstrap";
 import {
-    HiOutlineMail,
-    HiOutlineTrash,
-    HiOutlineReply,
     HiOutlineMailOpen,
     HiArrowNarrowRight,
 } from "react-icons/hi";
 import NewMail from "./NewMail";
-import {updateEmailStatus} from "../../../api/Mail";
-import {AuthContext} from "../../../contexts/AuthContext";
 import Forward from "./Forward";
 import Reply from "./Reply";
-import Outline from "../Outline";
-import {ToastContext} from "../../../contexts/ToastContext";
-import { Mail } from "../../../models/Mail";
+import { updateEmailStatus } from "../../api/Mail";
+import { AuthContext } from "../../utility/contexts/AuthContext";
+import { ToastContext } from "../../utility/contexts/ToastContext";
 
 const ToolbarComponent = ({emails, selectedEmail, handleStatusUpdate, toggleImageDisplay, showAttachments}) => {
     const {token} = useContext(AuthContext);

@@ -2,8 +2,8 @@ import React, { useContext, useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import { Routes, Route, useNavigate, Link } from 'react-router-dom';
 import { loginUser } from "../api/Auth";
-import { ToastContext } from "../contexts/ToastContext";
-import { AuthContext } from "../contexts/AuthContext";
+import { ToastContext } from "../utility/contexts/ToastContext";
+import { AuthContext } from "../utility/contexts/AuthContext";
 import { getUserData } from "../api/User";
 
 const Login = () => {
