@@ -45,6 +45,8 @@ export const Login = ({ }) => {
   return (
     <div className="flex items-center justify-center min-h-screen">
       <div className="container w-64 ">
+      <h2 className="text-2xl font-bold mb-4">Login</h2>
+
         <form onSubmit={handleLogin}>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
@@ -77,6 +79,10 @@ export const Login = ({ }) => {
             Login
           </button>
         </form>
+        
+        <p className="mt-4 text-black">
+                Create account  <Link className="text-blue-500 hover:text-blue-800" to="/register">Register</Link>
+            </p>
       </div>
     </div>
   );
