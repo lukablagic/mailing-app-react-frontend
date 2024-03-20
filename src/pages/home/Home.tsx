@@ -5,9 +5,9 @@ import Inbox from "./Inbox";
 import { getEmails } from "../../api/Mail";
 import { AuthContext } from "../../utility/contexts/AuthContext";
 import { User } from "../../utility/models/User";
-import Header from "../header/Header";
-import ToolbarComponent from "../toolbar/ToolbarComponent";
-import Details from "../details/Details";
+import Header from "../../components/header/Header";
+import ToolbarComponent from "../../components/toolbar/ToolbarComponent";
+import Details from "../../components/details/Details";
 
 const Home = () => {
   

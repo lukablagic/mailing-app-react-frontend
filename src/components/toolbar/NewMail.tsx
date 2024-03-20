@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
+// import "react-quill/dist/quill.snow.css";
 import { Button, Col, Container, Form, Modal } from "react-bootstrap";
 import { HiOutlineMail } from "react-icons/hi";
 import { useContext } from "react";
@@ -127,7 +126,7 @@ const NewMail = ({ placeholder }) => {
                 </Col>
               </Form.Group>
               <Container style={{ paddingTop: "20px" }}>
-                <ReactQuill
+                {/* <ReactQuill
                     onChange={handleChange}
                     value={editorHtml}
                     modules={modules}
@@ -135,7 +134,7 @@ const NewMail = ({ placeholder }) => {
                     bounds=".app"
                     placeholder={placeholder}
                     style={{ height: "100%", width: "100%" }}
-                />
+                /> */}
               </Container>
             </Form>
           </Modal.Body>

@@ -1,6 +1,5 @@
-import React, { useState, useContext } from "react";
+import { useState, useContext } from "react";
 import PropTypes from "prop-types";
-import ReactQuill from "react-quill";
 import { Button, Col, Container, Form, Modal } from "react-bootstrap";
 import { HiOutlineReply } from "react-icons/hi";
 import { replyEmail } from "../../api/Mail";
@@ -180,7 +179,7 @@ const Forward = ({ placeholder, selectedEmail, selectedEmailUid, emails }) => {
                     </Col>
                   </Form.Group>
                   <Container style={{ paddingTop: "20px" }}>
-                    <ReactQuill
+                    {/* <ReactQuill
                       onChange={handleChange}
                       value={editorHtml}
                       modules={modules}
@@ -188,7 +187,7 @@ const Forward = ({ placeholder, selectedEmail, selectedEmailUid, emails }) => {
                       bounds=".app"
                       placeholder={placeholder}
                       style={{ height: "100%", width: "100%" }}
-                    />
+                    /> */}
                   </Container>
                 </Form.Group>
               </Form>

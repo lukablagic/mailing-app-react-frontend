@@ -1,7 +1,7 @@
 import {  useEffect, useState } from "react";
 import { Card, Col,  Row } from "react-bootstrap";
 import Accordion from "react-bootstrap/Accordion";
-import Outline from "../home/Outline";
+import Outline from "../../pages/home/Outline";
 import Attachments from "./Attachments";
 const Details = ({ emails, selectedEmail, showAttachments }) => {
 

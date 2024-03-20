@@ -1,6 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
+import  { useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import ReactQuill from "react-quill";
 import { Button, Col, Container, Form, Modal } from "react-bootstrap";
 import { HiOutlineReply } from "react-icons/hi";
 import { replyEmail } from "../../api/Mail";
@@ -9,17 +8,17 @@ import { ToastContext } from "../../utility/contexts/ToastContext";
 import { User } from "../../utility/models/User";
 
 const Reply = ({ placeholder, emails, selectedEmailUid, selectedEmail }) => {
+
   const [editorHtml, setEditorHtml] = useState("");
-  const [subject, setSubject] = useState("");
-  const [to, setTo] = useState([]);
-  const [cc, setCC] = useState([]);
-  const [bcc, setBCC] = useState([]);
-  const [sending, setSending] = useState(false);
-  const [show, setShow] = useState(false);
-  const { token, auth } = useContext(AuthContext);
-  const { showToast } = useContext(ToastContext);
-  const [user, setUser] = useState<User>(null);
-  //get user from local storage and set it to user state
+  const [subject, setSubject]       = useState("");
+  const [to, setTo]                 = useState([]);
+  const [cc, setCC]                 = useState([]);
+  const [bcc, setBCC]               = useState([]);
+  const [sending, setSending]       = useState(false);
+  const [show, setShow]             = useState(false);
+  const { token, auth }             = useContext(AuthContext);
+  const { showToast }               = useContext(ToastContext);
+  const [user, setUser]             = useState<User>(null);
 
   useEffect(() => {
     getUser();
@@ -212,7 +211,7 @@ const Reply = ({ placeholder, emails, selectedEmailUid, selectedEmail }) => {
                   </Col>
                 </Form.Group>
                 <Container style={{ paddingTop: "20px" }}>
-                  <ReactQuill
+                  {/* <ReactQuill
                     onChange={handleChange}
                     value={editorHtml}
                     modules={modules}
@@ -220,7 +219,7 @@ const Reply = ({ placeholder, emails, selectedEmailUid, selectedEmail }) => {
                     bounds=".app"
                     placeholder={placeholder}
                     style={{ height: "100%", width: "100%" }}
-                  />
+                  /> */}
                 </Container>
               </Form>
             </Modal.Body>
