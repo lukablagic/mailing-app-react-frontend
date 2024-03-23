@@ -77,7 +77,7 @@ const Home = () => {
 
   return (
 
-        <div className="bg-light ">
+        <div className="bg-light">
           <Header />
           <div >
             <ToolbarComponent

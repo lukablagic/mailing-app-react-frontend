@@ -2,42 +2,55 @@
 @tailwind components;
 @tailwind utilities;
 
-.App, body{
-  overflow-x: hidden;
-  overflow-y: hidden;
+
+html,
+body,#root {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
+
 .read-email {
   background-color: #b8b7b7;
 }
+
 .toast-container {
   position: fixed;
   top: 1rem;
   right: 1rem;
   z-index: 9999;
 }
+
 .login-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 15rem;
 }
+
 .unread-email {
   background-color: rgb(255, 255, 255);
   font-weight: bold;
 }
+
 .image-container {
-width: 100px;
-margin: 10px;
-height: 100px;
+  width: 100px;
+  margin: 10px;
+  height: 100px;
 }
+
 img {
-display: flex;
-width: 100%;
-height: 100%;
-object-fit: cover;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
-.home{
-max-height:100vh;
+
+.home {
+  max-height: 100vh;
 }
 
 .inbox {
@@ -46,28 +59,9 @@ max-height:100vh;
   max-height: 80ch;
   min-height: 80ch;
 }
+
 .outline {
-  max-height:  85ch;
-  min-height:  85ch;
+  max-height: 85ch;
+  min-height: 85ch;
   overflow-y: scroll;
-}
-/* Media query for smartphones */
-@media (max-width: 767px) {
-  .inbox,
-  .details,
-  .outline{
-    max-height: 30ch;
-    min-height: 30ch;
-  }
-  .outline{
-    max-height: 18ch;
-    min-height: 18ch;
-  }
-  .title{
-    font-size: 1rem;
-  }
-  .App, body{
-    overflow-x: hidden;
-    overflow-y: scroll;
-  }
 }
