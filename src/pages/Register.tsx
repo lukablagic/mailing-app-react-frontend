@@ -1,101 +1,77 @@
 import React, { useContext, useState } from "react";
-import { Container, Form, Button } from "react-bootstrap";
-import { Routes, Route, useNavigate, Link } from "react-router-dom";
-import { registerUser } from "../api/Auth";
-import { ToastContext } from "../utility/contexts/ToastContext";
+import { useNavigate, Link } from 'react-router-dom';
+import axios from "axios";
 import { AuthContext } from "../utility/contexts/AuthContext";
+import { ToastContext } from "../utility/contexts/ToastContext";
 
-export const Register = () => {
-    const [surname, setSurname] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [name, setName] = useState('');
-    const { setAuth } = useContext(AuthContext);
-    const { showToast } = useContext(ToastContext);
-    const navigate = useNavigate();
+export const Register = ({ }) => {
 
-    const handleRegister = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        if (!name || !surname || !email || !password) {
-            showToast("warning", 'Please fill in all fields');
-            return;
-        }
-        try {
-            const data = await registerUser({ name, surname, email, password });
-            if (data) {
-                setAuth(true);
-                showToast("success", 'Registration successful!');
-                navigate('/login');
-            } else {
-                showToast("danger", 'Registration failed!');
-            }
-        } catch (error) {
-            console.error(error);
-            showToast("danger", 'Registration failed!');
-        }
-    };
+  const { showToast } = useContext(ToastContext);
+  const { setAuth, setToken, setUser } = useContext(AuthContext);
+  const [formData, setFormData] = useState({name: '', surname: '',email: '', password: ''});
+  const navigate = useNavigate();
+  
+  const handleInputChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
 
 
-    const navigateToLogin = () => {
-        navigate(`/login`);
-    };
 
-    return (
-        <div className="flex items-center justify-center min-h-screen">
-            <div className="container w-64 ">
-                <h2 className="text-2xl font-bold mb-4">Register</h2>
-                <form onSubmit={handleRegister}>
-                    <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="surname">
-                            Surname
-                        </label>
-                        <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="surname"
-                            type="surname"
-                            placeholder="Enter Surname"
-                            value={surname}
-                            onChange={(e) => setSurname(e.target.value)}
-                        />
-                    </div>
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    const response = await axios.post('http://localhost/api/auth/register', formData);
+    console.log(response);
+    if (response.status === 200) {
+      const { user, token } = response.data;
+      setAuth(true);
+      setUser(user);
+      setToken(token);
+    } else {
+      showToast('error', 'Invalid credentials');
+    }
+  };
 
-                    <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-                            Email address
-                        </label>
-                        <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="email"
-                            type="email"
-                            placeholder="Enter email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
-                    </div>
-
-                    <div className="mb-6">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-                            Password
-                        </label>
-                        <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="password"
-                            type="password"
-                            placeholder="Password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                    </div>
-
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-                        Register
-                    </button>
-                </form>
-
-                <p className="mt-4 text-black">
-                    Registered? <Link className="text-blue-500 hover:text-blue-800" to="/login">Login</Link>
-                </p>
-            </div>
+  return (
+    <div className="h-full w-full bg-teal-50 flex items-csenter justify-center">
+      <div className="flex flex-row h-max-h-screen w-full justify-end items-right gap-4">
+        <div className="w-4/12 flex justify-end h-full ">
+          <div className="mb-24 flex flex-col items-left grow-1 shrink-1 justify-center gap-4 ">
+            <h1 className="text-4xl font-bold text-sky-400">Dev Mail</h1>
+            <h1 className="text-gray-500">Welcome, please register for a new account.</h1>
+            <h2 className="text-xl font-bold  ">Register</h2>
+            <p className=" my-2 text-black">
+              Already have an account? <Link className="text-cyan-500 hover:text-cyan-800" to="/login">Login</Link>
+            </p>
+            <form className="flex flex-col gap-3 " onSubmit={handleRegister}>
+               <label className="block text-gray-700 text-sm font-bold ">
+                Name
+                <input className="shadow border appearance-none rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="name" placeholder="Enter name" onChange={handleInputChange} />
+              </label>
+              <label className="block text-gray-700 text-sm font-bold ">
+                Surname
+                <input className="shadow border appearance-none rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="surname" placeholder="Enter surname" onChange={handleInputChange}/>
+              </label>     
+              <label className="block text-gray-700 text-sm font-bold ">
+                Email address
+                <input className="shadow border appearance-none rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="email" type="email" placeholder="Enter email"  onChange={handleInputChange}/>
+              </label>
+              <label className="block text-gray-700 text-sm font-bold ">
+                Password
+                <input className="shadow appearance-none border rounded w-full py-2 px-2 leading-tight focus:outline-none focus:shadow-outline text-gray-700" name="password" type="password" placeholder="Password" onChange={handleInputChange} />
+              </label>
+              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" >
+                Register
+              </button>
+            </form>
+          </div>
         </div>
-    );
+        <div className="w-1/2 mx-auto">
+          <img src="src\assets\images\login-mobile-testing.svg" alt="Team development image" />
+        </div>
+      </div>
+    </div>
+  );
 };
