@@ -69,7 +69,7 @@ export const Register = ({ }) => {
           </div>
         </div>
         <div className="w-1/2 mx-auto">
-          <img src="src\assets\images\login-mobile-testing.svg" alt="Team development image" />
+          <img src="../src/assets/images/login-mobile-testing.svg" alt="Team development image" />
         </div>
       </div>
     </div>
