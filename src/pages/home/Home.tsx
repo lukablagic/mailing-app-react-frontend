@@ -1,110 +1,32 @@
-import  { useState, useEffect, useContext } from "react";
-import {  Row, Col } from "react-bootstrap";
-import Options from "./Options";
-import Inbox from "./Inbox";
-import { getEmails } from "../../api/Mail";
+import { useState, useContext } from "react";
 import { AuthContext } from "../../utility/contexts/AuthContext";
-import { User } from "../../utility/models/User";
-import Header from "../../components/header/Header";
-import ToolbarComponent from "../../components/toolbar/ToolbarComponent";
-import Details from "../../components/details/Details";
+import { Mail } from "../../components/Mail";
+import { Sidebar } from "../../components/Sidebar";
+import { ActionSidebar } from "../../components/ActionSidebar";
+import { Search } from "../../components/Search";
 
 const Home = () => {
-  
-  const { token }                               = useContext(AuthContext);
-  const [emails, setEmails]                     = useState([]);
+  const { token } = useContext(AuthContext);
+  const [emails, setEmails] = useState([]);
   const [selectedEmailUid, setSelectedEmailUid] = useState(null);
-  const [emailType, setEmailType]               = useState("inbox");
-  const [showAttachments, setShowAttachments]   = useState(false);
-  const [selectedEmail, setSelectedEmail]       = useState(null);
-  const seenSubjects                            = new Set();
-  const seenSubjectsSent                        = new Set();
-  const [user, setUser]                         = useState<User>(null);
-  
-  const getUser = () => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    setUser(user);
-  };
-
-  useEffect(() => {
-    getUser();
-    getEmails(token).then((res) => setEmails(res));
-
-  }, [token]);
-
-  const handleEmailClick = (id) => {
-
-    setSelectedEmailUid(id);
-    setSelectedEmail(emails.find((email) => email.uid === id));
-
-  };
-
-  const handleStatusUpdate = () => {
-    getEmails(token).then((res) => setEmails(res));
-  };
-
-  const filteredEmailsInbox = emails.filter((email) => {
-    if (emailType === "inbox") {
-      if (email.in_reply_to !== null) {
-        return false;
-      }
-      if (email.subject.startsWith("Re:")) {
-        return false;
-      }
-      if (seenSubjects.has(email.subject)) {
-        return false;
-      }
-      return true ;
-    } else if (emailType === "sent") {
-     if (email.from == user.email) {
-        return true;
-      }
-    }
-    return false ;
-  });
-
-  const handleEmailType = (type) => {
-    setSelectedEmailUid(null); // Reset selected email UID
-    seenSubjects.clear(); // Clear seenSubjects set
-    seenSubjectsSent.clear(); // Clear seenSubjectsSent set
-    setEmailType(type);
-  };
-
-  const toggleImageDisplay = () => {
-    setShowAttachments(!showAttachments);
-    console.log(showAttachments);
-  };
+  const [showAttachments, setShowAttachments] = useState(false);
+  const [selectedEmail, setSelectedEmail] = useState(null);
 
   return (
-
-        <div className="bg-light">
-          <Header />
-          <div >
-            <ToolbarComponent
-                emails={emails}
-                handleStatusUpdate={handleStatusUpdate}
-                selectedEmail={selectedEmail}
-                toggleImageDisplay={toggleImageDisplay}
-                showAttachments={showAttachments}
-            />
-          </div>
-          <Row className=" ">
-            <Col xs={12} md={2} className="py-1 py-md-0 left">
-              <Options handleItemSelected={handleEmailType} />
-            </Col>
-            <Col xs={12} md={2} className="py-2 py-md-0">
-              <Inbox
-                  filteredEmailsInbox={filteredEmailsInbox}
-                  handleEmailClick={handleEmailClick}
-                  handleReload={handleStatusUpdate} 
-              />
-            </Col>
-            <Col xs={12} md={8} >
-              <Details emails={emails} selectedEmail={selectedEmail} showAttachments={showAttachments} />
-            </Col>
-          </Row>
+    <div className="flex h-screen">
+      <div className="flex w-16 flex-col items-center justify-end bg-blue-950 text-purple-200">
+        <ActionSidebar />
+      </div>
+      <div className="flex flex-grow flex-col">
+        <div className="flex items-center justify-between bg-blue-950 text-white">
+          <Search />
         </div>
-
+        <div className="flex grow flex-row overflow-auto  ">
+          <Sidebar />
+          <Mail />
+        </div>
+      </div>
+    </div>
   );
 };
 
