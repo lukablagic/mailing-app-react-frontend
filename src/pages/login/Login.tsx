@@ -31,6 +31,7 @@ export const Login = ({}) => {
     if (response.status === 200) {
       const { user, token } = response.data;
       setAuth(true);
+      sessionStorage.setItem("token", token);
       setUser(user);
       setToken(token);
       navigateToHome();

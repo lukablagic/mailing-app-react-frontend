@@ -7,7 +7,7 @@ import { AuthContext } from "./utility/contexts/AuthContext";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const storedToken = localStorage.getItem("token");
+  const storedToken = sessionStorage.getItem("token");
   const { auth, setAuth, setToken } = useContext(AuthContext);
 
   useEffect(() => {

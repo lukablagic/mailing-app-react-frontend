@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { AuthContext } from "../../utility/contexts/AuthContext";
 import { Mail } from "../../components/Mail";
 import { Sidebar } from "../../components/Sidebar";
-import { ActionSidebar } from "../../components/ActionSidebar";
+import { ActionSidebar } from "../../components/action-sidebar/ActionSidebar";
 import { Search } from "../../components/Search";
 
 const Home = () => {
