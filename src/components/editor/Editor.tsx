@@ -23,7 +23,7 @@ function Placeholder() {
 }
 
 const editorConfig = {
-  namespace: 'React.js Demo',
+  namespace: 'Dev Mail editor',
   nodes: [],
   // Handling of errors during update
   onError(error: Error) {
@@ -46,7 +46,7 @@ export default function Editor() {
           />
           <HistoryPlugin />
           <AutoFocusPlugin />
-          <TreeViewPlugin />
+          {/* <TreeViewPlugin /> */}
         </div>
       </div>
     </LexicalComposer>
