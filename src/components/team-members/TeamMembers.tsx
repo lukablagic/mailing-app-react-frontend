@@ -1,7 +1,7 @@
 import React from "react";
 import ActiveIcon from "./ActiveIcon";
 
-export const ActionSidebar = () => {
+export const TeamMembers = () => {
   const teamMembers = [
     { name: "John Doe", role: "Developer" },
     { name: "Jane Smith", role: "Designer" },
@@ -12,7 +12,7 @@ export const ActionSidebar = () => {
   return (
     <div className="my-4  grid grid-rows-1">
       <div className=" flex flex-col items-center justify-center gap-4">
-        <div className="vertical-center flex flex flex-col items-center items-center justify-center gap-4 text-center">
+        <div className="vertical-center flex flex-col items-center  justify-center gap-4 text-center">
           <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gray-300 text-xl font-bold text-black hover:bg-blue-700">
             +
           </div>

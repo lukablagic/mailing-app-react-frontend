@@ -1,8 +1,9 @@
 import { useState, useContext } from "react";
 import { AuthContext } from "../../utility/contexts/AuthContext";
 import { Mail } from "../../components/mail/Mail";
-import { ActionSidebar } from "../../components/action-sidebar/ActionSidebar";
+import { TeamMembers } from "../../components/team-members/TeamMembers";
 import { Search } from "../../components/Search";
+import { NavigationList } from "../../components/navigation/NavigationList";
 
 const Home = () => {
   const { token } = useContext(AuthContext);
@@ -12,9 +13,10 @@ const Home = () => {
   const [selectedEmail, setSelectedEmail] = useState(null);
 
   return (
-    <div className="flex bg-blue-900 h-full">
-      <div className="flex w-16 flex-col items-center justify-end bg-blue-900 text-purple-200">
-        <ActionSidebar />
+    <div className="flex h-full bg-blue-900">
+      <div className="flex w-16 mt-14 flex-col items-center justify-between bg-blue-900 text-purple-200">
+        <NavigationList />
+        <TeamMembers />
       </div>
       <div className="flex flex-grow flex-col ">
         <Search />
