@@ -30,7 +30,7 @@ const App = () => {
 
   function UnAuthGuard({ children }) {
     if (auth) {
-      return <Navigate to="/" />;
+      return <Navigate to="/app/mail" />;
     } else {
       return children;
     }
@@ -40,7 +40,7 @@ const App = () => {
 
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<AuthGuard><Home /></AuthGuard>} />
+        <Route path="/app/*" element={<AuthGuard><Home /></AuthGuard>} />
         <Route path="register" element={<UnAuthGuard><Register /></UnAuthGuard>} />
         <Route path="login" element={<UnAuthGuard><Login /></UnAuthGuard>} />
       </Routes>
