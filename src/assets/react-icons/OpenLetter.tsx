@@ -3,14 +3,14 @@ const OpenLetter = (props) => (
     xmlns="http://www.w3.org/2000/svg"
     width={24}
     height={24}
-    fill="none"
+    fill="inherit"
     stroke="currentColor"
     strokeWidth={2}
     viewBox="0 0 16 16"
     {...props}
   >
     <path
-      fill="#fff"
+      fill="inherit"
       stroke="currentColor"
       strokeLinejoin="bevel"
       strokeMiterlimit={0}
@@ -18,7 +18,7 @@ const OpenLetter = (props) => (
       d="M.5 15.5h15v-10l-7-5h-1l-7 5v10z"
     />
     <path
-      fill="#fff"
+      fill="inherit"
       stroke="currentColor"
       strokeLinejoin="bevel"
       strokeMiterlimit={0}
@@ -26,7 +26,7 @@ const OpenLetter = (props) => (
       d="m15.5 5.5-7 6h-1l-7-6"
     />
     <path
-      fill="#fff"
+      fill="inherit"
       stroke="currentColor"
       strokeLinejoin="bevel"
       strokeMiterlimit={0}
