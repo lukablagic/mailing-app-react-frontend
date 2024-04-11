@@ -1,0 +1,3 @@
+.raise-once:hover {
+    @apply animate-raise-once;
+  }

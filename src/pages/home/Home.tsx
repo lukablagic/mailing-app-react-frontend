@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../../utility/contexts/AuthContext";
 import { Mail } from "../../components/mail/Mail";
 import { TeamMembers } from "../../components/team-members/TeamMembers";

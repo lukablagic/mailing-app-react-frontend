@@ -11,7 +11,7 @@ const App = () => {
   const { auth, setAuth, setToken } = useContext(AuthContext);
 
   useEffect(() => {
-    if (storedToken) {
+    if (storedToken !== undefined && storedToken !== null) {
       setToken(storedToken);
       setAuth(true);
     } else {
@@ -30,7 +30,7 @@ const App = () => {
 
   function UnAuthGuard({ children }) {
     if (auth) {
-      return <Navigate to="/app/mail" />;
+      return <Navigate to="/app/mail/" />;
     } else {
       return children;
     }

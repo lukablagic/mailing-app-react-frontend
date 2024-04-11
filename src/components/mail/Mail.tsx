@@ -1,5 +1,4 @@
 import { MailSidebar } from "./MailSidebar";
-import Editor from "../editor/Editor";
 import { Content } from "../content/Content";
 
 export const Mail = () => {
@@ -8,9 +7,9 @@ export const Mail = () => {
       <MailSidebar />
       <div className="h-full w-2/3 grow bg-white">
         <Content />
-        <div className="relative h-1/6 flex-grow bg-white">
+        {/* <div className="relative h-1/6 flex-grow bg-white">
           <Editor />
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ export const NavigationList = () => {
 
   return (
     <div className="flex h-full">
-      <NavigationIconWrapper title='Mail'  onClick={(e) => {e.preventDefault();navigateApp('mail','sdfsdf')}}>
+      <NavigationIconWrapper title='Mail' selected={true}  onClick={(e) => {e.preventDefault();navigateApp('mail','sdfsdf')}}>
         <MailIcon />
       </NavigationIconWrapper>
     </div>

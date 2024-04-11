@@ -12,9 +12,8 @@ export const useNavigation = () => {
     if (viewType) {
       path += `${viewType}/`;
     }
-
     if (location !== null) {
-        path += `${location}`;
+      path += `${location}`;
     }
 
     navigate(path);
