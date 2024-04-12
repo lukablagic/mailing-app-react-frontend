@@ -4,6 +4,7 @@ import { loginUser } from "../../api/Auth";
 import { ToastContext } from "../../utility/contexts/ToastContext";
 import { AuthContext } from "../../utility/contexts/AuthContext";
 import axios from "axios";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export const Login = ({}) => {
   
@@ -15,7 +16,7 @@ export const Login = ({}) => {
   const navigate = useNavigate();
 
   const navigateToHome = () => {
-    navigate(`/`);
+    navigate(`/app/mail`);
   };
 
   const navigateToRegister = () => {
@@ -24,7 +25,7 @@ export const Login = ({}) => {
 
   const handleLogin = async (event) => {
     event.preventDefault();
-    const response = await axios.post("http://localhost/api/auth/login", {
+    const response = await axios.post( BASE_URL  + "/auth/login", {
       email,
       password,
     });
