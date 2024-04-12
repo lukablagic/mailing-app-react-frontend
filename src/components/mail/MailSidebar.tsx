@@ -3,16 +3,18 @@ import { Thread } from "../../utility/models/Thread";
 import { getThreads } from "../../hooks/getThreads";
 import { ThreadItem } from "../thread-item/ThreadItem";
 import { MailFolders } from "./MailFolders";
+import { useNavigation } from "../../hooks/Navigation";
 
 export const MailSidebar = () => {
   const [displayedEmails, setDisplayedEmails] = useState<Thread[]>([]);
   const { emails, loading, error } = getThreads();
-
+  const {endpoints} = useNavigation();
+  
   useEffect(() => {
-    if (emails.length > 0) {
+    if (loading === false) {
       setDisplayedEmails(emails);
     }
-  }, [emails]);
+  }, [emails,endpoints]);
 
   return (
     <div className="flex w-1/3  shrink-0 flex-col gap-4 rounded-tl-lg bg-blue-950 p-4 text-white ">

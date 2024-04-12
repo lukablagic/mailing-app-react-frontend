@@ -15,10 +15,8 @@ interface FoldersResponse {
 }
 
 export const MailFolders = () => {
-  const [selectedFolder, setSelectedFolder] = useState({
-    name: "Inbox",
-    id: 1,
-  });
+  
+  const [selectedFolder, setSelectedFolder] = useState({name: "Inbox",id: 1,});
   const [folders, setFolders] = useState([]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { token } = useContext(AuthContext);
@@ -41,12 +39,12 @@ export const MailFolders = () => {
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };
-  
+
   const handleSelectFolder = (folder: Folder) => {
     setSelectedFolder(folder);
-    navigateApp('mail', folder.name.toLowerCase());
+    navigateApp("mail", folder.name.toLowerCase());
   };
-  
+
   return (
     <div>
       <h1
@@ -67,7 +65,6 @@ export const MailFolders = () => {
               }}
             >
               {folder.name}
-              
             </div>
           ))}
         </div>

@@ -30,7 +30,7 @@ const App = () => {
 
   function UnAuthGuard({ children }) {
     if (auth) {
-      return <Navigate to="/app/mail/" />;
+      return <Navigate to="/app/mail/inbox" />;
     } else {
       return children;
     }

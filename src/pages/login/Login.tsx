@@ -16,11 +16,7 @@ export const Login = ({}) => {
   const navigate = useNavigate();
 
   const navigateToHome = () => {
-    navigate(`/app/mail`);
-  };
-
-  const navigateToRegister = () => {
-    navigate(`/register`);
+    navigate(`/app/mail/inbox`);
   };
 
   const handleLogin = async (event) => {
