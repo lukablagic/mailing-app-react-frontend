@@ -1,11 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Thread } from "../../utility/models/Thread";
 import { getThreads } from "../../hooks/getThreads";
 import { ThreadItem } from "../thread-item/ThreadItem";
 import { MailFolders } from "./MailFolders";
 import { useNavigation } from "../../hooks/Navigation";
+import { ThreadContext } from "../../utility/contexts/ThreadContext";
 
 export const MailSidebar = () => {
+
+  const {setSelectedThread} = useContext(ThreadContext);
   const [displayedEmails, setDisplayedEmails] = useState<Thread[]>([]);
   const { emails, loading, error } = getThreads();
   const {endpoints} = useNavigation();
@@ -15,6 +18,10 @@ export const MailSidebar = () => {
       setDisplayedEmails(emails);
     }
   }, [emails,endpoints]);
+
+  const handleSelectThread = (thread: Thread) => {
+    setSelectedThread(thread);
+  };
 
   return (
     <div className="flex w-1/3  shrink-0 flex-col gap-4 rounded-tl-lg bg-blue-950 p-4 text-white ">
@@ -26,7 +33,7 @@ export const MailSidebar = () => {
           {typeof displayedEmails !== "undefined" &&
             displayedEmails.length > 0 &&
             displayedEmails.map((thread: Thread, index) => (
-             <ThreadItem key={index} thread={thread} />
+             <ThreadItem key={index} thread={thread} onSelect={handleSelectThread}/>
             ))}
         </div>
       </div>
