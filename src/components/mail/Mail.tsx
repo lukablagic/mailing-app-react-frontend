@@ -1,5 +1,5 @@
 import { MailContent } from "../mail-content/MailContent";
-import { MailSidebar } from "./MailSidebar";
+import { MailSidebar } from "../mail-sidebar/MailSidebar";
 
 export const Mail = () => {
   return (

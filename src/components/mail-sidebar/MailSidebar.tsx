@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Thread } from "../../utility/models/Thread";
 import { getThreads } from "../../hooks/getThreads";
 import { ThreadItem } from "../thread-item/ThreadItem";
-import { MailFolders } from "./MailFolders";
+import { MailFolders } from "../mails-folder/MailFolders";
 import { useNavigation } from "../../hooks/Navigation";
 import { ThreadContext } from "../../utility/contexts/ThreadContext";
 

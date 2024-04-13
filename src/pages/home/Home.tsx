@@ -12,7 +12,7 @@ const Home = () => {
 
   return (
     <div className="flex h-full bg-blue-900">
-      <div className="mt-14 flex w-16 flex-col items-center justify-between bg-blue-900 text-purple-200">
+      <div className="mt-14 flex w-16 flex-col items-center justify-between bg-blue-900 text-purple-200 min-w-16">
         <NavigationList />
         <TeamMembers />
       </div>
