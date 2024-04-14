@@ -1,5 +1,4 @@
 import React, { createContext, useState } from 'react';
-import { Toast } from 'react-bootstrap';
 
 
  const ToastContext = createContext({
@@ -23,13 +22,6 @@ function ToastProvider ({ children }) {
   
     return (
       <ToastContext.Provider value={{ showToast, hideToast }}>
-       
-        <div className='toast-container'>
-        <Toast className="d-inline-block m-1" bg={type} show={isOpen} onClose={hideToast} delay={3000} autohide>
-          <Toast.Header></Toast.Header>
-          <Toast.Body>{message}</Toast.Body>
-        </Toast>
-      </div>
         {children}      
       </ToastContext.Provider>
 );
