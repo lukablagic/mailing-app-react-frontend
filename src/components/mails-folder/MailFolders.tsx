@@ -54,11 +54,11 @@ export const MailFolders = () => {
         {selectedFolder.name} <ArrorDown />
       </h1>
       {dropdownOpen === true && (
-        <div className="absolute w-48 bg-blue-950 text-white">
+        <div className="absolute w-48 bg-blue-950 text-white rounded-lg border border-white">
           {folders.map((folder: Folder) => (
             <div
               key={folder.id}
-              className="p-2 text-white hover:bg-gray-500"
+              className="p-2 text-white hover:bg-gray-500 first:rounded-t-lg cursor-pointer last:rounded-b-lg"
               onClick={() => {
                 handleSelectFolder(folder);
                 setDropdownOpen(false);
