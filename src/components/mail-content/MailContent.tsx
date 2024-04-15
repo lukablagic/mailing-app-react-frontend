@@ -5,6 +5,7 @@ import { AuthContext } from "../../utility/contexts/AuthContext";
 import axios from "axios";
 import { Mail } from "../../utility/models/Mail";
 import { MailContentItem } from "./MailContentItem";
+import { MailEditor } from "../editor/MailEditor";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 interface ThreadMembersResponse {
@@ -39,18 +40,23 @@ export const MailContent = () => {
   }, [selectedThread, token]);
 
   return (
-    <div className="flex h-5/6 w-full grow flex-col gap-2  overflow-y-auto overflow-x-hidden ">
-      {typeof selectedThread !== "undefined" && selectedThread !== null && (
-        <div className="w-full border-t border-b p-4">
-          <h2 className="text-xl font-semibold">{selectedThread.subject}</h2>
+    <>
+      <div className="flex h-5/6 w-full grow flex-col gap-2  overflow-y-auto overflow-x-hidden ">
+        {typeof selectedThread !== "undefined" && selectedThread !== null && (
+          <div className="w-full border-b border-t p-4">
+            <h2 className="text-xl font-semibold">{selectedThread.subject}</h2>
+          </div>
+        )}
+        <div className=" m-5 mt-3 flex flex-col gap-5">
+          {typeof displayedEmails !== "undefined" &&
+            displayedEmails.map((mail: Mail) => (
+              <MailContentItem mail={mail} key={mail.id} />
+            ))}
         </div>
-      )}
-      <div className=" flex flex-col gap-5 m-5 mt-3">
-        {typeof displayedEmails !== "undefined" &&
-          displayedEmails.map((mail: Mail) => (
-            <MailContentItem mail={mail} key={mail.id} />
-          ))}
       </div>
-    </div>
+      <div className="relative h-1/6 max-h-64 flex-grow bg-white">
+        <MailEditor html={"laoo "} />
+      </div>
+    </>
   );
 };

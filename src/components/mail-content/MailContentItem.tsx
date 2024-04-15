@@ -13,6 +13,7 @@ export const MailContentItem = ({ mail }: MailContentItemProps) => {
   const handleCollapse = () => {
     setCollapsed(!collapsed);
   };
+  
   return (
     <div className=" rounded-xl border border-gray-200 ">
       <div className="flex flex-col max-w-full ">

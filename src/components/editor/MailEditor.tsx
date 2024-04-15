@@ -1,12 +1,26 @@
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 const ClassicEditor = window["CKSource"]['Editor'];
 import "./assets/styles.css";
+import { useEffect, useState } from "react";
 
-export const MailEditor = () => {
+interface MailEditorProps {
+  html:string;
+}
+
+export const MailEditor = ({html}:MailEditorProps) => {
+
+  const [editorData,setEditorData] = useState(' ');
+
+  useEffect(() => {
+    if(editorData !== null && editorData !== ''){
+      setEditorData(html);
+    }
+  },[]);
+
   return (
     <CKEditor
       editor={ClassicEditor}
-      data={"alo"}
+      data={editorData}
       onReady={(editor) => {
         editor.editing.view.document.on(
           "enter",
