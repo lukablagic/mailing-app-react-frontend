@@ -1,28 +1,25 @@
-import React, { createContext, useEffect, useState } from 'react';
-import { Toast } from 'react-bootstrap';
-
+import { createContext, useState } from "react";
 
 const AuthContext = createContext({
   auth: {},
   setAuth: (auth: {}) => {},
-  token:  "",
+  token: "",
   setToken: (token: any) => {},
-  user:  null,
+  user: null,
   setUser: (user: any) => {},
 });
 
-
-function AuthProvider ({ children }) {
- 
+function AuthProvider({ children }) {
   const [auth, setAuth] = useState(false);
-  const [token, setToken] = useState('');
+  const [token, setToken] = useState("");
   const [user, setUser] = useState([]);
   return (
-    <AuthContext.Provider value={{ auth, setAuth ,token, setToken,user,setUser}}>
-        {children}      
-      </AuthContext.Provider>
-);
-  }
-  
+    <AuthContext.Provider
+      value={{ auth, setAuth, token, setToken, user, setUser }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
+}
 
 export { AuthContext, AuthProvider };

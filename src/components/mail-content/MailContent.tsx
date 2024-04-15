@@ -14,6 +14,7 @@ interface ThreadMembersResponse {
 }
 
 export const MailContent = () => {
+ 
   const { selectedThread } = useContext(ThreadContext);
   const { token } = useContext(AuthContext);
   const [displayedEmails, setDisplayedEmails] = useState<Thread[]>([]);
