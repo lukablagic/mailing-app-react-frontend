@@ -4,67 +4,75 @@
 
 
 html,
-body,#root {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    overflow-y: hidden;
+body, #root {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	overflow-x: hidden;
+	overflow-y: hidden;
+}
+
+.button-primary {
+	@apply  text-blue-600 rounded-md p-2 px-3 text-sm  border-blue-500 border hover:bg-gray-300
+}
+.button-secondary {
+	@apply bg-white text-gray-800 rounded-md p-1 px-2
 }
 
 .read-email {
-  background-color: #b8b7b7;
+	background-color: #b8b7b7;
 }
 
 .toast-container {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  z-index: 9999;
+	position: fixed;
+	top: 1rem;
+	right: 1rem;
+	z-index: 9999;
 }
 
 .login-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 15rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding-top: 15rem;
 }
 
 .unread-email {
-  background-color: rgb(255, 255, 255);
-  font-weight: bold;
+	background-color: rgb(255, 255, 255);
+	font-weight: bold;
 }
 
 .image-container {
-  width: 100px;
-  margin: 10px;
-  height: 100px;
+	width: 100px;
+	margin: 10px;
+	height: 100px;
 }
 
 img {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+	display: flex;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
 }
 
 .home {
-  max-height: 100vh;
+	max-height: 100vh;
 }
 
 .inbox {
 
-  overflow-y: scroll;
-  max-height: 80ch;
-  min-height: 80ch;
+	overflow-y: scroll;
+	max-height: 80ch;
+	min-height: 80ch;
 }
 
 .outline {
-  max-height: 85ch;
-  min-height: 85ch;
-  overflow-y: scroll;
+	max-height: 85ch;
+	min-height: 85ch;
+	overflow-y: scroll;
 }
+
 /* CKEditor styles */
 :root {
 	--ck-sample-base-spacing: 2em;
@@ -76,6 +84,7 @@ img {
 	--ck-sample-editor-min-height: fit-content;
 	--ck-sample-editor-z-index: 10;
 }
+
 
 /* --------- EDITOR STYLES  ---------------------------------------------------------------------------------------- */
 
@@ -116,8 +125,8 @@ main .ck-editor[role='application'] .ck.ck-content,
 	justify-content: center;
 }
 
-.editor-container--with-sidebar > .ck.ck-editor {
-	width: calc( 100% - var(--ck-sample-sidebar-width) );
+.editor-container--with-sidebar>.ck.ck-editor {
+	width: calc(100% - var(--ck-sample-sidebar-width));
 }
 
 /* --------- DECOUPLED (DOCUMENT) BUILD. ---------------------------------------------*/
@@ -134,9 +143,9 @@ body[data-editor='DecoupledEditor'] .row-editor .editor {
 	height: fit-content;
 	padding: 2cm 1.2cm;
 	margin: 2.5rem;
-	border: 1px hsl( 0, 0%, 82.7% ) solid;
+	border: 1px hsl(0, 0%, 82.7%) solid;
 	background-color: var(--ck-sample-color-white);
-	box-shadow: 0 0 5px hsla( 0, 0%, 0%, .1 );
+	box-shadow: 0 0 5px hsla(0, 0%, 0%, .1);
 	box-sizing: border-box;
 }
 
@@ -200,13 +209,13 @@ body[data-editor='DecoupledEditor'] .sidebar {
 	top: 30px;
 	border: 0;
 	padding: 0;
-	color: hsl( 0, 0%, 50% );
+	color: hsl(0, 0%, 50%);
 	transition: 250ms ease color;
 	background-color: transparent;
 }
 
 #sidebar-display-toggle:hover {
-	color: hsl( 0, 0%, 30% );
+	color: hsl(0, 0%, 30%);
 	cursor: pointer;
 }
 
@@ -236,8 +245,8 @@ body[data-editor='DecoupledEditor'] .sidebar {
 }
 
 .ck.ck-presence-list {
-    flex: 1;
-    padding: 1.25rem .75rem;
+	flex: 1;
+	padding: 1.25rem .75rem;
 }
 
 .presence .ck.ck-presence-list__counter {
@@ -272,23 +281,23 @@ body[data-editor='InlineEditor'] .collaboration-demo__row {
 .collaboration-demo__topbar {
 	background: #fff;
 	border: 1px solid var(--ck-color-toolbar-border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 0;
-    border-radius: 4px 4px 0 0;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 0;
+	border-radius: 4px 4px 0 0;
 }
 
 .collaboration-demo__topbar .btn {
 	margin-right: 1em;
 	outline-offset: 2px;
 	outline-width: 2px;
-	background-color: var( --ck-sample-color-blue );
+	background-color: var(--ck-sample-color-blue);
 }
 
 .collaboration-demo__topbar .btn:focus,
 .collaboration-demo__topbar .btn:hover {
-	border-color: var( --ck-sample-color-blue );
+	border-color: var(--ck-sample-color-blue);
 }
 
 .collaboration-demo__share {
@@ -329,44 +338,44 @@ body[data-editor='InlineEditor'] .collaboration-demo__row {
 .collaboration-demo__share button[data-tooltip]::before,
 .collaboration-demo__share button[data-tooltip]::after {
 	position: absolute;
-    visibility: hidden;
-    opacity: 0;
-    pointer-events: none;
-    transition: all .15s cubic-bezier(.5,1,.25,1);
+	visibility: hidden;
+	opacity: 0;
+	pointer-events: none;
+	transition: all .15s cubic-bezier(.5, 1, .25, 1);
 	z-index: 1;
 }
 
 .collaboration-demo__share button[data-tooltip]::before {
 	content: attr(data-tooltip);
-    padding: 5px 15px;
-    border-radius: 3px;
-    background: #111;
-    color: #fff;
-    text-align: center;
-    font-size: 11px;
+	padding: 5px 15px;
+	border-radius: 3px;
+	background: #111;
+	color: #fff;
+	text-align: center;
+	font-size: 11px;
 	top: 100%;
-    left: 50%;
-    margin-top: 5px;
-    transform: translateX(-50%);
+	left: 50%;
+	margin-top: 5px;
+	transform: translateX(-50%);
 }
 
 .collaboration-demo__share button[data-tooltip]::after {
-    content: '';
+	content: '';
 	border: 5px solid transparent;
-    width: 0;
-    font-size: 0;
-    line-height: 0;
+	width: 0;
+	font-size: 0;
+	line-height: 0;
 	top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    border-bottom: 5px solid #111;
+	left: 50%;
+	transform: translateX(-50%);
+	border-bottom: 5px solid #111;
 	border-top: none;
 }
 
 .collaboration-demo__share button[data-tooltip]:hover:before,
 .collaboration-demo__share button[data-tooltip]:hover:after {
 	visibility: visible;
-    opacity: 1;
+	opacity: 1;
 }
 
 .collaboration-demo--ready {
@@ -390,18 +399,18 @@ body[data-editor='InlineEditor'] .collaboration-demo__row {
 /* --------- REVISION HISTORY FEATURE ------------------------------------------------------------------------------ */
 
 .revision-viewer-container {
-    display: none;
-    max-width: 100%;
-    word-wrap: break-word;
+	display: none;
+	max-width: 100%;
+	word-wrap: break-word;
 }
 
 .revision-viewer-sidebar {
-    position: relative;
-    min-width: 310px;
-    overflow: hidden;
-    background: var(--ck-color-toolbar-background);
-    border: 1px solid var(--ck-color-toolbar-border);
-    margin-left: -1px;
+	position: relative;
+	min-width: 310px;
+	overflow: hidden;
+	background: var(--ck-color-toolbar-background);
+	border: 1px solid var(--ck-color-toolbar-border);
+	margin-left: -1px;
 }
 
 /* A case when Pagination and Revision History features are enabled in the editor. */
@@ -480,7 +489,7 @@ header nav ul li {
 	display: inline-block;
 }
 
-header nav ul li + li {
+header nav ul li+li {
 	margin-left: 1em;
 }
 
@@ -534,7 +543,7 @@ main .message h2 {
 	font-size: 1rem;
 	user-select: none;
 	border-radius: 4px;
-	transition: color .2s ease-in-out,background-color .2s ease-in-out,border-color .2s ease-in-out,opacity .2s ease-in-out;
+	transition: color .2s ease-in-out, background-color .2s ease-in-out, border-color .2s ease-in-out, opacity .2s ease-in-out;
 	background-color: var(--ck-sample-color-button-blue);
 	border-color: var(--ck-sample-color-button-blue);
 	color: var(--ck-sample-color-white);
@@ -550,11 +559,11 @@ footer {
 	margin: calc(2*var(--ck-sample-base-spacing)) var(--ck-sample-base-spacing);
 	font-size: .8em;
 	text-align: center;
-	color: rgba(0,0,0,.4);
+	color: rgba(0, 0, 0, .4);
 }
 
 /* --------- RWD --------------------------------------------------------------------------------------------------- */
-@media screen and ( max-width: 800px ) {
+@media screen and (max-width: 800px) {
 	:root {
 		--ck-sample-base-spacing: 1em;
 	}

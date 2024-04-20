@@ -33,11 +33,11 @@ export const MailContentItem = ({ mail, replyMail }: MailContentItemProps) => {
           <div className="flex items-center justify-between p-4 px-6 ">
             <div className="flex flex-row gap-3 ">
               <Avatar name={mail.from_name} email={mail.from} />
-              <h1 className="text-xl font-bold">
+              <div className="text-sm font-bold text-gray-700  tabel-cell flex align-baseline items-center">
                 {mail.from_name === undefined || mail.from_name === null
                   ? mail.from
                   : mail.from_name}
-              </h1>
+              </div>
             </div>
             <div className="flex flex-row gap-3" onClick={(e) => { e.stopPropagation(); selectMail(); setCurrentIndex(tabsCounter + 1) }}>
               <div className="cursor-pointer rounded-xl p-1 hover:bg-gray-200">
@@ -49,8 +49,8 @@ export const MailContentItem = ({ mail, replyMail }: MailContentItemProps) => {
             </div>
           </div>
           <div className="flex items-center justify-between p-4 pt-0 px-6 ">
-            <p className="text-gray-600">{mail.from}</p>
-            <div>{DateTimeUtility.format(mail.sent_date, 'H:i d.m.Y')}</div>
+            <div className="text-sm text-center font-bold text-gray-600 ">{mail.from}</div>
+            <div className="text-sm ">{DateTimeUtility.format(mail.sent_date, 'H:i d.m.Y')}</div>
           </div>
         </div>
         {collapsed === false && <EmbededHTMLView html={mail.body} />}

@@ -49,7 +49,7 @@ Tabs.Titles = ({ items, removeTab }: TabTitlesProps) => {
                 >
                     {title}
                     {collapsable === true &&
-                        <div onClick={(e) => { removeTab(id) }}>
+                        <div className='tabs-close-icon' onClick={(e) => { removeTab(id) }}>
                             X
                         </div>
                     }

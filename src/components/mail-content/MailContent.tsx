@@ -50,10 +50,9 @@ export const MailContent = ({ addTab }: MailContentProps) => {
 
 
   const handleReplyMail = (mail: Mail) => {
-    console.log(mail)
     addTab(
       {
-        id: "REPLY",
+        id:`${mail.id}  + ${Math.random()}`,
         title: mail.from_name !== null ? mail.from_name : mail.from,
         content: <ReplyMail replyMail={mail} renderFullView={true} />,
         collapsable: true,
@@ -65,11 +64,11 @@ export const MailContent = ({ addTab }: MailContentProps) => {
     <>
       <div className="flex h-5/6 w-full grow flex-col gap-2  overflow-y-auto overflow-x-hidden ">
         {typeof selectedThread !== "undefined" && selectedThread !== null && (
-          <div className="w-full border-b border-t p-4">
-            <h2 className="text-xl font-semibold">{selectedThread.subject}</h2>
+          <div className="w-full border-b border-t p-2 px-4 text-gray-700">
+            <h2 className="text-lg font-semibold">{selectedThread.subject}</h2>
           </div>
         )}
-        <div className=" m-5 mt-3 flex flex-col gap-5">
+        <div className="m-5 mt-3 flex flex-col gap-5">
           {typeof displayedEmails !== "undefined" &&
             displayedEmails.map((mail: Mail) => (
               <MailContentItem mail={mail} key={mail.id} replyMail={handleReplyMail} />

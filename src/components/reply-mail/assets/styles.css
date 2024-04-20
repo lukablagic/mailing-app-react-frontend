@@ -1,0 +1,27 @@
+.reply-mail {
+    @apply flex h-full w-full flex-col
+}
+
+.reply-mail-section-row {
+    @apply flex flex-row gap-1 justify-start p-3 border-b items-center border-gray-200 first:border-b-2 first:p-2 last:border-b-0 last:p-0
+}
+
+.reply-mail-info {
+    @apply mx-2  flex flex-col shrink   
+}
+
+.reply-mail-editor-container {
+    @apply shrink grow basis-0 overflow-auto p-2 
+}
+
+.reply-mail-section-title {
+    @apply text-gray-500 text-sm
+}
+
+.reply-mail-section-txt {
+    @apply text-gray-800 text-sm
+}
+
+.reply-mail-input {
+    @apply  w-full  p-3 text-gray-800 text-sm bg-white  placeholder-slate-400  focus:outline-none border-gray-300 focus:border focus:border-gray-500 border-b
+}
