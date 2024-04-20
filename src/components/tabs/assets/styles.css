@@ -1,0 +1,18 @@
+.tabs-wrapper {
+    @apply h-full w-2/3 grow bg-white;
+}
+
+.tab-content {
+    @apply bg-white h-full w-full;
+}
+
+.tab-list {
+    @apply flex flex-row h-12 w-full gap-1 border-b border-gray-200 align-bottom justify-start  m-1 mb-0 pb-0;
+}
+
+.tab-list-item {
+    @apply bg-gray-300 text-gray-800 hover:bg-white border-l p-1 border-r border-t rounded-t-lg border-gray-300 pb-0 mb-0;
+}
+.selected-tab-item {
+    @apply bg-white text-gray-800 border-l p-1 border-r border-t rounded-t-lg border-b border-b-white pb-0 mb-0;
+}
