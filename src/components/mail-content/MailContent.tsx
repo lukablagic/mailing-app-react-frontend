@@ -7,23 +7,26 @@ import { Mail } from "../../utility/models/Mail";
 import { MailContentItem } from "./MailContentItem";
 import { MailEditor } from "../editor/MailEditor";
 import { ReplyMail } from "../reply-mail/ReplyMail";
+import { useTabsContext } from "../../utility/contexts/TabsContext";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 interface ThreadMembersResponse {
   ok: boolean;
   emails: Thread[];
 }
+interface MailContentProps {
+  addTab?: (tab: any) => void;
+}
 
-export const MailContent = () => {
+export const MailContent = ({ addTab }: MailContentProps) => {
 
-  const { selectedThread } = useContext(ThreadContext);
-  const { token } = useContext(AuthContext);
+  const { selectedThread }                    = useContext(ThreadContext);
+  const { setCurrentIndex }                   = useTabsContext();
+  const { token }                             = useContext(AuthContext);
   const [displayedEmails, setDisplayedEmails] = useState<Thread[]>([]);
-  const [selectedMail, setSelectedMail] = useState<Mail | null>(null);
 
   useEffect(() => {
     if (selectedThread === null) return;
-
     const params = {
       id: selectedThread.id,
     };
@@ -35,17 +38,26 @@ export const MailContent = () => {
         params: params,
       })
       .then((response) => {
-        console.log(response);
         if (response.data.ok === true) {
           setDisplayedEmails(response.data.emails);
+          console.log("wokring")
+          setCurrentIndex(0);
         }
       });
+
+
   }, [selectedThread, token]);
 
 
   const handleReplyMail = (mail: Mail) => {
-    console.log(mail);
-    setSelectedMail(mail);
+    console.log(mail)
+    addTab(
+      {
+        id: "REPLY",
+        title: mail.from_name !== null ? mail.from_name : mail.from,
+        content: <ReplyMail replyMail={mail} renderFullView={true} />
+      },
+    );
   }
 
   return (
@@ -63,9 +75,6 @@ export const MailContent = () => {
             ))}
         </div>
       </div>
-      {typeof selectedMail !== "undefined" && selectedMail !== null &&
-          <ReplyMail replyMail={selectedMail}/>
-      }
     </>
   );
 };

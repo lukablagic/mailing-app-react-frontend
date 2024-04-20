@@ -5,14 +5,16 @@ import { EmbededHTMLView } from "../embeded-html-view/EmbededHTMLView";
 import ReplyIcon from "../../assets/react-icons/ReplyIcon";
 import MoreDotsIcon from "../../assets/react-icons/MoreDotsIcons";
 import { DateTimeUtility } from "../../utility/DateTimeUtlity";
+import { useTabsContext } from "../../utility/contexts/TabsContext";
 
 interface MailContentItemProps {
   mail: Mail;
   replyMail: (mail: Mail) => void;
 }
 
-export const MailContentItem = ({ mail,replyMail }: MailContentItemProps) => {
+export const MailContentItem = ({ mail, replyMail }: MailContentItemProps) => {
   const [collapsed, setCollapsed] = useState(true);
+  const { setCurrentIndex, tabsCounter } = useTabsContext();
 
   const handleCollapse = () => {
     setCollapsed(!collapsed);
@@ -37,7 +39,7 @@ export const MailContentItem = ({ mail,replyMail }: MailContentItemProps) => {
                   : mail.from_name}
               </h1>
             </div>
-            <div className="flex flex-row gap-3" onClick={selectMail}>
+            <div className="flex flex-row gap-3" onClick={(e) => { e.stopPropagation(); selectMail(); setCurrentIndex(tabsCounter + 1) }}>
               <div className="cursor-pointer rounded-xl p-1 hover:bg-gray-200">
                 <ReplyIcon />
               </div>

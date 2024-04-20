@@ -6,7 +6,7 @@ import Home from "./pages/home/Home";
 import { AuthContext } from "./utility/contexts/AuthContext";
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   const storedToken = sessionStorage.getItem("token");
   const { auth, setAuth, setToken } = useContext(AuthContext);
 
@@ -18,7 +18,7 @@ const App = () => {
       setToken(null);
       setAuth(false);
     }
-  }, [setAuth, setToken, storedToken]);
+  }, []);
 
   function AuthGuard({ children }) {
     if (auth) {

@@ -73,7 +73,7 @@ img {
 	--ck-sample-color-blue: #1a9aef;
 	--ck-sample-container-width: 1285px;
 	--ck-sample-sidebar-width: 350px;
-	--ck-sample-editor-min-height: 50%;
+	--ck-sample-editor-min-height: fit-content;
 	--ck-sample-editor-z-index: 10;
 }
 

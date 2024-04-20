@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useRef, useState } from 'react';
 import { Thread } from '../models/Thread';
 
 
@@ -10,6 +10,7 @@ import { Thread } from '../models/Thread';
 function ThreadProvider ({ children }) {
 
     const [selectedThread, setSelectedThread] = useState(null);
+  console.log(selectedThread)
   
     return (
       <ThreadContext.Provider value={{ selectedThread, setSelectedThread }}>

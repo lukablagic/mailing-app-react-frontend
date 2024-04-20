@@ -2,7 +2,9 @@ import { Dispatch, ReactNode, SetStateAction, createContext, useContext, useStat
 
 type TabsContextProps = {
     currentIndex: number
-    setCurrentIndex: Dispatch<SetStateAction<number>>
+    setCurrentIndex: Dispatch<SetStateAction<number>>,
+    tabsCounter: number,
+    setTabsCounter: Dispatch<SetStateAction<number>>
 }
 
 type TabsProviderProps = {
@@ -12,15 +14,18 @@ type TabsProviderProps = {
 const initialContext: TabsContextProps = {
     currentIndex: 0,
     setCurrentIndex: () => { },
+    tabsCounter: 0,
+    setTabsCounter: () => { }
 }
 
 const TabsContext = createContext<TabsContextProps>(initialContext)
 
 export default function TabsProvider({ children }: TabsProviderProps) {
     const [currentIndex, setCurrentIndex] = useState<number>(0)
+    const [tabsCounter, setTabsCounter] = useState<number>(0)
 
     return (
-        <TabsContext.Provider value={{ currentIndex, setCurrentIndex }}>
+        <TabsContext.Provider value={{ currentIndex, setCurrentIndex, tabsCounter, setTabsCounter }}>
             {children}
         </TabsContext.Provider>
     )

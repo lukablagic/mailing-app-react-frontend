@@ -56,18 +56,25 @@ Tabs.Titles = ({ items }) => {
 
 Tabs.Contents = ({ items }) => {
     const { currentIndex } = useTabsContext()
-    const { id, content } = items[currentIndex]
 
     return (
-        <div
-            className='tab-content'
-            key={id}
-            id={`tab-content-${id}`}
-            role="tabpanel"
-            aria-labelledby={`tab-control-${id}`}
-        >
-            {content}
-        </div>
+        <>
+            {items.map((item, index) => {
+                const { id, content } = item;
+                return (
+                    <div
+                        className='tab-content'
+                        key={id}
+                        id={`tab-content-${id}`}
+                        role="tabpanel"
+                        aria-labelledby={`tab-control-${id}`}
+                        style={{ display: index === currentIndex ? 'block' : 'none' }}
+                    >
+                        {content}
+                    </div>
+                );
+            })}
+        </>
     );
 }
 
