@@ -55,7 +55,7 @@ export const MailContent = () => {
             ))}
         </div>
       </div>
-      <div className="relative h-1/6 max-h-64 flex-grow bg-white">
+      <div className="relative h-1/6 max-h-64 flex-grow bg-white m-4">
         <MailEditor html={"laoo "} />
       </div>
     </>
