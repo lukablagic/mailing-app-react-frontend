@@ -8,14 +8,18 @@ import { DateTimeUtility } from "../../utility/DateTimeUtlity";
 
 interface MailContentItemProps {
   mail: Mail;
+  replyMail: (mail: Mail) => void;
 }
 
-export const MailContentItem = ({ mail }: MailContentItemProps) => {
+export const MailContentItem = ({ mail,replyMail }: MailContentItemProps) => {
   const [collapsed, setCollapsed] = useState(true);
 
   const handleCollapse = () => {
     setCollapsed(!collapsed);
   };
+  const selectMail = () => {
+    replyMail(mail);
+  }
 
   return (
     <div className=" rounded-xl border border-gray-200 ">
@@ -33,7 +37,7 @@ export const MailContentItem = ({ mail }: MailContentItemProps) => {
                   : mail.from_name}
               </h1>
             </div>
-            <div className="flex flex-row gap-3 ">
+            <div className="flex flex-row gap-3" onClick={selectMail}>
               <div className="cursor-pointer rounded-xl p-1 hover:bg-gray-200">
                 <ReplyIcon />
               </div>
@@ -44,7 +48,7 @@ export const MailContentItem = ({ mail }: MailContentItemProps) => {
           </div>
           <div className="flex items-center justify-between p-4 pt-0 px-6 ">
             <p className="text-gray-600">{mail.from}</p>
-            <div>{DateTimeUtility.format(mail.sent_date,'H:i d.m.Y')}</div>
+            <div>{DateTimeUtility.format(mail.sent_date, 'H:i d.m.Y')}</div>
           </div>
         </div>
         {collapsed === false && <EmbededHTMLView html={mail.body} />}

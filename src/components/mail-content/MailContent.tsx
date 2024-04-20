@@ -6,6 +6,7 @@ import axios from "axios";
 import { Mail } from "../../utility/models/Mail";
 import { MailContentItem } from "./MailContentItem";
 import { MailEditor } from "../editor/MailEditor";
+import { ReplyMail } from "../reply-mail/ReplyMail";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 interface ThreadMembersResponse {
@@ -14,10 +15,11 @@ interface ThreadMembersResponse {
 }
 
 export const MailContent = () => {
- 
+
   const { selectedThread } = useContext(ThreadContext);
   const { token } = useContext(AuthContext);
   const [displayedEmails, setDisplayedEmails] = useState<Thread[]>([]);
+  const [selectedMail, setSelectedMail] = useState<Mail | null>(null);
 
   useEffect(() => {
     if (selectedThread === null) return;
@@ -40,6 +42,12 @@ export const MailContent = () => {
       });
   }, [selectedThread, token]);
 
+
+  const handleReplyMail = (mail: Mail) => {
+    console.log(mail);
+    setSelectedMail(mail);
+  }
+
   return (
     <>
       <div className="flex h-5/6 w-full grow flex-col gap-2  overflow-y-auto overflow-x-hidden ">
@@ -51,13 +59,13 @@ export const MailContent = () => {
         <div className=" m-5 mt-3 flex flex-col gap-5">
           {typeof displayedEmails !== "undefined" &&
             displayedEmails.map((mail: Mail) => (
-              <MailContentItem mail={mail} key={mail.id} />
+              <MailContentItem mail={mail} key={mail.id} replyMail={handleReplyMail} />
             ))}
         </div>
       </div>
-      <div className="relative h-1/6 max-h-64 flex-grow bg-white m-4">
-        <MailEditor html={"laoo "} />
-      </div>
+      {typeof selectedMail !== "undefined" && selectedMail !== null &&
+          <ReplyMail replyMail={selectedMail}/>
+      }
     </>
   );
 };
