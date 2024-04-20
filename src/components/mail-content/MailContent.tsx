@@ -15,7 +15,7 @@ interface ThreadMembersResponse {
   emails: Thread[];
 }
 interface MailContentProps {
-  addTab?: (tab: any) => void;
+  addTab?: (tab: TabItem) => void;
 }
 
 export const MailContent = ({ addTab }: MailContentProps) => {
@@ -55,7 +55,8 @@ export const MailContent = ({ addTab }: MailContentProps) => {
       {
         id: "REPLY",
         title: mail.from_name !== null ? mail.from_name : mail.from,
-        content: <ReplyMail replyMail={mail} renderFullView={true} />
+        content: <ReplyMail replyMail={mail} renderFullView={true} />,
+        collapsable: true,
       },
     );
   }

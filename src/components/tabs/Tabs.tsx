@@ -3,16 +3,16 @@ import TabsProvider, { useTabsContext } from '../../utility/contexts/TabsContext
 import './assets/styles.css';
 
 type TabTitlesProps = {
-    items: {
-        id: string
-        title: string
-    }[]
+    items: TabItem[],
+    removeTab: (tabId: string) => void
 }
 
 type TabContentProps = {
     items: {
         id: string
-        content: React.ReactNode
+        title?: string
+        content?: React.ReactNode
+        collapsable?: boolean
     }[]
 }
 
@@ -31,12 +31,12 @@ const Tabs: TabsWrapper & TabsComposition = ({ children }) => {
     return <div className='tabs-wrapper'><TabsProvider>{children}</TabsProvider></div>
 }
 
-Tabs.Titles = ({ items }) => {
+Tabs.Titles = ({ items, removeTab }: TabTitlesProps) => {
     const { currentIndex, setCurrentIndex } = useTabsContext()
     return (
         <div role="tab-list" className='tab-list' >
-            {items.map(({ id, title }, index) => (
-                <button
+            {items.map(({ id, title, collapsable }, index) => (
+                <div
                     className={`tab-list-item ${currentIndex === index ? 'selected-tab-item' : ''}`}
                     key={id}
                     id={`tab-control-${id}`}
@@ -48,7 +48,12 @@ Tabs.Titles = ({ items }) => {
                     }}
                 >
                     {title}
-                </button>
+                    {collapsable === true &&
+                        <div onClick={(e) => { removeTab(id) }}>
+                            X
+                        </div>
+                    }
+                </div>
             ))}
         </div>
     )
