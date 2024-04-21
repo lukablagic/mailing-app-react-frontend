@@ -34,7 +34,7 @@ export const Mail = () => {
         <Tabs.Contents
           items={tabData.map(({ id, content, collapsable }) => ({
             id,
-            content: <div className='tab-content'>{content}</div>,
+            content: <>{content}</>,
           }))}
         />
       </Tabs>

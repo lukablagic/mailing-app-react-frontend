@@ -3,11 +3,11 @@
 }
 
 .tab-content {
-    @apply bg-white h-full w-full;
+    @apply bg-white  w-full flex flex-1 h-[95%] ;
 }
 
 .tab-list {
-    @apply flex flex-row h-12 w-full gap-1 border-b border-gray-200 align-bottom justify-start  p-1 mb-0 pb-0 bg-gray-100 cursor-pointer; 
+    @apply flex flex-row h-[5%] w-full gap-1 border-b border-gray-200 align-bottom justify-start  p-1 mb-0 pb-0 bg-gray-100 cursor-pointer; 
 }
 
 .tab-list-item {

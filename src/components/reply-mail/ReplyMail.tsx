@@ -20,7 +20,7 @@ export const ReplyMail = ({ replyMail, renderFullView = true }: ReplyMailProps) 
     return (
         <div className={'reply-mail'}>
             {typeof editingEmail !== "undefined" && editingEmail !== null &&
-                <div className='reply-mail-info '>
+                <>
                     <div className='reply-mail-section-row'>
                         <button className='button-primary' onClick={() => { console.log(editingEmail) }}>Send Mail</button>
                     </div>
@@ -33,16 +33,16 @@ export const ReplyMail = ({ replyMail, renderFullView = true }: ReplyMailProps) 
                         <div className='reply-mail-section-txt'>{editingEmail.to}</div>
                     </div>
                     <div className='reply-mail-section-row'>
-                        <input className='reply-mail-input' placeholder='Title' value={editingEmail.subject}/>
+                        <input className='reply-mail-input' placeholder='Title' value={editingEmail.subject} />
                     </div>
-
-                </div>
+                    <div className='reply-mail-editor-container'>
+                        {typeof editingEmail !== "undefined" && editingEmail !== null &&
+                            <MailEditor html={editingEmail.body} />
+                        }
+                    </div>
+                </>
             }
-            <div className='reply-mail-editor-container'>
-                {typeof editingEmail !== "undefined" && editingEmail !== null &&
-                    <MailEditor html={editingEmail.body} />
-                }
-            </div>
+
 
         </div>
     )

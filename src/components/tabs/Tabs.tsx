@@ -73,7 +73,7 @@ Tabs.Contents = ({ items }) => {
                         id={`tab-content-${id}`}
                         role="tabpanel"
                         aria-labelledby={`tab-control-${id}`}
-                        style={{ display: index === currentIndex ? 'block' : 'none' }}
+                        style={{ display: index === currentIndex ? 'tab-content' : 'none' }}
                     >
                         {content}
                     </div>
