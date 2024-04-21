@@ -3,7 +3,7 @@
 }
 
 .tab-content {
-    @apply bg-white  w-full flex flex-1 h-[96%] ;
+    @apply bg-white  w-full flex flex-1;
 }
 
 .tab-list {
@@ -11,11 +11,14 @@
 }
 
 .tab-list-item {
-    @apply bg-gray-200 text-gray-800 hover:bg-white border-l p-1 text-sm border-r border-t rounded-t-lg border-gray-300 pb-0 mb-0 flex flex-row justify-center items-center gap-2 ;
+    @apply bg-gray-200 text-gray-800 hover:bg-white border-l p-1 text-sm border-r border-t rounded-t-lg border-gray-300 pb-0 mb-0 flex flex-row justify-center items-center;
+}
+.tab-list-text {
+    @apply truncate max-w-16;
 }
 .selected-tab-item {
-    @apply bg-white text-gray-800 border-l p-1 border-r border-t rounded-t-lg border-b border-b-white pb-0 mb-0;
+    @apply bg-white text-gray-800 border-l p-1 border-r border-t rounded-t-lg border-b border-b-white pb-0 mb-0   ;
 }
 .tabs-close-icon {
-    @apply text-gray-800 hover:text-gray-600 cursor-pointer;
+    @apply text-gray-400 hover:text-gray-600 rounded-md px-1 cursor-pointer ;
 }

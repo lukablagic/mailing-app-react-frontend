@@ -1,34 +1,29 @@
-import React, { useContext, useState } from "react";
-import { useNavigate, Link } from 'react-router-dom';
+import { useContext, useState } from "react";
+import { Link } from 'react-router-dom';
 import axios from "axios";
 import { AuthContext } from "../utility/contexts/AuthContext";
 import { ToastContext } from "../utility/contexts/ToastContext";
 
 export const Register = ({ }) => {
 
-  const { showToast } = useContext(ToastContext);
-  const { setAuth, setToken, setUser } = useContext(AuthContext);
-  const [formData, setFormData] = useState({name: '', surname: '',email: '', password: ''});
-  const navigate = useNavigate();
-  
+  const { showToast }                   = useContext(ToastContext);
+  const { setAuth, setIsAuthenticated } = useContext(AuthContext);
+  const [formData, setFormData]         = useState({ name: '', surname: '', email: '', password: '' });
+
   const handleInputChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
   };
-
-
-
   const handleRegister = async (e) => {
     e.preventDefault();
     const response = await axios.post('http://localhost/api/auth/register', formData);
     console.log(response);
     if (response.status === 200) {
-      const { user, token } = response.data;
-      setAuth(true);
-      setUser(user);
-      setToken(token);
+      const { auth } = response.data;
+      setAuth(auth);
+      setIsAuthenticated(true);
     } else {
       showToast('error', 'Invalid credentials');
     }
@@ -46,17 +41,17 @@ export const Register = ({ }) => {
               Already have an account? <Link className="text-cyan-500 hover:text-cyan-800" to="/login">Login</Link>
             </p>
             <form className="flex flex-col gap-3 " onSubmit={handleRegister}>
-               <label className="block text-gray-700 text-sm font-bold ">
+              <label className="block text-gray-700 text-sm font-bold ">
                 Name
                 <input className="shadow border appearance-none rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="name" placeholder="Enter name" onChange={handleInputChange} />
               </label>
               <label className="block text-gray-700 text-sm font-bold ">
                 Surname
-                <input className="shadow border appearance-none rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="surname" placeholder="Enter surname" onChange={handleInputChange}/>
-              </label>     
+                <input className="shadow border appearance-none rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="surname" placeholder="Enter surname" onChange={handleInputChange} />
+              </label>
               <label className="block text-gray-700 text-sm font-bold ">
                 Email address
-                <input className="shadow border appearance-none rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="email" type="email" placeholder="Enter email"  onChange={handleInputChange}/>
+                <input className="shadow border appearance-none rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="email" type="email" placeholder="Enter email" onChange={handleInputChange} />
               </label>
               <label className="block text-gray-700 text-sm font-bold ">
                 Password

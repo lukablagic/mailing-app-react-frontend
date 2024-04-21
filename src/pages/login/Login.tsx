@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { loginUser } from "../../api/Auth";
 import { ToastContext } from "../../utility/contexts/ToastContext";
 import { AuthContext } from "../../utility/contexts/AuthContext";
 import axios from "axios";
@@ -9,7 +8,7 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 export const Login = ({}) => {
   
   const { showToast } = useContext(ToastContext);
-  const { setAuth, setToken, setUser } = useContext(AuthContext);
+  const { setAuth ,setIsAuthenticated} = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -26,11 +25,10 @@ export const Login = ({}) => {
       password,
     });
     if (response.status === 200) {
-      const { user, token } = response.data;
-      setAuth(true);
-      sessionStorage.setItem("token", token);
-      setUser(user);
-      setToken(token);
+      const { auth } = response.data;
+      setIsAuthenticated(true);
+      setAuth(auth);
+      // sessionStorage.setItem("token", auth.token);
       navigateToHome();
     } else {
       showToast("error", "Invalid credentials");

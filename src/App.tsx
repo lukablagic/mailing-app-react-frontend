@@ -8,20 +8,19 @@ import { AuthContext } from "./utility/contexts/AuthContext";
 const App = () => {
 
   const storedToken = sessionStorage.getItem("token");
-  const { auth, setAuth, setToken } = useContext(AuthContext);
+  const { auth, setAuth, isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
 
   useEffect(() => {
     if (storedToken !== undefined && storedToken !== null) {
-      setToken(storedToken);
-      setAuth(true);
+      setAuth({ token: storedToken });
+      setIsAuthenticated(true);
     } else {
-      setToken(null);
-      setAuth(false);
+      setIsAuthenticated(false);
     }
   }, []);
 
   function AuthGuard({ children }) {
-    if (auth) {
+    if (Object.keys(auth).length > 0) {
       return children;
     } else {
       return <Navigate to="/login" />;
@@ -29,7 +28,7 @@ const App = () => {
   }
 
   function UnAuthGuard({ children }) {
-    if (auth) {
+    if (Object.keys(auth).length > 0) {
       return <Navigate to="/app/mail/inbox" />;
     } else {
       return children;

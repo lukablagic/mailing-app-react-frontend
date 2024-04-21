@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import TabsProvider, { useTabsContext } from '../../utility/contexts/TabsContext';
 import './assets/styles.css';
+import { MailContent } from '../mail-content/MailContent';
 
 type TabTitlesProps = {
     items: TabItem[],
@@ -32,7 +33,9 @@ const Tabs: TabsWrapper & TabsComposition = ({ children }) => {
 }
 
 Tabs.Titles = ({ items, removeTab }: TabTitlesProps) => {
+
     const { currentIndex, setCurrentIndex } = useTabsContext()
+
     return (
         <div role="tab-list" className='tab-list' >
             {items.map(({ id, title, collapsable }, index) => (
@@ -47,7 +50,9 @@ Tabs.Titles = ({ items, removeTab }: TabTitlesProps) => {
                         setCurrentIndex(index)
                     }}
                 >
-                    {title}
+                    <div className='tab-list-text'>
+                        {title}
+                    </div>
                     {collapsable === true &&
                         <div className='tabs-close-icon' onClick={(e) => { removeTab(id) }}>
                             X
@@ -59,7 +64,8 @@ Tabs.Titles = ({ items, removeTab }: TabTitlesProps) => {
     )
 }
 
-Tabs.Contents = ({ items }) => {
+Tabs.Contents = ({items}) => {
+
     const { currentIndex } = useTabsContext()
 
     return (
@@ -68,14 +74,15 @@ Tabs.Contents = ({ items }) => {
                 const { id, content } = item;
                 return (
                     <div
-                        className='tab-content'
                         key={id}
                         id={`tab-content-${id}`}
                         role="tabpanel"
                         aria-labelledby={`tab-control-${id}`}
-                        style={{ display: index === currentIndex ? 'tab-content' : 'none' }}
+                        className={index === currentIndex ? 'flex flex-1 h-[96%]' : 'hidden'}
                     >
-                        {content}
+                        <div className='tab-content'>
+                            {content}
+                        </div>
                     </div>
                 );
             })}

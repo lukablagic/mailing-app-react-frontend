@@ -12,7 +12,7 @@ interface ThreadResponse {
 
 export const getThreads = () => {
 
-  const { token } = useContext(AuthContext);
+  const { auth } = useContext(AuthContext);
   const [emails, setEmails] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -26,7 +26,7 @@ export const getThreads = () => {
     axios
       .get<ThreadResponse>(`${url}/threads/all`, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${auth.token}`,
         },
         params
       })
@@ -37,7 +37,7 @@ export const getThreads = () => {
         }
       });
 
-  }, [token, endpoints]);
+  }, [auth.token, endpoints]);
 
   return { emails, loading, error };
 };

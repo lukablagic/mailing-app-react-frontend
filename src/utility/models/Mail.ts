@@ -7,6 +7,7 @@ export class Mail {
   is_read?: boolean | number;
   sent_date?: string;
   has_attachment?: boolean;
+  reply_to?: string;
   to: string[];
   cc: string[];
   bcc: string[];

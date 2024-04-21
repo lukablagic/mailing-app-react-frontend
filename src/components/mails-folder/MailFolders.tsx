@@ -2,7 +2,6 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import ArrorDown from "../../assets/react-icons/ArrowDown";
 import { AuthContext } from "../../utility/contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
 import { useNavigation } from "../../hooks/Navigation";
 
 interface Folder {
@@ -17,16 +16,16 @@ interface FoldersResponse {
 export const MailFolders = () => {
   
   const [selectedFolder, setSelectedFolder] = useState({name: "Inbox",id: 1,});
-  const [folders, setFolders] = useState([]);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const { token } = useContext(AuthContext);
-  const { navigateApp } = useNavigation();
+  const [folders, setFolders]               = useState([]);
+  const [dropdownOpen, setDropdownOpen]     = useState(false);
+  const { auth }                            = useContext(AuthContext);
+  const { navigateApp }                     = useNavigation();
 
   useEffect(() => {
     axios
       .get<FoldersResponse>("http://localhost/api/folders/all", {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${auth.token}`,
         },
       })
       .then((response) => {

@@ -1,28 +1,21 @@
-import React, { useContext, useEffect, useState } from "react";
-import { getAttachmentData } from "../../api/Mail";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../utility/contexts/AuthContext";
 
 
 const ImageView = ({ attachment }) => {
     const [blobUrl, setBlobUrl] = useState(null);
     const [attachmentImage, setAttachmentImage] = useState(null);
-    const { token } = useContext(AuthContext);
+    const { auth } = useContext(AuthContext);
 
     useEffect(() => {
         const fetchAttachmentImage = async () => {
             if (attachment.file_type.startsWith("image")) {
-                const attachmentBlob = await getAttachmentData(
-                    token,
-                    attachment.file_name,
-                    attachment.file_type,
-                    attachment.file_subtype
-                );
-                setAttachmentImage(attachmentBlob);
+               
             }
         };
 
         fetchAttachmentImage();
-    }, [attachment, token]);
+    }, [attachment, auth.token]);
 
     return (
         <div >

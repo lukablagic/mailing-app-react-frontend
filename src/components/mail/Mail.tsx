@@ -18,6 +18,7 @@ export const Mail = () => {
     }])
     setTabsCounter(0);
   }, [])
+
   const handleAddTab = (tab: { id, title, content, collapsable }) => {
     setTabData(prevTabData => [...prevTabData, tab]);
     setCurrentIndex(tabsCounter + 1);
@@ -30,7 +31,7 @@ export const Mail = () => {
     <div className="flex h-full flex-row overflow-hidden">
       <MailSidebar />
       <Tabs>
-        <Tabs.Titles items={tabData} removeTab={handleRemoveTab}   />
+        <Tabs.Titles items={tabData} removeTab={handleRemoveTab} />
         <Tabs.Contents
           items={tabData.map(({ id, content, collapsable }) => ({
             id,

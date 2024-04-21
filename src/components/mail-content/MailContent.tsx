@@ -5,7 +5,7 @@ import { AuthContext } from "../../utility/contexts/AuthContext";
 import axios from "axios";
 import { Mail } from "../../utility/models/Mail";
 import { MailContentItem } from "./MailContentItem";
-import { MailEditor } from "../editor/MailEditor";
+// import { MailEditor } from "../editor/MailEditor";
 import { ReplyMail } from "../reply-mail/ReplyMail";
 import { useTabsContext } from "../../utility/contexts/TabsContext";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
@@ -22,7 +22,7 @@ export const MailContent = ({ addTab }: MailContentProps) => {
 
   const { selectedThread }                    = useContext(ThreadContext);
   const { setCurrentIndex }                   = useTabsContext();
-  const { token }                             = useContext(AuthContext);
+  const { auth }                             = useContext(AuthContext);
   const [displayedEmails, setDisplayedEmails] = useState<Thread[]>([]);
 
   useEffect(() => {
@@ -33,26 +33,25 @@ export const MailContent = ({ addTab }: MailContentProps) => {
     axios
       .get<ThreadMembersResponse>(`${BASE_URL}/threads/members`, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${auth.token}`,
         },
         params: params,
       })
       .then((response) => {
         if (response.data.ok === true) {
           setDisplayedEmails(response.data.emails);
-          console.log("wokring")
           setCurrentIndex(0);
         }
       });
 
 
-  }, [selectedThread, token]);
+  }, [selectedThread, auth.token]);
 
 
   const handleReplyMail = (mail: Mail) => {
     addTab(
       {
-        id:`${mail.id}  + ${Math.random()}`,
+        id:`${mail.id}${Math.random()}`,
         title: mail.from_name !== null ? mail.from_name : mail.from,
         content: <ReplyMail replyMail={mail} renderFullView={true} />,
         collapsable: true,
