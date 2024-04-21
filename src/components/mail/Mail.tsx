@@ -6,14 +6,14 @@ import { useTabsContext } from "../../utility/contexts/TabsContext";
 
 export const Mail = () => {
 
-  const [tabData, setTabData] = useState<TabItem[]>([]);
+  const [tabData, setTabData]                            = useState<TabItem[]>([]);
   const { setCurrentIndex, tabsCounter, setTabsCounter } = useTabsContext();
 
   useEffect(() => {
     setTabData([{
       id: 'INDEX',
       title: 'INDEX',
-      content: <MailContent addTab={handleAddTab} />,
+      content: <MailContent addTab={handleAddTab} removeTab={handleRemoveTab} />,
       collapsable: false
     }])
     setTabsCounter(0);

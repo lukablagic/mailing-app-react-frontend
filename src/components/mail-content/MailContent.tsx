@@ -16,9 +16,10 @@ interface ThreadMembersResponse {
 }
 interface MailContentProps {
   addTab?: (tab: TabItem) => void;
+  removeTab?: (tabId: string) => void;
 }
 
-export const MailContent = ({ addTab }: MailContentProps) => {
+export const MailContent = ({ addTab,removeTab }: MailContentProps) => {
 
   const { selectedThread }                    = useContext(ThreadContext);
   const { setCurrentIndex }                   = useTabsContext();
@@ -51,9 +52,9 @@ export const MailContent = ({ addTab }: MailContentProps) => {
   const handleReplyMail = (mail: Mail) => {
     addTab(
       {
-        id:`${mail.id}${Math.random()}`,
+        id:`${mail.id}`,
         title: mail.from_name !== null ? mail.from_name : mail.from,
-        content: <ReplyMail replyMail={mail} renderFullView={true} />,
+        content: <ReplyMail replyMail={mail} renderFullView={true} removeTab={removeTab} tabId={`${mail.id}`} />,
         collapsable: true,
       },
     );

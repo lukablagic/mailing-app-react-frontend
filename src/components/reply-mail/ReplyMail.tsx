@@ -6,24 +6,30 @@ import './assets/styles.css';
 import axios from 'axios';
 import { AuthContext } from '../../utility/contexts/AuthContext';
 import { MailEditor } from '../editor/MailEditor';
+import { useTabsContext } from '../../utility/contexts/TabsContext';
 
 interface ReplyMailProps {
     replyMail: Mail;
+    tabId: string;
+    removeTab: (tabId: string) => void;
     renderFullView: boolean;
 }
 
-export const ReplyMail = ({ replyMail, renderFullView = true }: ReplyMailProps) => {
+export const ReplyMail = ({ replyMail, renderFullView = true, tabId, removeTab }: ReplyMailProps) => {
 
     const [editingEmail, setEditingMail] = useState<Mail | null>(null);
-    const { auth }                       = useContext(AuthContext);
+    const { setCurrentIndex, tabsCounter, setTabsCounter } = useTabsContext();
+    const { auth } = useContext(AuthContext);
 
     useEffect(() => {
         setEditingMail(MailUtility.prepareMailForEditing(replyMail, auth.team.addresses));
     }, [replyMail]);
 
     const handleSendMail = () => {
-        console.log('Mail sent');
-        console.log('editing mail', editingEmail)
+        console.log(tabId)
+        removeTab(tabId)
+        setCurrentIndex(0);
+        setTabsCounter(tabsCounter - 1);
         axios.post(`${BASE_URL}/mail/send-mail`, {
             'draft': editingEmail,
         },
@@ -34,7 +40,7 @@ export const ReplyMail = ({ replyMail, renderFullView = true }: ReplyMailProps) 
             }
         ).then((response) => {
             if (response.status === 200) {
-                    
+
             }
         })
     }
