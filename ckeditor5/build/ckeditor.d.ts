@@ -14,7 +14,7 @@ import { Essentials } from "@ckeditor/ckeditor5-essentials";
 import { FontBackgroundColor, FontColor, FontFamily, FontSize } from "@ckeditor/ckeditor5-font";
 import { HorizontalLine } from "@ckeditor/ckeditor5-horizontal-line";
 import { HtmlEmbed } from "@ckeditor/ckeditor5-html-embed";
-import { DataFilter, GeneralHtmlSupport, HtmlComment } from "@ckeditor/ckeditor5-html-support";
+import { DataFilter, GeneralHtmlSupport, HtmlComment, FullPage } from "@ckeditor/ckeditor5-html-support";
 import { Image, ImageInsert, ImageResize, ImageUpload } from "@ckeditor/ckeditor5-image";
 import { Indent, IndentBlock } from "@ckeditor/ckeditor5-indent";
 import { AutoLink, Link } from "@ckeditor/ckeditor5-link";
@@ -34,7 +34,7 @@ import { Undo } from "@ckeditor/ckeditor5-undo";
 import { EditorWatchdog } from "@ckeditor/ckeditor5-watchdog";
 import { WordCount } from "@ckeditor/ckeditor5-word-count";
 declare class Editor extends ClassicEditor {
-    static builtinPlugins: (typeof AccessibilityHelp | typeof Alignment | typeof AutoLink | typeof Autoformat | typeof Autosave | typeof BlockQuote | typeof Bold | typeof Code | typeof CodeBlock | typeof DataFilter | typeof Essentials | typeof FontBackgroundColor | typeof FontColor | typeof FontFamily | typeof FontSize | typeof GeneralHtmlSupport | typeof HorizontalLine | typeof HtmlComment | typeof HtmlEmbed | typeof Image | typeof ImageInsert | typeof ImageResize | typeof ImageUpload | typeof Indent | typeof IndentBlock | typeof Italic | typeof LegacyList | typeof Link | typeof Markdown | typeof MediaEmbed | typeof Paragraph | typeof RemoveFormat | typeof ShowBlocks | typeof SourceEditing | typeof SpecialCharacters | typeof SpecialCharactersArrows | typeof SpecialCharactersCurrency | typeof SpecialCharactersEssentials | typeof SpecialCharactersLatin | typeof SpecialCharactersMathematical | typeof SpecialCharactersText | typeof StandardEditingMode | typeof Strikethrough | typeof Style | typeof TextTransformation | typeof Underline | typeof Undo | typeof WordCount)[];
+    static builtinPlugins: (typeof AccessibilityHelp | typeof Alignment | typeof AutoLink | typeof Autoformat | typeof Autosave | typeof BlockQuote | typeof Bold | typeof Code | typeof CodeBlock | typeof DataFilter | typeof Essentials | typeof FontBackgroundColor | typeof FontColor | typeof FontFamily | typeof FontSize | typeof GeneralHtmlSupport | typeof HorizontalLine | typeof HtmlComment | typeof HtmlEmbed | typeof Image | typeof ImageInsert | typeof ImageResize | typeof ImageUpload | typeof Indent | typeof IndentBlock | typeof Italic | typeof LegacyList | typeof Link | typeof Markdown | typeof MediaEmbed | typeof Paragraph | typeof RemoveFormat | typeof ShowBlocks | typeof SourceEditing | typeof SpecialCharacters | typeof SpecialCharactersArrows | typeof SpecialCharactersCurrency | typeof SpecialCharactersEssentials | typeof SpecialCharactersLatin | typeof SpecialCharactersMathematical | typeof SpecialCharactersText | typeof StandardEditingMode | typeof Strikethrough | typeof Style | typeof TextTransformation | typeof Underline | typeof Undo | typeof WordCount | typeof FullPage)[];
     static defaultConfig: EditorConfig;
 }
 declare const _default: {

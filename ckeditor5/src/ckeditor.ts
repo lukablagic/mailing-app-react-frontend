@@ -31,6 +31,7 @@ import {
   DataFilter,
   GeneralHtmlSupport,
   HtmlComment,
+  FullPage
 } from "@ckeditor/ckeditor5-html-support";
 import {
   Image,
@@ -117,6 +118,7 @@ class Editor extends ClassicEditor {
     Underline,
     Undo,
     WordCount,
+    FullPage
   ];
 
   public static override defaultConfig: EditorConfig = {
