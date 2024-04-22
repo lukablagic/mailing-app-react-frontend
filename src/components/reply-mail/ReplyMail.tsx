@@ -1,25 +1,25 @@
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 import { useContext, useEffect, useState } from 'react';
 import { Mail } from '../../utility/models/Mail';
-const BASE_URL = import.meta.env.VITE_BASE_URL;
 import { MailUtility } from '../../utility/MailUtilty';
-import './assets/styles.css';
-import axios from 'axios';
 import { AuthContext } from '../../utility/contexts/AuthContext';
 import { MailEditor } from '../editor/MailEditor';
 import { useTabsContext } from '../../utility/contexts/TabsContext';
+import axios from 'axios';
+import './assets/styles.css';
 
 interface ReplyMailProps {
-    replyMail: Mail;
-    tabId: string;
-    removeTab: (tabId: string) => void;
+    replyMail     : Mail;
+    tabId         : string;
+    removeTab     : (tabId: string) => void;
     renderFullView: boolean;
 }
 
 export const ReplyMail = ({ replyMail, renderFullView = true, tabId, removeTab }: ReplyMailProps) => {
 
-    const [editingEmail, setEditingMail] = useState<Mail | null>(null);
+    const [editingEmail, setEditingMail]                   = useState<Mail | null>(null);
     const { setCurrentIndex, tabsCounter, setTabsCounter } = useTabsContext();
-    const { auth } = useContext(AuthContext);
+    const { auth }                                         = useContext(AuthContext);
 
     useEffect(() => {
         setEditingMail(MailUtility.prepareMailForEditing(replyMail, auth.team.addresses));
@@ -28,21 +28,25 @@ export const ReplyMail = ({ replyMail, renderFullView = true, tabId, removeTab }
     const handleSendMail = () => {
         console.log(tabId)
         removeTab(tabId)
+        console.log(editingEmail.body);
         setCurrentIndex(0);
         setTabsCounter(tabsCounter - 1);
-        axios.post(`${BASE_URL}/mail/send-mail`, {
-            'draft': editingEmail,
-        },
-            {
-                headers: {
-                    Authorization: `Bearer ${auth.token}`
-                }
-            }
-        ).then((response) => {
-            if (response.status === 200) {
+        // axios.post(`${BASE_URL}/mail/send-mail`, {
+        //     'draft': editingEmail,
+        // },
+        //     {
+        //         headers: {
+        //             Authorization: `Bearer ${auth.token}`
+        //         }
+        //     }
+        // ).then((response) => {
+        //     if (response.status === 200) {
 
-            }
-        })
+        //     }
+        // })
+    }
+    const handleSaveHtml = (data: string) => {
+        setEditingMail({ ...editingEmail, body: data });
     }
 
     return (
@@ -65,7 +69,7 @@ export const ReplyMail = ({ replyMail, renderFullView = true, tabId, removeTab }
                     </div>
                     <div className='reply-mail-editor-container'>
                         {typeof editingEmail !== "undefined" && editingEmail !== null &&
-                            <MailEditor html={editingEmail.body} />
+                            <MailEditor html={editingEmail.body} saveData={handleSaveHtml} />
                         }
                     </div>
                 </>

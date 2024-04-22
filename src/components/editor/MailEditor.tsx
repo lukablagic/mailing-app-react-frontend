@@ -4,18 +4,19 @@ import "./assets/styles.css";
 import { useEffect, useState } from "react";
 
 interface MailEditorProps {
-  html:string;
+  html: string;
+  saveData: (data: string) => void;
 }
 
-export const MailEditor = ({html}:MailEditorProps) => {
+export const MailEditor = ({ html, saveData }: MailEditorProps) => {
 
-  const [editorData,setEditorData] = useState(' ');
+  const [editorData, setEditorData] = useState(' ');
 
   useEffect(() => {
-    if(editorData !== null && editorData !== ''){
+    if (editorData !== null && editorData !== '') {
       setEditorData(html);
     }
-  },[]);
+  }, []);
 
   return (
     <CKEditor
@@ -38,10 +39,11 @@ export const MailEditor = ({html}:MailEditorProps) => {
         );
       }}
       onBlur={(_event, editor) => {
-        // const data = (editor as any).getData();
-        // if (data !== null && data !== undefined && data !== "") {
-        //     saveData(data);
-        // }
+        const data = (editor as any).getData();
+        console.log(data)
+        if (data !== null && data !== undefined && data !== "") {
+          saveData(data);
+        }
       }}
     />
   );
