@@ -8,6 +8,7 @@ import { MailContentItem } from "./MailContentItem";
 // import { MailEditor } from "../editor/MailEditor";
 import { ReplyMail } from "../reply-mail/ReplyMail";
 import { useTabsContext } from "../../utility/contexts/TabsContext";
+import { MailEditor } from "../editor/MailEditor";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 interface ThreadMembersResponse {
@@ -19,13 +20,17 @@ interface MailContentProps {
   removeTab?: (tabId: string) => void;
 }
 
-export const MailContent = ({ addTab,removeTab }: MailContentProps) => {
+export const MailContent = ({ addTab, removeTab }: MailContentProps) => {
 
-  const { selectedThread }                    = useContext(ThreadContext);
-  const { setCurrentIndex }                   = useTabsContext();
-  const { auth }                             = useContext(AuthContext);
+  const { selectedThread } = useContext(ThreadContext);
+  const { setCurrentIndex } = useTabsContext();
+  const { auth } = useContext(AuthContext);
   const [displayedEmails, setDisplayedEmails] = useState<Thread[]>([]);
+  const [message, setMessage] = useState<string>(' ');
 
+  const handleUpdateMessage = (data: string) => {
+    setMessage(data);
+  };
   useEffect(() => {
     if (selectedThread === null) return;
     const params = {
@@ -52,7 +57,7 @@ export const MailContent = ({ addTab,removeTab }: MailContentProps) => {
   const handleReplyMail = (mail: Mail) => {
     addTab(
       {
-        id:`${mail.id}`,
+        id: `${mail.id}`,
         title: mail.from_name !== null ? mail.from_name : mail.from,
         content: <ReplyMail replyMail={mail} renderFullView={true} removeTab={removeTab} tabId={`${mail.id}`} />,
         collapsable: true,
@@ -61,8 +66,8 @@ export const MailContent = ({ addTab,removeTab }: MailContentProps) => {
   }
 
   return (
-    <>
-      <div className="flex h-5/6 w-full grow flex-col gap-2  overflow-y-auto overflow-x-hidden ">
+    <div className="flex flex-col w-full">
+      <div className="flex  w-full grow flex-col gap-2  overflow-y-auto overflow-x-hidden ">
         {typeof selectedThread !== "undefined" && selectedThread !== null && (
           <div className="w-full border-b border-t p-2 px-4 text-gray-700">
             <h2 className="text-lg font-semibold">{selectedThread.subject}</h2>
@@ -75,6 +80,11 @@ export const MailContent = ({ addTab,removeTab }: MailContentProps) => {
             ))}
         </div>
       </div>
-    </>
+      <div className="relative h-[5%] max-h-32 flex-grow bg-white px-4 pt-0 ">
+        {typeof message !== "undefined" && message !== null &&
+          <MailEditor html={message} saveData={handleUpdateMessage} placholder="Send message to your team..."/>
+        }
+      </div>
+    </div>
   );
 };

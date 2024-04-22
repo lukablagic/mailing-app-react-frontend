@@ -4,11 +4,12 @@ import "./assets/styles.css";
 import { useEffect, useState } from "react";
 
 interface MailEditorProps {
-  html: string;
-  saveData: (data: string) => void;
+  html       : string;
+  saveData   : (data: string) => void;
+  placholder?: string;
 }
 
-export const MailEditor = ({ html, saveData }: MailEditorProps) => {
+export const MailEditor = ({ html, saveData, placholder = '' }: MailEditorProps) => {
 
   const [editorData, setEditorData] = useState(' ');
 
@@ -20,9 +21,10 @@ export const MailEditor = ({ html, saveData }: MailEditorProps) => {
 
   return (
     <CKEditor
-      editor={ClassicEditor}
-      data={editorData}
-      onReady={(editor) => {
+      editor  = {ClassicEditor}
+      config  = {{ placeholder: placholder !== '' ? placholder : 'Start typing here...' }}
+      data    = {editorData}
+      onReady = {(editor) => {
         editor.editing.view.document.on(
           "enter",
           (evt, data) => {
@@ -40,7 +42,6 @@ export const MailEditor = ({ html, saveData }: MailEditorProps) => {
       }}
       onBlur={(_event, editor) => {
         const data = (editor as any).getData();
-        console.log(data)
         if (data !== null && data !== undefined && data !== "") {
           saveData(data);
         }
