@@ -5,28 +5,27 @@ import { AuthContext } from "../../utility/contexts/AuthContext";
 import axios from "axios";
 import { Mail } from "../../utility/models/Mail";
 import { MailContentItem } from "./MailContentItem";
-// import { MailEditor } from "../editor/MailEditor";
 import { ReplyMail } from "../reply-mail/ReplyMail";
 import { useTabsContext } from "../../utility/contexts/TabsContext";
 import { MailEditor } from "../editor/MailEditor";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 interface ThreadMembersResponse {
-  ok: boolean;
+  ok    : boolean;
   emails: Thread[];
 }
 interface MailContentProps {
-  addTab?: (tab: TabItem) => void;
+  addTab   ?: (tab: TabItem) => void;
   removeTab?: (tabId: string) => void;
 }
 
 export const MailContent = ({ addTab, removeTab }: MailContentProps) => {
 
-  const { selectedThread } = useContext(ThreadContext);
-  const { setCurrentIndex } = useTabsContext();
-  const { auth } = useContext(AuthContext);
+  const { selectedThread }                    = useContext(ThreadContext);
+  const { setCurrentIndex }                   = useTabsContext();
+  const { auth }                              = useContext(AuthContext);
   const [displayedEmails, setDisplayedEmails] = useState<Thread[]>([]);
-  const [message, setMessage] = useState<string>(' ');
+  const [message, setMessage]                 = useState<string>(' ');
 
   const handleUpdateMessage = (data: string) => {
     setMessage(data);
@@ -67,7 +66,7 @@ export const MailContent = ({ addTab, removeTab }: MailContentProps) => {
 
   return (
     <div className="flex flex-col w-full">
-      <div className="flex  w-full grow flex-col gap-2  overflow-y-auto overflow-x-hidden ">
+      <div className="flex max-h-[88%]  w-full grow flex-col gap-2  overflow-y-auto overflow-x-hidden ">
         {typeof selectedThread !== "undefined" && selectedThread !== null && (
           <div className="w-full border-b border-t p-2 px-4 text-gray-700">
             <h2 className="text-lg font-semibold">{selectedThread.subject}</h2>
@@ -75,14 +74,14 @@ export const MailContent = ({ addTab, removeTab }: MailContentProps) => {
         )}
         <div className="m-5 mt-3 flex flex-col gap-5">
           {typeof displayedEmails !== "undefined" &&
-            displayedEmails.map((mail: Mail) => (
-              <MailContentItem mail={mail} key={mail.id} replyMail={handleReplyMail} />
+            displayedEmails.map((mail: Mail, index: number) => (
+              <MailContentItem mail={mail} key={mail.id} replyMail={handleReplyMail} index={index} />
             ))}
         </div>
       </div>
       <div className="relative h-[5%] max-h-32 flex-grow bg-white px-4 pt-0 ">
         {typeof message !== "undefined" && message !== null &&
-          <MailEditor html={message} saveData={handleUpdateMessage} placholder="Send message to your team..."/>
+          <MailEditor html={message} saveData={handleUpdateMessage} placholder="Send message to your team..." />
         }
       </div>
     </div>

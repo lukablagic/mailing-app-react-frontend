@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Mail } from "../../utility/models/Mail";
 import { Avatar } from "../avatar/Avatar";
 import { EmbededHTMLView } from "../embeded-html-view/EmbededHTMLView";
@@ -10,11 +10,19 @@ import { useTabsContext } from "../../utility/contexts/TabsContext";
 interface MailContentItemProps {
   mail: Mail;
   replyMail: (mail: Mail) => void;
+  index: number;
 }
 
-export const MailContentItem = ({ mail, replyMail }: MailContentItemProps) => {
+export const MailContentItem = ({ mail, replyMail, index }: MailContentItemProps) => {
   const [collapsed, setCollapsed] = useState(true);
   const { setCurrentIndex, tabsCounter } = useTabsContext();
+
+
+  useEffect(() => {
+    if (index === 0) {
+      setCollapsed(false);
+    }
+  }, [index])
 
   const handleCollapse = () => {
     setCollapsed(!collapsed);
