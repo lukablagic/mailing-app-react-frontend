@@ -8,7 +8,7 @@ export const MeUser = () => {
 
     return (
         <div>
-            <UserIcon text={auth.user.name[0]} isActive={true} />
+            <UserIcon text={auth.user.name[0] + auth.user.surname[0]} isActive={true} />
         </div>
     )
 }

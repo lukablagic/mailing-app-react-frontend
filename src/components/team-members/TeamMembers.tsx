@@ -8,7 +8,7 @@ import { UserIcon } from "./UserIcon";
 export const TeamMembers = () => {
 
   const { auth } = useContext(AuthContext);
-
+console.log(auth.team.members)
   return (
     <div className="my-4  grid grid-rows-1">
       <div className=" flex flex-col items-center justify-center gap-4">
@@ -17,7 +17,7 @@ export const TeamMembers = () => {
             +
           </div>
           {auth.team.members.map((member, index) => (
-            <UserIcon text={member.name[0]} isActive={true} />
+            <UserIcon key={index} text={member.name[0] + member.surname[0]} isActive={true} />
           ))}
           <MeUser />
         </div>

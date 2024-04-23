@@ -1,29 +1,23 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useContext } from "react";
+import { Toast } from "../../components/toast/Toast";
 
-const ToastContext = createContext({
-  showToast: (type: string, message: string) => {},
-  hideToast: () => {},
-});
+const ToastContext = createContext(null);
 
 function ToastProvider({ children }) {
-  
-  const [isOpen, setIsOpen] = useState(false);
-  const [message, setMessage] = useState("");
-  const [type, setType] = useState("success");
+  const [toastData, setToastData] = useState(null);
 
-  const showToast = (type, message) => {
-    setType(type);
-    setMessage(message);
-    setIsOpen(true);
+  const showToast = (type, message, position = "top-center") => {
+    setToastData({ type, message, position });
   };
 
   const hideToast = () => {
-    setIsOpen(false);
+    setToastData(null);
   };
 
   return (
     <ToastContext.Provider value={{ showToast, hideToast }}>
       {children}
+      {toastData && <Toast {...toastData} />}
     </ToastContext.Provider>
   );
 }

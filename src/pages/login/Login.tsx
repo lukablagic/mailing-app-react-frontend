@@ -1,17 +1,16 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { ToastContext } from "../../utility/contexts/ToastContext";
 import { AuthContext } from "../../utility/contexts/AuthContext";
 import axios from "axios";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
-export const Login = ({}) => {
-  
-  const { showToast } = useContext(ToastContext);
-  const { setAuth ,setIsAuthenticated} = useContext(AuthContext);
+export const Login = ({ }) => {
+
+  const { setAuth, setIsAuthenticated } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const { showToast } = useContext(ToastContext);
   const navigate = useNavigate();
 
   const navigateToHome = () => {
@@ -20,19 +19,20 @@ export const Login = ({}) => {
 
   const handleLogin = async (event) => {
     event.preventDefault();
-    const response = await axios.post( BASE_URL  + "/auth/login", {
+    await axios.post(BASE_URL + "/auth/login", {
       email,
       password,
-    });
-    if (response.status === 200) {
-      const { auth } = response.data;
-      setIsAuthenticated(true);
-      setAuth(auth);
-      // sessionStorage.setItem("token", auth.token);
-      navigateToHome();
-    } else {
-      showToast("error", "Invalid credentials");
+    }).then((response) => {
+      if (response.status === 200) {
+        const { auth } = response.data;
+        setIsAuthenticated(true);
+        setAuth(auth);
+        navigateToHome();
+      }
     }
+    ).catch((error) => {
+      showToast("error", "Invalid credentials");
+    });
   };
 
   return (

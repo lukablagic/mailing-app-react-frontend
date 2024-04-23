@@ -6,10 +6,10 @@ import { ToastContext } from "../utility/contexts/ToastContext";
 
 export const Register = ({ }) => {
 
-  const { showToast }                   = useContext(ToastContext);
   const { setAuth, setIsAuthenticated } = useContext(AuthContext);
   const [formData, setFormData]         = useState({ name: '', surname: '', email: '', password: '' });
-
+  const { showToast }                    = useContext(ToastContext);
+  
   const handleInputChange = (e) => {
     setFormData({
       ...formData,
@@ -24,6 +24,7 @@ export const Register = ({ }) => {
       const { auth } = response.data;
       setAuth(auth);
       setIsAuthenticated(true);
+      showToast('success', 'Registration successful');
     } else {
       showToast('error', 'Invalid credentials');
     }

@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import TabsProvider, { useTabsContext } from '../../utility/contexts/TabsContext';
 import './assets/styles.css';
-import { MailContent } from '../mail-content/MailContent';
 
 type TabTitlesProps = {
     items: TabItem[],

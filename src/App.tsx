@@ -5,14 +5,13 @@ import { Register } from "./pages/Register";
 import Home from "./pages/home/Home";
 import { AuthContext } from "./utility/contexts/AuthContext";
 
-const App = () => {
+export const App = () => {
 
   const storedToken = sessionStorage.getItem("token");
   const { auth, setAuth, isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
 
   useEffect(() => {
     if (storedToken !== undefined && storedToken !== null) {
-      setAuth({ token: storedToken });
       setIsAuthenticated(true);
     } else {
       setIsAuthenticated(false);
@@ -20,7 +19,7 @@ const App = () => {
   }, []);
 
   function AuthGuard({ children }) {
-    if (Object.keys(auth).length > 0) {
+    if (typeof auth !== 'undefined' && isAuthenticated === true && Object.keys(auth).length > 0) {
       return children;
     } else {
       return <Navigate to="/login" />;
@@ -28,7 +27,7 @@ const App = () => {
   }
 
   function UnAuthGuard({ children }) {
-    if (Object.keys(auth).length > 0) {
+    if (typeof auth !== 'undefined' && isAuthenticated === true && Object.keys(auth).length > 0) {
       return <Navigate to="/app/mail/inbox" />;
     } else {
       return children;
@@ -37,15 +36,14 @@ const App = () => {
 
   return (
 
-    <BrowserRouter>
-      <Routes>
-        <Route path="/app/*" element={<AuthGuard><Home /></AuthGuard>} />
-        <Route path="register" element={<UnAuthGuard><Register /></UnAuthGuard>} />
-        <Route path="login" element={<UnAuthGuard><Login /></UnAuthGuard>} />
-      </Routes>
-    </BrowserRouter>
-
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/app/*" element={<AuthGuard><Home /></AuthGuard>} />
+          <Route path="register" element={<UnAuthGuard><Register /></UnAuthGuard>} />
+          <Route path="login" element={<UnAuthGuard><Login /></UnAuthGuard>} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 };
-
-export default App;
