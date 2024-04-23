@@ -14,7 +14,7 @@ interface Auth {
   team: {
     addresses: string[];
     name: string;
-    team_members: User[];
+    members: User[];
   };
 }
 const AuthContext = createContext({
