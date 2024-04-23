@@ -1,26 +1,19 @@
 .toast {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1000;
-    padding: 10px;
-    color: #fff;
-    background-color: #333;
-    border-radius: 5px;
-    cursor: pointer;
+    @apply fixed top-5 left-1/2 transform -translate-x-1/2 z-50 p-2 text-white rounded-md cursor-pointer;
   }
   
   .toast-success {
-    background-color: green;
+    @apply bg-green-500;
   }
   
   .toast-error {
-    background-color: red;
+    @apply bg-red-500;
   }
   
   .toast-warning {
-    background-color: yellow;
-    color: #000;
+    @apply bg-yellow-500 text-black;
   }
   
+  .toast {
+    @apply transition-opacity duration-1000 ease-in-out;
+  }
