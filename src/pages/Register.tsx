@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { AuthContext } from "../utility/contexts/AuthContext";
 import { ToastContext } from "../utility/contexts/ToastContext";
@@ -8,8 +8,8 @@ export const Register = ({ }) => {
 
   const { setAuth, setIsAuthenticated } = useContext(AuthContext);
   const [formData, setFormData]         = useState({ name: '', surname: '', email: '', password: '' });
-  const { showToast }                    = useContext(ToastContext);
-  
+  const { showToast }                   = useContext(ToastContext);
+  const navigate                        = useNavigate();
   const handleInputChange = (e) => {
     setFormData({
       ...formData,
@@ -18,15 +18,21 @@ export const Register = ({ }) => {
   };
   const handleRegister = async (e) => {
     e.preventDefault();
-    const response = await axios.post('http://localhost/api/auth/register', formData);
-    console.log(response);
-    if (response.status === 200) {
+    try {
+      const response = await axios.post('http://localhost/api/auth/register', formData);
       const { auth } = response.data;
       setAuth(auth);
       setIsAuthenticated(true);
       showToast('success', 'Registration successful');
-    } else {
-      showToast('error', 'Invalid credentials');
+      navigate('app/login');
+    } catch (error) {
+      if (error.response) {
+        showToast('error', error.response.data.message);
+      } else if (error.request) {
+        showToast('error', 'No response received from server. Please try again.');
+      } else {
+        showToast('error', 'An error occurred. Please try again.');
+      }
     }
   };
 
@@ -37,28 +43,36 @@ export const Register = ({ }) => {
           <div className="mb-24 flex flex-col items-left grow-1 shrink-1 justify-center gap-4 ">
             <h1 className="text-4xl font-bold text-sky-400">Dev Mail</h1>
             <h1 className="text-gray-500">Welcome, please register for a new account.</h1>
-            <h2 className="text-xl font-bold  ">Register</h2>
+            <h2 className="text-xl font-bold">Register</h2>
             <p className=" my-2 text-black">
               Already have an account? <Link className="text-cyan-500 hover:text-cyan-800" to="/login">Login</Link>
             </p>
             <form className="flex flex-col gap-3 " onSubmit={handleRegister}>
-              <label className="block text-gray-700 text-sm font-bold ">
+              <label className="block text-gray-700 text-sm ">
                 Name
                 <input className="shadow border appearance-none rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="name" placeholder="Enter name" onChange={handleInputChange} />
               </label>
-              <label className="block text-gray-700 text-sm font-bold ">
+              <label className="block text-gray-700 text-sm ">
                 Surname
                 <input className="shadow border appearance-none rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="surname" placeholder="Enter surname" onChange={handleInputChange} />
               </label>
-              <label className="block text-gray-700 text-sm font-bold ">
+              <label className="block text-gray-700 text-sm ">
                 Email address
                 <input className="shadow border appearance-none rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="email" type="email" placeholder="Enter email" onChange={handleInputChange} />
               </label>
-              <label className="block text-gray-700 text-sm font-bold ">
+              <label className="block text-gray-700 text-sm ">
                 Password
-                <input className="shadow appearance-none border rounded w-full py-2 px-2 leading-tight focus:outline-none focus:shadow-outline text-gray-700" name="password" type="password" placeholder="Password" onChange={handleInputChange} />
+                <input
+                  className="shadow appearance-none border rounded w-full py-2 px-2 leading-tight focus:outline-none focus:shadow-outline text-gray-700"
+                  name="password"
+                  type="password"
+                  placeholder="Password"
+                  onChange={handleInputChange}
+                  pattern="(?=.*\W).{8,}"
+                  title="Password must be at least 8 characters long and one special character."
+                />
               </label>
-              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" >
+              <button className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" >
                 Register
               </button>
             </form>

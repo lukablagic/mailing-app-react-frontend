@@ -7,7 +7,7 @@ import { AuthContext } from "./utility/contexts/AuthContext";
 
 export const App = () => {
 
-  const storedToken = sessionStorage.getItem("token");
+  const storedToken                                            = sessionStorage.getItem("token");
   const { auth, setAuth, isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export const App = () => {
     if (typeof auth !== 'undefined' && isAuthenticated === true && Object.keys(auth).length > 0) {
       return children;
     } else {
-      return <Navigate to="/login" />;
+      return <Navigate to="/app/login" />;
     }
   }
 
@@ -40,8 +40,9 @@ export const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/app/*" element={<AuthGuard><Home /></AuthGuard>} />
-          <Route path="register" element={<UnAuthGuard><Register /></UnAuthGuard>} />
-          <Route path="login" element={<UnAuthGuard><Login /></UnAuthGuard>} />
+          <Route path="/app/register" element={<UnAuthGuard><Register /></UnAuthGuard>} />
+          <Route path="/app/login" element={<UnAuthGuard><Login /></UnAuthGuard>} />
+          <Route path="*" element={<AuthGuard>{false}</AuthGuard> } />
         </Routes>
       </BrowserRouter>
     </>

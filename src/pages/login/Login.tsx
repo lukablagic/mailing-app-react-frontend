@@ -40,11 +40,11 @@ export const Login = ({ }) => {
       <div className="h-max-h-screen items-right flex w-full flex-row justify-end gap-4">
         <div className="flex h-full w-4/12 justify-end ">
           <div className="items-left grow-1 shrink-1 mb-24 flex flex-col justify-center gap-4 ">
-            <h1 className="text-4xl font-bold text-sky-400">Dev Mail</h1>
+            <h1 className="text-4xl  text-sky-400">Dev Mail</h1>
             <h1 className="text-gray-500">
               Welcome back, please login to your account.
             </h1>
-            <h2 className="text-xl font-bold  ">Login</h2>
+            <h2 className="text-xl  ">Login</h2>
             <p className=" my-2 text-black">
               Don't have an account yet?{" "}
               <Link
@@ -56,7 +56,7 @@ export const Login = ({ }) => {
             </p>
             <form className="flex flex-col gap-3 ">
               <label
-                className="block text-sm font-bold text-gray-700 "
+                className="block text-sm  text-gray-700 "
                 htmlFor="email"
               >
                 Email address
@@ -70,7 +70,7 @@ export const Login = ({ }) => {
               />
               <div className="flex flex-row items-center justify-between">
                 <label
-                  className="block  font-bold  text-gray-700"
+                  className="block    text-gray-700"
                   htmlFor="password"
                 >
                   Password
@@ -89,7 +89,7 @@ export const Login = ({ }) => {
             </form>
             <div className="flex items-center justify-between">
               <label
-                className="block text-sm font-bold text-gray-700"
+                className="block text-sm  text-gray-700"
                 htmlFor="remember"
               >
                 <input
