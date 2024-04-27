@@ -8,10 +8,10 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 export const Login = ({ }) => {
 
   const { setAuth, setIsAuthenticated } = useContext(AuthContext);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const { showToast } = useContext(ToastContext);
-  const navigate = useNavigate();
+  const [email, setEmail]               = useState("");
+  const [password, setPassword]         = useState("");
+  const { showToast }                   = useContext(ToastContext);
+  const navigate                        = useNavigate();
 
   const navigateToHome = () => {
     navigate(`/app/mail/inbox`);

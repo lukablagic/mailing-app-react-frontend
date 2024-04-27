@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { AuthContext } from "../utility/contexts/AuthContext";
 import { ToastContext } from "../utility/contexts/ToastContext";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export const Register = ({ }) => {
 
@@ -20,7 +21,7 @@ export const Register = ({ }) => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost/api/auth/register', formData);
+      const response = await axios.post(`${BASE_URL}/auth/register`, formData);
       const { auth } = response.data;
       if (response.status === 200) {
         setAuth(auth);
