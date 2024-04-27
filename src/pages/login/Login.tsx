@@ -49,7 +49,7 @@ export const Login = ({ }) => {
               Don't have an account yet?{" "}
               <Link
                 className="text-cyan-500 hover:text-cyan-800"
-                to="/register"
+                to="/app/register"
               >
                 Register
               </Link>

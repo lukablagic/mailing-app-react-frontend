@@ -10,6 +10,7 @@ export const Register = ({ }) => {
   const [formData, setFormData]         = useState({ name: '', surname: '', email: '', password: '' });
   const { showToast }                   = useContext(ToastContext);
   const navigate                        = useNavigate();
+  
   const handleInputChange = (e) => {
     setFormData({
       ...formData,
@@ -21,10 +22,13 @@ export const Register = ({ }) => {
     try {
       const response = await axios.post('http://localhost/api/auth/register', formData);
       const { auth } = response.data;
-      setAuth(auth);
-      setIsAuthenticated(true);
-      showToast('success', 'Registration successful');
-      navigate('app/login');
+      if (response.status === 200) {
+        setAuth(auth);
+        setIsAuthenticated(true);
+        showToast('success', 'Registration successful');
+        navigate('app/login');
+      }
+  
     } catch (error) {
       if (error.response) {
         showToast('error', error.response.data.message);
