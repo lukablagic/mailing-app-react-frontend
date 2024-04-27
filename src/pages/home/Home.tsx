@@ -28,7 +28,7 @@ const Home = () => {
           <Route path="/" element={<Overview />} />
           <Route path="*" element={isAuthenticated === false && <Navigate to="/mail/inbox" replace />} />
         </Routes>
-        {location.hash === "#settings" && <Settings />}
+        {location.hash.startsWith("#settings") && <Settings />}
       </div>
     </div>
   );
