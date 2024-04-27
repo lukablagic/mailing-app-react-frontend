@@ -6,7 +6,7 @@ export const Settings = () => {
 
     let content;
     const location = window.location.hash;
-
+    
     const options = [
         {
             location: '#settings/add-member',
@@ -26,11 +26,12 @@ export const Settings = () => {
 
     return (
         <Modal title={'Setings'}>
-            <div className="">
-
-            <SettingsSidebar />
+            <div className="flex felx-row gap-0 min-h-[80vh] min-w-32">
+                <SettingsSidebar />
+                <div className="w-2/3">
+                    {content}
+                </div>
             </div>
-            {content}
         </Modal>
     )
 }
