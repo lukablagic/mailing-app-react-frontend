@@ -23,7 +23,7 @@ const TabsContext = createContext<TabsContextProps>(initialContext)
 export default function TabsProvider({ children }: TabsProviderProps) {
 
     const [currentIndex, setCurrentIndex] = useState<number>(0)
-    const [tabsCounter, setTabsCounter] = useState<number>(0)
+    const [tabsCounter, setTabsCounter]   = useState<number>(0)
   
     return (
         <TabsContext.Provider value={{ currentIndex, setCurrentIndex, tabsCounter, setTabsCounter }}>

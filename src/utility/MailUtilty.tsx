@@ -15,7 +15,6 @@ export const MailUtility = {
         return newMail;
     },
     updateRecipients(newMail: Mail, teamAddreses: string[]) {
-        console.log(newMail)
         const to            = newMail.to;
         const from          = newMail.from;
         const cc            = newMail.cc;

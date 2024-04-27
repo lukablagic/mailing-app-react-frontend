@@ -12,5 +12,4 @@ export class Mail {
   cc: string[];
   bcc: string[];
   body?: string;
-  
 }

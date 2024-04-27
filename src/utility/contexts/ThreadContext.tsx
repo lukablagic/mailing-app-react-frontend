@@ -3,7 +3,7 @@ import { Thread } from '../models/Thread';
 
 
  const ThreadContext = createContext({
-    selectedThread: null,
+    selectedThread   : null,
     setSelectedThread: (thread: Thread) => {},
   });
 

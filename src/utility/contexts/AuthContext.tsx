@@ -1,28 +1,27 @@
 import { createContext, useState } from "react";
 
 interface User {
-  id: number;
-  name: string;
+  id     : number;
+  name   : string;
   surname: string;
-  email: string;
-  role: string;
+  email  : string;
+  role   : string;
   team_id: number;
 }
 interface Auth {
   token: string;
-  user: User;
-  team: {
+  user : User;
+  team : {
     addresses: string[];
-    name: string;
-    members: User[];
+    name     : string;
+    members  : User[];
   };
 }
 const AuthContext = createContext({
-  auth: {} as Auth ,
-  setAuth: (auth: Auth | any) => { },
-  isAuthenticated: false,
+  auth              : {} as Auth,
+  setAuth           : (auth: Auth | any) => { },
+  isAuthenticated   : false,
   setIsAuthenticated: (isAuthenticated: any) => { },
-
 });
 
 function AuthProvider({ children }) {

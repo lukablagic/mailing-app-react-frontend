@@ -6,17 +6,17 @@ import { useNavigation } from "./Navigation";
 const url = import.meta.env.VITE_BASE_URL;
 
 interface ThreadResponse {
-  emails: Thread[];
+  emails : Thread[];
   message: string;
 }
 
 export const getThreads = () => {
 
-  const { auth } = useContext(AuthContext);
-  const [emails, setEmails] = useState([]);
+  const { auth }              = useContext(AuthContext);
+  const [emails, setEmails]   = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-  const {endpoints} = useNavigation();
+  const [error, setError]     = useState(false);
+  const {endpoints}           = useNavigation();
   useEffect(() => {
     
     const params = {

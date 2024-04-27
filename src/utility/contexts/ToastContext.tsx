@@ -7,7 +7,7 @@ function ToastProvider({ children }) {
   const [toasts, setToasts] = useState([]);
 
   const showToast = (type, message, position = "top-center", duration = 1000) => {
-    const id = Math.random().toString(36).slice(4, 9); 
+    const id = Math.random().toString(36).slice(4, 9);
     setToasts((oldToasts) => [...oldToasts, { id, type, message, position }]);
 
     setTimeout(() => {
@@ -16,10 +16,10 @@ function ToastProvider({ children }) {
   };
 
   return (
-    <ToastContext.Provider value={{ showToast }}>
+    <ToastContext.Provider value = {{ showToast }}>
       {children}
       {toasts.map((toast) => (
-        <Toast key={toast.id} {...toast} />
+        <Toast key = {toast.id} {...toast} />
       ))}
     </ToastContext.Provider>
   );

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { Login } from "./pages/login/Login";
 import { Register } from "./pages/Register";
@@ -7,8 +7,8 @@ import { AuthContext } from "./utility/contexts/AuthContext";
 
 export const App = () => {
 
-  const storedToken                                            = sessionStorage.getItem("token");
-  const { auth, setAuth, isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
+  const storedToken                                   = sessionStorage.getItem("token");
+  const { auth, isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
 
   useEffect(() => {
     if (storedToken !== undefined && storedToken !== null) {
