@@ -5,13 +5,12 @@ import { ThreadItem } from "../thread-item/ThreadItem";
 import { MailFolders } from "../mails-folder/MailFolders";
 import { useNavigation } from "../../hooks/Navigation";
 import { ThreadContext } from "../../utility/contexts/ThreadContext";
-import { useTabsContext } from "../../utility/contexts/TabsContext";
 
 export const MailSidebar = () => {
 
   const { setSelectedThread }                 = useContext(ThreadContext);
   const [displayedEmails, setDisplayedEmails] = useState<Thread[]>([]);
-  const { emails, loading, error }            = getThreads();
+  const { emails, loading }                   = getThreads();
   const { endpoints }                         = useNavigation();
 
   useEffect(() => {
@@ -25,7 +24,7 @@ export const MailSidebar = () => {
   };
 
   return (
-    <div className="flex w-1/3  shrink-0 flex-col gap-4 rounded-tl-lg bg-blue-950 p-4 text-white ">
+    <div className="flex w-1/3  shrink-0 flex-col gap-4 rounded-tl-lg bg-blue-950 p-4 text-white pb-0">
       <div className="flex h-full w-full flex-col gap-2">
         <div className="mx-2  flex shrink flex-row items-center justify-between">
           <MailFolders />
