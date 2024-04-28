@@ -8,20 +8,20 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 export const Register = ({ }) => {
 
   const { setAuth, setIsAuthenticated } = useContext(AuthContext);
-  const [formData, setFormData]         = useState({ name: '', surname: '', email: '', password: '' });
+  const [formData, setFormData]         = useState({ name: '', surname: '', email: '', password: '', code: '', uid: ''});
   const { showToast }                   = useContext(ToastContext);
   const navigate                        = useNavigate();
     
   useEffect(() => {
-    document.title = 'Dev Mail - Register';
-    // check url and check if code and invitation_uid and code parameters are present
-    const urlParams = new URLSearchParams(window.location.search);
-    const code = urlParams.get('code');
-    const invitation_uid = urlParams.get('invitation_uid');
-    if (code && invitation_uid) {
-      navigate('app/accept-invitation', { state: { code, invitation_uid } });
+          document.title = 'Dev Mail - Register';
+    const urlParams      = new URLSearchParams(window.location.search);
+    const code           = urlParams.get('code');
+    const uid            = urlParams.get('uid');
+    if (code && uid) {
+      formData.code = code;
+      formData.uid  = uid;
     }
-    
+    setFormData(formData);
   }, []);
   
   const handleInputChange = (e) => {
