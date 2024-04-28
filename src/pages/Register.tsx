@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { AuthContext } from "../utility/contexts/AuthContext";
@@ -11,6 +11,18 @@ export const Register = ({ }) => {
   const [formData, setFormData]         = useState({ name: '', surname: '', email: '', password: '' });
   const { showToast }                   = useContext(ToastContext);
   const navigate                        = useNavigate();
+    
+  useEffect(() => {
+    document.title = 'Dev Mail - Register';
+    // check url and check if code and invitation_uid and code parameters are present
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+    const invitation_uid = urlParams.get('invitation_uid');
+    if (code && invitation_uid) {
+      navigate('app/accept-invitation', { state: { code, invitation_uid } });
+    }
+    
+  }, []);
   
   const handleInputChange = (e) => {
     setFormData({

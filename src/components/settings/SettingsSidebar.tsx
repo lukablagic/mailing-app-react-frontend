@@ -10,9 +10,9 @@ export const SettingsSidebar = () => {
     }
 
     return (
-        <div className='settings-sidebar'>
-            <div className={`settings-sidebar-item ${window.location.href === '#settings/add-team-member' && 'selected'}`} onClick={()=>navigateSetttings(window.location.pathname + '#settings/add-member')}>
-                Add Team Member
+        <div className='settings-sidbebar'>
+            <div className={`settings-sidebar-item ${window.location.hash === '#settings/team-members' ? 'selected' : ""}`} onClick={()=>navigateSetttings(window.location.pathname + '#settings/team-members')}>
+                Team Member
             </div>
         </div>
     )

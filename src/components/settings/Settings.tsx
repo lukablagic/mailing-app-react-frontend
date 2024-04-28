@@ -9,7 +9,7 @@ export const Settings = () => {
     
     const options = [
         {
-            location: '#settings/add-member',
+            location: '#settings/team-members',
             content: <AddTeamMember />
         },
         {
@@ -26,7 +26,7 @@ export const Settings = () => {
 
     return (
         <Modal title={'Setings'}>
-            <div className="flex felx-row gap-0 min-h-[80vh] min-w-32">
+            <div className="flex felx-row gap-0 min-h-[80vh] min-w-96">
                 <SettingsSidebar />
                 <div className="settings-content">
                     {content}

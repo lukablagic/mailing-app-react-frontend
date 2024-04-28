@@ -1,19 +1,22 @@
 .settings-sidbebar {
-    @apply w-1/3 flex flex-col;
+    @apply w-1/3 flex flex-col mx-2;
 }
 
 .settings-sidebar-item {
     @apply flex items-center justify-between p-4 cursor-pointer hover:bg-gray-100;
 }
 
-.settings-sidebar-item .selected {
-    @apply bg-gray-300;
+.selected{
+    @apply bg-gray-200 ;
 }
 .settings-content {
     @apply w-2/3;
 }
 .settings-content-title {
     @apply text-lg;
+}
+.team-member{
+    @apply p-2;
 }
 .team-member-item {
     @apply flex items-center justify-between p-4 cursor-pointer hover:bg-gray-100;
