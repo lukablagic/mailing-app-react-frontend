@@ -9,3 +9,25 @@
 .settings-sidebar-item .selected {
     @apply bg-gray-300;
 }
+.settings-content {
+    @apply w-2/3;
+}
+.settings-content-title {
+    @apply text-lg;
+}
+.team-member-item {
+    @apply flex items-center justify-between p-4 cursor-pointer hover:bg-gray-100;
+
+}
+.team-member-item-info {
+    @apply flex flex-col items-start;
+}
+.plus-button {
+    @apply bg-blue-500 text-white rounded-full p-2 w-full hover:bg-blue-300;
+}
+.register-link-container {
+    @apply   w-full;
+}
+.register-link {
+    @apply text-sm text-blue-500 hover:underline cursor-pointer  break-words;
+}

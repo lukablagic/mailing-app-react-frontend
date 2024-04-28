@@ -28,7 +28,7 @@ export const Settings = () => {
         <Modal title={'Setings'}>
             <div className="flex felx-row gap-0 min-h-[80vh] min-w-32">
                 <SettingsSidebar />
-                <div className="w-2/3">
+                <div className="settings-content">
                     {content}
                 </div>
             </div>
