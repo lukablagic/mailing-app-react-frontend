@@ -6,7 +6,7 @@ import { useNavigation } from "./Navigation";
 const url = import.meta.env.VITE_BASE_URL;
 
 interface ThreadResponse {
-  emails : Thread[];
+  emails: Thread[];
   message: string;
 }
 
@@ -15,14 +15,17 @@ export const getThreads = () => {
   const { auth }              = useContext(AuthContext);
   const [emails, setEmails]   = useState([]);
   const [loading, setLoading] = useState(true);
+  const [page, setPage]       = useState(1);  
   const [error, setError]     = useState(false);
-  const {endpoints}           = useNavigation();
+  const { endpoints }         = useNavigation();
+
   useEffect(() => {
-    
+    setLoading(true);
     const params = {
-    folder: endpoints[3] !== undefined ? endpoints[3] : "inbox",
+      folder: endpoints[3] !== undefined ? endpoints[3] : "inbox",
+      page: page,
     };
-    
+
     axios
       .get<ThreadResponse>(`${url}/threads/all`, {
         headers: {
@@ -32,12 +35,12 @@ export const getThreads = () => {
       })
       .then((response) => {
         if (response.status === 200) {
-          setEmails(response.data.emails);
+          setEmails([...emails, ...response.data.emails]);
           setLoading(false);
         }
       });
+      setLoading(false);
+  }, [auth.token, endpoints, page]);
 
-  }, [auth.token, endpoints]);
-
-  return { emails, loading, error };
+  return { emails, loading, error, setPage };
 };

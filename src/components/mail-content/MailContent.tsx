@@ -65,7 +65,7 @@ export const MailContent = ({ addTab, removeTab }: MailContentProps) => {
   }
 
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex flex-col w-full overflow-auto">
       <div className="flex max-h-[88%]  w-full grow flex-col gap-2  overflow-y-auto overflow-x-hidden">
         {typeof selectedThread !== "undefined" && selectedThread !== null && (
           <div className="w-full border-b border-t p-2 px-4 text-gray-700">
@@ -79,7 +79,7 @@ export const MailContent = ({ addTab, removeTab }: MailContentProps) => {
             ))}
         </div>
       </div>
-      <div className="relative h-32 bg-white px-4 pt-0 ">
+      <div className="relative h-32 bg-white px-4 pt-0 max-h-32">
         {typeof message !== "undefined" && message !== null &&
           <MailEditor html={message} saveData={handleUpdateMessage} placholder="Send message to your team..." />
         }

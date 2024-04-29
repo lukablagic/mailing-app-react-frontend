@@ -2,16 +2,18 @@ import MailIcon from "../../assets/react-icons/MailIcon";
 import OpenLetter from "../../assets/react-icons/OpenLetter";
 import { Thread } from "../../utility/models/Thread";
 import { DateTimeUtility } from "../../utility/DateTimeUtlity";
+import { forwardRef } from "react";
 
 interface ThreadProps {
   thread: Thread;
-  onSelect?: (thread: Thread) => void;
+  onSelect: (thread: Thread) => void;
 }
 
-export const ThreadItem = ({ thread, onSelect }: ThreadProps) => {
+export const ThreadItem = forwardRef<HTMLDivElement, ThreadProps>(({ thread, onSelect }, ref) => {
   return (
     <div
-      className="p-2 px-3 mx-2 cursor-pointer rounded-md text-gray-300 hover:bg-gray-500 hover:text-white"
+      ref={ref}
+      className="thread-list-item"
       onClick={(e) => {
         e.preventDefault();
         onSelect(thread)
@@ -35,4 +37,4 @@ export const ThreadItem = ({ thread, onSelect }: ThreadProps) => {
       </div>
     </div>
   );
-};
+});
