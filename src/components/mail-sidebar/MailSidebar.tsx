@@ -11,12 +11,12 @@ export const MailSidebar = () => {
 
   const { setSelectedThread }                 = useContext(ThreadContext);
   const [displayedEmails, setDisplayedEmails] = useState<Thread[]>([]);
-  const { emails, loading, setPage }          = getThreads();
+  const { emails, loading, setPage,error }          = getThreads();
   const { endpoints }                         = useNavigation();
   const observer                              = useRef<IntersectionObserver | null>(null);
 
   const lastEmailElementRef = useCallback(node => {
-    if (loading) return;
+    if (loading || error) return;
     if (observer.current) observer.current.disconnect();
     observer.current = new IntersectionObserver(entries => {
       if (entries[0].isIntersecting) {
