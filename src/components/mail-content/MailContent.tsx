@@ -8,6 +8,7 @@ import { MailContentItem } from "./MailContentItem";
 import { ReplyMail } from "../reply-mail/ReplyMail";
 import { useTabsContext } from "../../utility/contexts/TabsContext";
 import { MailEditor } from "../editor/MailEditor";
+import { TabItem } from "../../utility/models/TabItem";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 interface ThreadMembersResponse {

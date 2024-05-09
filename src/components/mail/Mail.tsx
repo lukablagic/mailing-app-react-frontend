@@ -3,6 +3,7 @@ import { MailContent } from "../mail-content/MailContent";
 import { MailSidebar } from "../mail-sidebar/MailSidebar";
 import Tabs from "../tabs/Tabs";
 import { useTabsContext } from "../../utility/contexts/TabsContext";
+import { TabItem } from "../../utility/models/TabItem";
 
 export const Mail = () => {
 

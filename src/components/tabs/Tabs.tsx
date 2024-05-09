@@ -1,6 +1,7 @@
 import React from 'react'
 import TabsProvider, { useTabsContext } from '../../utility/contexts/TabsContext';
 import './assets/styles.css';
+import { TabItem } from '../../utility/models/TabItem';
 
 type TabTitlesProps = {
     items: TabItem[],
@@ -17,15 +18,15 @@ type TabContentProps = {
 }
 
 type TabsComposition = {
-    Titles: (props: TabTitlesProps) => React.ReactNode
-    Contents: (props: TabContentProps) => React.ReactNode
+    Titles  : (props: TabTitlesProps) => React.ReactElement | null
+    Contents: (props: TabContentProps) => React.ReactElement | null
 }
 
 type TabsProps = {
     children: React.ReactNode
 }
 
-type TabsWrapper = (props: TabsProps) => React.ReactNode
+type TabsWrapper = (props: TabsProps) => React.ReactElement | null
 
 const Tabs: TabsWrapper & TabsComposition = ({ children }) => {
     return <div className='tabs-wrapper'><TabsProvider>{children}</TabsProvider></div>

@@ -3,10 +3,10 @@ import { useContext, useEffect, useState } from 'react';
 import { Mail } from '../../utility/models/Mail';
 import { MailUtility } from '../../utility/MailUtilty';
 import { AuthContext } from '../../utility/contexts/AuthContext';
-import { MailEditor } from '../editor/MailEditor';
 import { useTabsContext } from '../../utility/contexts/TabsContext';
 import axios from 'axios';
 import './assets/styles.css';
+import { MailEditor } from '../editor/MailEditor';
 
 interface ReplyMailProps {
     replyMail     : Mail;

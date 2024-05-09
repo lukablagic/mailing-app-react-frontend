@@ -1,6 +1,6 @@
-interface TabItem {
-    id: string;
-    title: string;
-    content: JSX.Element;
-    collapsable: boolean;
-  }
+export interface TabItem {
+  id: string;
+  title: string;
+  content: JSX.Element;
+  collapsable: boolean;
+}
