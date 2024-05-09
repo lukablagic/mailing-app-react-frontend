@@ -1,3 +1,4 @@
+import { AccountSettings } from "../account-settings/AccountSettings";
 import { Modal } from "../modal/Modal"
 import { AddTeamMember } from "./AddTeamMember";
 import { SettingsSidebar } from "./SettingsSidebar";
@@ -11,6 +12,10 @@ export const Settings = () => {
         {
             location: '#settings/team-members',
             content: <AddTeamMember />
+        },
+        {
+            location: '#settings/account',
+            content: <AccountSettings/>
         },
         {
             location: '#settings',

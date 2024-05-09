@@ -19,7 +19,7 @@ export const Modal = ({ children, title, displayFooter = false, location = windo
                             <span className="sr-only" >Close</span>
                         </button>
                     </div>
-                    <div className="p-4 md:p-5 space-y-4">
+                    <div className="">
                         {children}
                     </div>
                     {displayFooter &&

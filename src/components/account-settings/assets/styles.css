@@ -1,0 +1,7 @@
+.account-settings {
+    @apply bg-white rounded flex flex-col gap-2 justify-start;
+}
+
+.settings-list {
+    @apply flex flex-col gap-2;
+}
