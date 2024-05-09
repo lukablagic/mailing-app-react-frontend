@@ -1,3 +1,7 @@
 .raise-once:hover {
-    @apply animate-raise-once;
-  }
+  @apply animate-raise-once;
+}
+
+.icon-wrapper {
+  @apply flex h-12 w-12 items-center justify-center rounded-lg text-black hover:bg-gray-300;
+}

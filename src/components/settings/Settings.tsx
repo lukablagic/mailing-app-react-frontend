@@ -25,7 +25,7 @@ export const Settings = () => {
     });
 
     return (
-        <Modal title={'Setings'}>
+        <Modal title={'Settings'}>
             <div className="flex felx-row gap-0 min-h-[80vh] min-w-96">
                 <SettingsSidebar />
                 <div className="settings-content">
