@@ -9,11 +9,11 @@ import './assets/styles.css';
 
 export const MailSidebar = () => {
 
-  const { setSelectedThread }                 = useContext(ThreadContext);
+  const { setSelectedThread } = useContext(ThreadContext);
   const [displayedEmails, setDisplayedEmails] = useState<Thread[]>([]);
-  const { emails, loading, setPage,error }          = getThreads();
-  const { endpoints }                         = useNavigation();
-  const observer                              = useRef<IntersectionObserver | null>(null);
+  const { emails, loading, setPage, error } = getThreads();
+  const { endpoints } = useNavigation();
+  const observer = useRef<IntersectionObserver | null>(null);
 
   const lastEmailElementRef = useCallback(node => {
     if (loading || error) return;
@@ -53,7 +53,7 @@ export const MailSidebar = () => {
               }
             })}
         </div>
-        {loading && <div className="relative text-center text-white">Loading...</div> }
+        {loading && <div className="relative text-center text-white">Loading...</div>}
       </div>
     </div>
   );

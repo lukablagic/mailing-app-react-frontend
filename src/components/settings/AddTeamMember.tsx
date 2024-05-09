@@ -10,9 +10,9 @@ import { Tooltip } from "../tooltip/Tooltip";
 
 export const AddTeamMember = () => {
 
-  const { auth } = useContext(AuthContext);
+  const { auth }                        = useContext(AuthContext);
   const [registerLink, setRegisterLink] = useState<string | null>(null);
-  const { showMessage } = useContext(ToastContext);
+  const { showMessage }                 = useContext(ToastContext);
 
   const handleGenerateNewMemberLink = () => {
     axios.post(BASE_URL + '/invitations/create-link'
@@ -54,7 +54,7 @@ export const AddTeamMember = () => {
         ))}
       </div>
       <div className="user-link">
-        <button className="plus-button" onClick={handleGenerateNewMemberLink}>+</button>
+        <button className="plus-button" onClick={handleGenerateNewMemberLink}>Add</button>
       </div>
       {registerLink && (
         <div className="register-link-container">
