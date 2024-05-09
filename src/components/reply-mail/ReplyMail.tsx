@@ -31,19 +31,19 @@ export const ReplyMail = ({ replyMail, renderFullView = true, tabId, removeTab }
         console.log(editingEmail.body);
         setCurrentIndex(0);
         setTabsCounter(tabsCounter - 1);
-        // axios.post(`${BASE_URL}/mail/send-mail`, {
-        //     'draft': editingEmail,
-        // },
-        //     {
-        //         headers: {
-        //             Authorization: `Bearer ${auth.token}`
-        //         }
-        //     }
-        // ).then((response) => {
-        //     if (response.status === 200) {
+        axios.post(`${BASE_URL}/mail/send-mail`, {
+            'draft': editingEmail,
+        },
+            {
+                headers: {
+                    Authorization: `Bearer ${auth.token}`
+                }
+            }
+        ).then((response) => {
+            if (response.status === 200) {
 
-        //     }
-        // })
+            }
+        })
     }
     const handleSaveHtml = (data: string) => {
         setEditingMail({ ...editingEmail, body: data });
