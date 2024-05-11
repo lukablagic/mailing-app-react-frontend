@@ -8,22 +8,22 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 export const Register = ({ }) => {
 
   const { setAuth, setIsAuthenticated } = useContext(AuthContext);
-  const [formData, setFormData]         = useState({ name: '', surname: '', email: '', password: '', code: '', uid: ''});
-  const { showToast }                   = useContext(ToastContext);
-  const navigate                        = useNavigate();
-    
+  const [formData, setFormData] = useState({ name: '', surname: '', email: '', password: '', code: '', uid: '' });
+  const { showToast } = useContext(ToastContext);
+  const navigate = useNavigate();
+
   useEffect(() => {
-          document.title = 'Dev Mail - Register';
-    const urlParams      = new URLSearchParams(window.location.search);
-    const code           = urlParams.get('code');
-    const uid            = urlParams.get('uid');
+    document.title = 'Dev Mail - Register';
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+    const uid = urlParams.get('uid');
     if (code && uid) {
       formData.code = code;
-      formData.uid  = uid;
+      formData.uid = uid;
     }
     setFormData(formData);
   }, []);
-  
+
   const handleInputChange = (e) => {
     setFormData({
       ...formData,
@@ -41,7 +41,7 @@ export const Register = ({ }) => {
         showToast('success', 'Registration successful');
         navigate('app/login');
       }
-  
+
     } catch (error) {
       if (error.response) {
         showToast('error', error.response.data.message);
@@ -96,7 +96,10 @@ export const Register = ({ }) => {
           </div>
         </div>
         <div className="w-1/2 mx-auto">
-          <img src="../src/assets/images/login-mobile-testing.svg" alt="Team development image" />
+          <img
+            src="/images/login-mobile-testing.svg"
+          alt="Team development image"
+          />
         </div>
       </div>
     </div>

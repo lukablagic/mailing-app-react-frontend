@@ -1,6 +1,17 @@
 RewriteEngine On
 
-# Redirect all requests to the dist/index.html file
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^ /dist/index.html [L]
+# Redirect HTTP to HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Redirect all traffic to /app
+RewriteCond %{REQUEST_URI} !^/app
+RewriteRule ^(.*)$ /app [R=302,L]
+
+# Rewrite for React Router
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -f [OR]
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -d
+RewriteRule ^ - [L]
+
+# Rewrite everything else to index.html for React Router to handle
+RewriteRule ^ index.html [L]

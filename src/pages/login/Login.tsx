@@ -111,7 +111,7 @@ export const Login = ({ }) => {
         </div>
         <div className="mx-auto w-1/2">
           <img
-            src="../src/assets/images/login-mobile-testing.svg"
+            src="/images/login-mobile-testing.svg"
             alt="Team development image"
           />
         </div>
