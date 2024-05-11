@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import ArrorDown from "../../assets/react-icons/ArrowDown";
 import { AuthContext } from "../../utility/contexts/AuthContext";
 import { useNavigation } from "../../hooks/Navigation";
-
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 interface Folder {
   id: number;
   name: string;
@@ -23,7 +23,7 @@ export const MailFolders = () => {
 
   useEffect(() => {
     axios
-      .get<FoldersResponse>("http://localhost/api/folders/all", {
+      .get<FoldersResponse>(`${BASE_URL}/folders/all`, {
         headers: {
           Authorization: `Bearer ${auth.token}`,
         },
@@ -41,7 +41,7 @@ export const MailFolders = () => {
 
   const handleSelectFolder = (folder: Folder) => {
     setSelectedFolder(folder);
-    navigateApp("mail", folder.name.toLowerCase());
+    navigateApp("mail", folder.name);
   };
 
   return (

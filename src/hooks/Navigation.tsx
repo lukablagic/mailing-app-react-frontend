@@ -4,9 +4,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 type viewType = "mail" | "message" | "activity";
 
 export const useNavigation = () => {
-  const location = useLocation();
+
+  const location                  = useLocation();
   const [endpoints, setEndpoints] = useState<string[]>([]);
-  const navigate = useNavigate();
+  const navigate                  = useNavigate();
 
   useEffect(() => {
     getLocation();
