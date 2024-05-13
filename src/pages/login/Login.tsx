@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { ToastContext } from "../../utility/contexts/ToastContext";
 import { AuthContext } from "../../utility/contexts/AuthContext";
 import axios from "axios";
+import TeamDevelopment from "../../assets/react-icons/TeamDevelopment";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export const Login = ({ }) => {
@@ -110,10 +111,7 @@ export const Login = ({ }) => {
           </div>
         </div>
         <div className="mx-auto w-1/2">
-          <img
-            src="/images/login-mobile-testing.svg"
-            alt="Team development image"
-          />
+         <TeamDevelopment />
         </div>
       </div>
     </div>
