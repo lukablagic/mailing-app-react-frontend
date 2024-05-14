@@ -8,21 +8,24 @@ import axios from 'axios';
 import './assets/styles.css';
 import { MailEditor } from '../editor/MailEditor';
 
+type replyType = 'new' | 'reply' | 'forward';
+
 interface ReplyMailProps {
     replyMail     : Mail;
     tabId         : string;
+    replyType     : replyType;
     removeTab     : (tabId: string) => void;
     renderFullView: boolean;
 }
 
-export const ReplyMail = ({ replyMail, renderFullView = true, tabId, removeTab }: ReplyMailProps) => {
+export const ReplyMail = ({ replyMail, renderFullView = true, tabId, removeTab, replyType }: ReplyMailProps) => {
 
     const [editingEmail, setEditingMail]                   = useState<Mail | null>(null);
     const { setCurrentIndex, tabsCounter, setTabsCounter } = useTabsContext();
     const { auth }                                         = useContext(AuthContext);
 
     useEffect(() => {
-        setEditingMail(MailUtility.prepareMailForEditing(replyMail, auth.team.addresses));
+        setEditingMail(MailUtility.prepareMailForEditing(replyMail, auth.team.addresses, replyType));
     }, [replyMail]);
 
     const handleSendMail = () => {
@@ -58,14 +61,22 @@ export const ReplyMail = ({ replyMail, renderFullView = true, tabId, removeTab }
                     </div>
                     <div className='reply-mail-section-row'>
                         <div className='reply-mail-section-title'>From:</div>
-                        <div className='reply-mail-section-txt'>{editingEmail.from}</div>
+                        <input
+                            className='reply-mail-input'
+                            value={editingEmail.from}
+                            onChange={e => setEditingMail({ ...editingEmail, from: e.target.value })}
+                        />
                     </div>
                     <div className='reply-mail-section-row'>
                         <div className='reply-mail-section-title'>To:</div>
                         <div className='reply-mail-section-txt'>{editingEmail.to}</div>
                     </div>
                     <div className='reply-mail-section-row'>
-                        <input className='reply-mail-input' placeholder='Title' value={editingEmail.subject} />
+                        <input
+                            className='reply-mail-input'
+                            value={editingEmail.subject}
+                            onChange={e => setEditingMail({ ...editingEmail, subject: e.target.value })}
+                        />
                     </div>
                     <div className='reply-mail-editor-container'>
                         {typeof editingEmail !== "undefined" && editingEmail !== null &&

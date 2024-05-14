@@ -1,4 +1,4 @@
-import { AccountSettings } from "../account-settings/AccountSettings";
+import { AccountSettings } from "./account-settings/AccountSettings";
 import { Modal } from "../modal/Modal"
 import { AddTeamMember } from "./AddTeamMember";
 import { SettingsSidebar } from "./SettingsSidebar";

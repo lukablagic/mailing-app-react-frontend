@@ -18,11 +18,11 @@ export const TeamMembers = () => {
     <div className="my-4  grid grid-rows-1">
       <div className=" flex flex-col items-center justify-center gap-4">
         <div className="vertical-center flex flex-col items-center  justify-center gap-4 text-center">
-          <div className="add-user-icon" onClick={()=> {navigate('#settings/add-member')}}>
+          <div className="add-user-icon" onClick={()=> {navigate('#settings/add-user-icon')}}>
             +
           </div>
           {auth.team.members.map((member, index) => (
-            <Tooltip text={member.name + ' ' + member.surname}>
+            <Tooltip text={member.name + ' ' + member.surname} key={index}>
               <UserIcon key={index} text={member.name[0] + member.surname[0]} isActive={true} />
             </Tooltip>
           ))}

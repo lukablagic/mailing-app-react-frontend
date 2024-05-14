@@ -9,9 +9,9 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 export const Register = ({ }) => {
 
   const { setAuth, setIsAuthenticated } = useContext(AuthContext);
-  const [formData, setFormData] = useState({ name: '', surname: '', email: '', password: '', code: '', uid: '' });
-  const { showToast } = useContext(ToastContext);
-  const navigate = useNavigate();
+  const [formData, setFormData]         = useState({ name: '', surname: '', email: '', password: '', code: '', uid: '' });
+  const { showToast }                   = useContext(ToastContext);
+  const navigate                        = useNavigate();
 
   useEffect(() => {
     document.title = 'Dev Mail - Register';
@@ -41,6 +41,8 @@ export const Register = ({ }) => {
         setIsAuthenticated(true);
         showToast('success', 'Registration successful');
         navigate('app/login');
+      } else {
+        showToast('error', 'An error occurred. Please try again.');
       }
 
     } catch (error) {

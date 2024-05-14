@@ -3,7 +3,7 @@
 }
 
 .reply-mail-section-row {
-    @apply flex flex-row gap-1 justify-start p-3 border-b items-center border-gray-200 first:border-b-2 first:p-2 last:border-b-0 last:p-0 
+    @apply flex flex-row gap-1 justify-start  border-b items-center border-gray-200 first:border-b-2 first:p-2 last:border-b-0 last:p-0 
 }
 
 .reply-mail-info {
@@ -23,7 +23,7 @@
 }
 
 .reply-mail-input {
-    @apply  w-full  p-3 text-gray-800 text-sm bg-white  placeholder-slate-400  focus:outline-none border-gray-300 focus:border focus:border-gray-500 
+    @apply  w-full h-full  p-3 text-gray-800 text-sm bg-white  placeholder-slate-400  focus:outline-none border-none focus:border focus:border-gray-500 m-3
 }
 /* This overrides padding from row  */
 .reply-mail-section-row .reply-mail-input {

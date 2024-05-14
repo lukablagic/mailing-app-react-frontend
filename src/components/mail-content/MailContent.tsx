@@ -59,7 +59,7 @@ export const MailContent = ({ addTab, removeTab }: MailContentProps) => {
       {
         id: `${mail.id}`,
         title: mail.from_name !== null ? mail.from_name : mail.from,
-        content: <ReplyMail replyMail={mail} renderFullView={true} removeTab={removeTab} tabId={`${mail.id}`} />,
+        content: <ReplyMail replyMail={mail} renderFullView={true} removeTab={removeTab} tabId={`${mail.id}`} replyType={"reply"} />,
         collapsable: true,
       },
     );

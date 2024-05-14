@@ -12,4 +12,12 @@ export class Mail {
   cc: string[];
   bcc: string[];
   body?: string;
+
+  constructor() {
+    this.to = [];
+    this.cc = [];
+    this.bcc = [];
+  }
+
+
 }
