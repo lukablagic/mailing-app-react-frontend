@@ -21,7 +21,6 @@ export const Mail = () => {
   }, [])
 
   const handleAddTab = (tab: { id, title, content, collapsable }) => {
-    console.log(tab)
     setTabData(prevTabData => [...prevTabData, tab]);
     setCurrentIndex(tabsCounter + 1);
   }

@@ -10,13 +10,14 @@ import { NewMail } from "../../utility/models/NewMail";
 import { AuthContext } from "../../utility/contexts/AuthContext";
 import MailIcon from "../../assets/react-icons/MailIcon";
 import './assets/styles.css';
+import { useTabsContext } from "../../utility/contexts/TabsContext";
 
 interface MailSidebarProprs {
-    addTab: (tab:{id:number, title:string, content, collapsable: boolean}) => void;
-    removeTab: (tabId: string) => void;
+  addTab: (tab: { id: number, title: string, content, collapsable: boolean }) => void;
+  removeTab: (tabId: string) => void;
 }
 
-export const MailSidebar = ({addTab,removeTab}:MailSidebarProprs) => {
+export const MailSidebar = ({ addTab, removeTab }: MailSidebarProprs) => {
 
   const { setSelectedThread }                 = useContext(ThreadContext);
   const [displayedEmails, setDisplayedEmails] = useState<Thread[]>([]);
@@ -50,8 +51,13 @@ export const MailSidebar = ({addTab,removeTab}:MailSidebarProprs) => {
   const handleAddNewMail = () => {
     counter.current++;
     const tabId = 'new-mail-' + counter.current;
-    const mail  = new NewMail(auth.team.addresses[0],[],'',' ');
-    addTab({id:counter.current, title: 'New Mail ' + counter, content: <ReplyMail replyMail={mail} tabId={tabId} removeTab={removeTab} renderFullView={false} replyType={"new"} />, collapsable: true})
+    const mail = new NewMail(auth.team.addresses[0], [], '', ' ');
+    addTab({
+      id: counter.current,
+      title: 'New Mail',
+      content: <ReplyMail replyMail={mail} tabId={tabId} removeTab={removeTab} renderFullView={false} replyType={"new"} />,
+      collapsable: true
+    })
   }
 
   return (
@@ -62,7 +68,7 @@ export const MailSidebar = ({addTab,removeTab}:MailSidebarProprs) => {
           <div>
             <button className="new-mail-button" onClick={handleAddNewMail}>
               New
-              <MailIcon/>
+              <MailIcon />
             </button>
           </div>
         </div>
