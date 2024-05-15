@@ -24,7 +24,6 @@ const Home = () => {
         <Search />
         <Routes>
           <Route path="mail/*" element={<Mail />} />
-
           <Route path="/" element={<Overview />} />
           <Route path="*" element={isAuthenticated === false && <Navigate to="/mail/inbox" replace />} />
         </Routes>

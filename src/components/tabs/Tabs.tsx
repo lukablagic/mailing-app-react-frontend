@@ -38,23 +38,23 @@ Tabs.Titles = ({ items, removeTab }: TabTitlesProps) => {
 
     return (
         <div role="tab-list" className='tab-list' >
-            {items.map(({ id, title, collapsable }, index) => (
+            {items.map(({ id, title, collapsable }) => (
                 <div
-                    className={`tab-list-item ${currentIndex === index ? 'selected-tab-item' : ''}`}
+                    className={`tab-list-item ${currentIndex === id ? 'selected-tab-item' : ''}`}
                     key={id}
                     id={`tab-control-${id}`}
                     role="tab"
                     aria-controls={`tab-content-${id}`}
-                    aria-selected={currentIndex === index}
+                    aria-selected={currentIndex === id}
                     onClick={() => {
-                        setCurrentIndex(index)
+                        setCurrentIndex(id)
                     }}
                 >
                     <div className='tab-list-text'>
                         {title}
                     </div>
                     {collapsable === true &&
-                        <div className='tabs-close-icon' onClick={(e) => { removeTab(id) }}>
+                        <div className='tabs-close-icon' onClick={(e) => {e.preventDefault();e.stopPropagation(); setCurrentIndex('INDEX');removeTab(id); }}>
                             X
                         </div>
                     }
@@ -78,7 +78,7 @@ Tabs.Contents = ({items}) => {
                         id={`tab-content-${id}`}
                         role="tabpanel"
                         aria-labelledby={`tab-control-${id}`}
-                        className={index === currentIndex ? 'flex flex-1 h-[96%]' : 'hidden'}
+                        className={id === currentIndex ? 'flex flex-1 h-[96%]' : 'hidden'}
                     >
                         <div className='tab-content'>
                             {content}

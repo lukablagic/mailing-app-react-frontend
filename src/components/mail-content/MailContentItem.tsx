@@ -47,7 +47,7 @@ export const MailContentItem = ({ mail, replyMail, index }: MailContentItemProps
                   : mail.from_name}
               </div>
             </div>
-            <div className="flex flex-row gap-3" onClick={(e) => { e.stopPropagation(); selectMail(); setCurrentIndex(tabsCounter + 1) }}>
+            <div className="flex flex-row gap-3" onClick={(e) => { e.stopPropagation(); selectMail(); setCurrentIndex(`${mail.id}`) }}>
               <div className="cursor-pointer rounded-xl p-1 hover:bg-gray-200">
                 <ReplyIcon />
               </div>

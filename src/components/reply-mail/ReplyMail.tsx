@@ -32,7 +32,7 @@ export const ReplyMail = ({ replyMail, renderFullView = true, tabId, removeTab, 
     const handleSendMail = () => {
         console.log(tabId)
         removeTab(tabId)
-        setCurrentIndex(0);
+        setCurrentIndex('INDEX');
         setTabsCounter(tabsCounter - 1);
         axios.post(`${BASE_URL}/mail/send-mail`, {
             'draft': editingEmail,

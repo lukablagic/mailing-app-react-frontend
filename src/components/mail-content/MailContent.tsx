@@ -46,7 +46,7 @@ export const MailContent = ({ addTab, removeTab }: MailContentProps) => {
       .then((response) => {
         if (response.data.ok === true) {
           setDisplayedEmails(response.data.emails);
-          setCurrentIndex(0);
+          setCurrentIndex('INDEX');
         }
       });
 

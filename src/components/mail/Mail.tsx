@@ -22,10 +22,11 @@ export const Mail = () => {
 
   const handleAddTab = (tab: { id, title, content, collapsable }) => {
     setTabData(prevTabData => [...prevTabData, tab]);
-    setCurrentIndex(tabsCounter + 1);
+    setCurrentIndex(tab.id);
   }
   const handleRemoveTab = (tabId: string) => {
     setTabData(prevTabData => prevTabData.filter(tab => tab.id !== tabId));
+    setCurrentIndex('INDEX');
   }
 
   return (
