@@ -68,7 +68,7 @@ export const ReplyMail = ({ replyMail, renderFullView = true, tabId, removeTab, 
                     <div className='reply-mail-section-row'>
                         <div className='reply-mail-section-title'>From:</div>
                         <input
-                            className='reply-mail-input'
+                            className='reply-mail-input mx-0'
                             value={editingEmail.from}
                             onChange={e => setEditingMail({ ...editingEmail, from: e.target.value })}
                         />

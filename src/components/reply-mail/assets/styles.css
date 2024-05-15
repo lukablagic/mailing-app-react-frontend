@@ -15,7 +15,7 @@
 }
 
 .reply-mail-section-title {
-    @apply text-gray-500 text-sm px-3
+    @apply text-gray-500 text-sm pl-3
 }
 
 .reply-mail-section-txt {
