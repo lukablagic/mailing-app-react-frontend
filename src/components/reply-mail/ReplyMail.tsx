@@ -78,6 +78,14 @@ export const ReplyMail = ({ replyMail, renderFullView = true, tabId, removeTab, 
                         <EmailInput onAdd={handleAddEmail} onRemove={handleRemoveEmail} emails={editingEmail.to} />
                     </div>
                     <div className='reply-mail-section-row'>
+                        <div className='reply-mail-section-title'>CC:</div>
+                        <EmailInput onAdd={handleAddEmail} onRemove={handleRemoveEmail} emails={editingEmail.cc} />
+                    </div>
+                    <div className='reply-mail-section-row'>
+                        <div className='reply-mail-section-title'>BCC:</div>
+                        <EmailInput onAdd={handleAddEmail} onRemove={handleRemoveEmail} emails={editingEmail.bcc} />
+                    </div>
+                    <div className='reply-mail-section-row'>
                         <input
                             className='reply-mail-input'
                             value={editingEmail.subject}

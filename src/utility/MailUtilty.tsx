@@ -26,7 +26,6 @@ export const MailUtility = {
     },
     updateRecipients(newMail: Mail, teamAddreses: string[]) {
         const to            = newMail.to;
-        const from          = newMail.from;
         const cc            = newMail.cc;
         newMail.to          = [];
         newMail.from        = teamAddreses[0];
@@ -34,12 +33,13 @@ export const MailUtility = {
         if (newMail.reply_to !== null) {
             newMail.to.push(newMail.reply_to);
         }
-        const all = [...to, ...cc, from];
+        const all = [...to, ...cc];
 
         all.forEach((email) => {
-            if (teamAddreses.includes(email) === false && newMail.to.includes(email) === false){
-                newMail.cc.push(email);
+            if (teamAddreses.includes(email)) {
+                return;
             }
+            newMail.cc.push(email);
         });
 
         return newMail;
