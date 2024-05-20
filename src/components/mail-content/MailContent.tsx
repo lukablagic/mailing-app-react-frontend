@@ -50,7 +50,9 @@ export const MailContent = ({ addTab, removeTab }: MailContentProps) => {
         }
       });
 
-
+      return () => {
+        setDisplayedEmails([]);
+      }
   }, [selectedThread, auth.token]);
 
 
@@ -64,7 +66,7 @@ export const MailContent = ({ addTab, removeTab }: MailContentProps) => {
       },
     );
   }
-
+console.log(selectedThread)
   return (
     <div className="flex flex-col w-full overflow-auto">
       <div className="flex max-h-[88%]  w-full grow flex-col overflow-y-auto overflow-x-hidden">

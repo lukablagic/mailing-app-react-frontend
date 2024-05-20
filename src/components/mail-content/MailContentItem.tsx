@@ -14,9 +14,9 @@ interface MailContentItemProps {
 }
 
 export const MailContentItem = ({ mail, replyMail, index }: MailContentItemProps) => {
-  const [collapsed, setCollapsed] = useState(true);
+  
   const { setCurrentIndex, tabsCounter } = useTabsContext();
-
+  const [collapsed, setCollapsed]        = useState(true);
 
   useEffect(() => {
     if (index === 0) {
@@ -27,7 +27,8 @@ export const MailContentItem = ({ mail, replyMail, index }: MailContentItemProps
   const handleCollapse = () => {
     setCollapsed(!collapsed);
   };
-  const selectMail = () => {
+  const selectMail = (mail) => {
+    console.log(mail,'selected Mail')
     replyMail(mail);
   }
 
@@ -47,8 +48,8 @@ export const MailContentItem = ({ mail, replyMail, index }: MailContentItemProps
                   : mail.from_name}
               </div>
             </div>
-            <div className="flex flex-row gap-3" onClick={(e) => { e.stopPropagation(); selectMail(); setCurrentIndex(`${mail.id}`) }}>
-              <div className="cursor-pointer rounded-xl p-1 hover:bg-gray-200">
+            <div className="flex flex-row gap-3">
+              <div className="cursor-pointer rounded-xl p-1 hover:bg-gray-200"  onClick={(e) => { e.stopPropagation(); selectMail(mail); setCurrentIndex(`${mail.id}`) }}>
                 <ReplyIcon />
               </div>
               <div className="cursor-pointer rounded-xl p-1 hover:bg-gray-200">
