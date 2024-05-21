@@ -1,4 +1,7 @@
-RewriteEngine On
-RewriteRule . index.html
-RewriteCond %{HTTP:Authorization} .+
-RewriteRule ^ - [E=HTTP_AUTHORIZATION:%0]
+# Rewrite for React Router
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -f [OR]
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -d
+RewriteRule ^ - [L]
+
+# Rewrite everything else to index.html for React Router to handle
+RewriteRule ^ index.html [L]
