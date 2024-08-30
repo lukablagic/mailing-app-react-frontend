@@ -7,8 +7,8 @@ import { AuthContext } from "./utility/contexts/AuthContext";
 
 export const App = () => {
 
-  const storedToken                                   = sessionStorage.getItem("token");
   const { auth, isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
+  const storedToken                                   = sessionStorage.getItem("token");
 
   useEffect(() => {
     if (storedToken !== undefined && storedToken !== null) {
